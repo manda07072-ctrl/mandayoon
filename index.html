@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머드마스터(MUDMASTER) - 두피의 기적</title>
+    <style>
+        /* Base Reset & Fonts */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background-color: #f7f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        /* Layout Structure */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            min-height: 100vh;
+            padding-bottom: 100px; /* Space for fixed bottom CTA */
+        }
+
+        /* Top Notification Bar */
+        .top-bar {
+            background-color: #1e2d24;
+            color: #d4af37;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #1a261f;
+            color: #ffffff;
+            padding: 50px 24px;
+            text-align: center;
+        }
+        .hero .badge {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: #e5c158;
+            border: 1px solid #d4af37;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin: 0 0 15px 0;
+            letter-spacing: -1px;
+        }
+        .hero h1 span {
+            color: #e5c158;
+        }
+        .hero p {
+            font-size: 15px;
+            color: #aebcb3;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* Video / Concept Image Placeholder */
+        .media-box {
+            background-color: #eceee0;
+            margin: -20px 24px 30px 24px;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #e0e4d9;
+        }
+        .media-box-tag {
+            font-size: 11px;
+            color: #556b2f;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .media-box-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a261f;
+        }
+
+        /* Problem Section (Agitation) */
+        .section-problem {
+            padding: 40px 24px;
+            background-color: #fbfbfc;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+        .section-title span {
+            color: #c0392b;
+        }
+        .pain-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .pain-item {
+            background: #ffffff;
+            border: 1px solid #eef0f2;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: table;
+            width: 100%;
+        }
+        .pain-icon {
+            display: table-cell;
+            vertical-align: middle;
+            width: 40px;
+            font-size: 24px;
+            text-align: left;
+        }
+        .pain-text {
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        /* Solution Section */
+        .section-solution {
+            padding: 50px 24px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .solution-badge {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .section-solution h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            letter-spacing: -0.5px;
+        }
+        .product-features {
+            text-align: left;
+            background: #f4f7f5;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+        }
+        .feature-item {
+            margin-bottom: 15px;
+        }
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+        .feature-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a261f;
+            margin-bottom: 4px;
+        }
+        .feature-desc {
+            font-size: 13px;
+            color: #627569;
+        }
+
+        /* Social Proof (Reviews) */
+        .section-reviews {
+            padding: 40px 24px;
+            background-color: #f7f9fa;
+        }
+        .review-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border: 1px solid #e3e8eb;
+        }
+        .review-stars {
+            color: #f1c40f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .review-text {
+            font-size: 13.5px;
+            color: #334155;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .review-user {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        /* Scarcity Offer */
+        .section-offer {
+            padding: 45px 24px;
+            background-color: #fff9e6;
+            border: 2px solid #f39c12;
+            margin: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .offer-tag {
+            background-color: #f39c12;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .price-box {
+            margin: 15px 0;
+        }
+        .price-original {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .price-discount {
+            font-size: 28px;
+            font-weight: 800;
+            color: #d35400;
+        }
+
+        /* Fixed Footer CTA */
+        .cta-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            background: #ffffff;
+            padding: 12px 24px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.08);
+            z-index: 1000;
+        }
+        .cta-btn {
+            display: block;
+            background-color: #1e2d24;
+            color: #ffffff;
+            text-align: center;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        .cta-btn:hover {
+            background-color: #111a15;
+        }
+        .cta-subtext {
+            text-align: center;
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- 상단 띠 배너 -->
+    <div class="top-bar">
+        📢 유튜브 [만다윤] 구독자 한정 혜택 (선착순 50명 종료 임박)
+    </div>
+
+    <!-- 헤어 섹션 (유튜브 키 콘텐츠의 문제의식 연결) -->
+    <div class="hero">
+        <div class="badge">YouTube 시청자 전용 페이지</div>
+        <h1>좋다는 샴푸 다 써봐도<br><span>두피 가려움·각질</span>이 그대로인 진짜 이유</h1>
+        <p>조회수를 위한 영상이 아닙니다. 밤마다 긁다 지친 당신을 위한 본질적인 두피 해결책.</p>
+    </div>
+
+    <!-- 비디오/이미지 영역 플레이스홀더 (유튜브 연결감 극대화) -->
+    <div class="media-box">
+        <div class="media-box-tag">🎬 방금 보신 영상 속 그 제품</div>
+        <div class="media-box-title">머드마스타 탈모·두피 케어 솔루션</div>
+    </div>
+
+    <!-- 문제 제기 섹션 (Agitation) -->
+    <div class="section-problem">
+        <div class="section-title">아직도 <span>이런 고통</span>을 반복하고 계신가요?</div>
+        <ul class="pain-list">
+            <li class="pain-item">
+                <span class="pain-icon">😰</span>
+                <span class="pain-text">감고 나서 대낮만 되면 어깨에 하얗게 떨어지는 각질</span>
+            </li>
+            <li class="pain-item">
+                <span class="pain-icon">🔥</span>
+                <span class="pain-text">긁다 못해 피가 나고 붉게 달아오른 예민한 두피</span>
+            </li>
+            <li class="pain-item">
+                <span class="pain-icon">💸</span>
+                <span class="pain-text">유명하다는 미용실, 고가 클리닉에 수십만 원 낭비</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 해결책 제시 섹션 (Solution) -->
+    <div class="section-solution">
+        <span class="solution-badge">유튜브에서 유일하게 공개한 해답</span>
+        <h2>더 이상 숨기지 마세요.<br>두피 마스터, '머드마스타'</h2>
+        <p style="font-size: 14px; color: #4b5563; margin: 0 0 20px 0;">화학 성분으로 일시적인 시원함만 주는 샴푸는 끝났습니다. 두피 모공 속 노폐물을 자극 없이 강력하게 흡착하는 고밀도 머드 포뮬러.</p>
+        
+        <div class="product-features">
+            <div class="feature-item">
+                <div class="feature-title">🌿 01. 청정 머드의 강력한 흡착력</div>
+                <div class="feature-desc">일반 샴푸가 닿지 못하는 모공 깊숙한 피지와 각질을 자극 없이 끌어당겨 비워냅니다.</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">❄️ 02. 즉각적인 두피 쿨링 & 진정</div>
+                <div class="feature-desc">두피 열은 탈모의 주범! 즉각적인 온도 감소 특허 성분으로 하루 종일 상쾌하게 유지합니다.</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🧪 03. 자연 유래 약산성 포뮬러</div>
+                <div class="feature-desc">무너진 두피 밸런스를 바로잡아 자생력을 키워주는 안심 처방 샴푸입니다.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사회적 증거 섹션 (Proof) -->
+    <div class="section-reviews">
+        <div class="section-title" style="margin-bottom: 15px;">먼저 경험한 분들의 <span>진짜 후기</span></div>
+        
+        <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">"유튜브 만다윤 채널 보고 반신반의하며 샀는데, 맨날 어깨 털던 버릇이 2주 만에 사라졌어요. 진짜 인생 샴푸입니다."</div>
+            <div class="review-user">이*민 (34세, 직장인)</div>
+        </div>
+        
+        <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">"두피가 예민해서 붉은 기가 심했는데 머드마스타 쓰고 나서 엄청 진정됐어요. 기름기도 확실히 덜 껴요!"</div>
+            <div class="review-user">김*우 (29세, 대학생)</div>
+        </div>
+    </div>
+
+    <!-- 거절할 수 없는 제안 섹션 (Scarcity) -->
+    <div class="section-offer">
+        <div class="offer-tag">만다윤 구독자 전용 혜택</div>
+        <h3 style="margin: 0; font-size: 18px; color: #1a261f;">오늘 단 하루, 무료 배송 + 40% OFF</h3>
+        <div class="price-box">
+            <span class="price-original">39,000원</span><br>
+            <span class="price-discount">23,400원</span>
+        </div>
+        <p style="font-size: 12px; color: #e67e22; margin: 0; font-weight: bold;">⚠️ 준비된 선착순 수량 소진 시 예고 없이 가격이 인상됩니다.</p>
+    </div>
+
+</div>
+
+<!-- 하단 고정 CTA 버튼 -->
+<div class="cta-container">
+    <a href="#구매링크_또는_스마트스토어링크" class="cta-btn">머드마스타 구독자 혜택가로 구매하기</a>
+    <div class="cta-subtext">본 혜택은 본 페이지 유입 고객에게만 적용됩니다.</div>
+</div>
+
+</body>
+</html>
