@@ -1,387 +1,2692 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>머드마스터(MUDMASTER) - 두피의 기적</title>
-    <style>
-        /* Base Reset & Fonts */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-            background-color: #f7f9fa;
-            color: #2c3e50;
-            line-height: 1.6;
-        }
-        
-        /* Layout Structure */
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-            min-height: 100vh;
-            padding-bottom: 100px; /* Space for fixed bottom CTA */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="30년 미용 경력의 만다윤이 7년째 정착한 두피 케어 샴푸, 머드마스타 샴푸 랜딩페이지" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="만다윤 추천 | 머드마스타 샴푸" />
+  <meta property="og:description" content="30년 미용 경력의 만다윤이 7년째 정착한 두피 케어 샴푸" />
+  <!-- 카카오톡/SNS 공유 썸네일: 제품 이미지 URL 준비 후 아래 주석을 해제하세요.
+  <meta property="og:image" content="https://예시.com/제품이미지.jpg" /> -->
+  <title>만다윤 추천 | 머드마스타 샴푸</title>
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --surface: #fffaf3;
+      --surface-2: #fff;
+      --ink: #201914;
+      --muted: #6f6258;
+      --line: #eadfd2;
+      --brand: #6a4a31;
+      --brand-dark: #3a2a20;
+      --accent: #d6a45f;
+      --accent-soft: #f0dfc2;
+      --green: #556b4e;
+      --danger-soft: #fff0e8;
+      --shadow: 0 24px 70px rgba(46, 32, 22, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
 
-        /* Top Notification Bar */
-        .top-bar {
-            background-color: #1e2d24;
-            color: #d4af37;
-            text-align: center;
-            padding: 8px 10px;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: -0.5px;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        /* Hero Section */
-        .hero {
-            background-color: #1a261f;
-            color: #ffffff;
-            padding: 50px 24px;
-            text-align: center;
-        }
-        .hero .badge {
-            background-color: rgba(212, 175, 55, 0.2);
-            color: #e5c158;
-            border: 1px solid #d4af37;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        .hero h1 {
-            font-size: 26px;
-            font-weight: 800;
-            line-height: 1.4;
-            margin: 0 0 15px 0;
-            letter-spacing: -1px;
-        }
-        .hero h1 span {
-            color: #e5c158;
-        }
-        .hero p {
-            font-size: 15px;
-            color: #aebcb3;
-            margin: 0;
-            font-weight: 300;
-        }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+    }
 
-        /* Video / Concept Image Placeholder */
-        .media-box {
-            background-color: #eceee0;
-            margin: -20px 24px 30px 24px;
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border: 1px solid #e0e4d9;
-        }
-        .media-box-tag {
-            font-size: 11px;
-            color: #556b2f;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        .media-box-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1a261f;
-        }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      word-break: keep-all;
+    }
 
-        /* Problem Section (Agitation) */
-        .section-problem {
-            padding: 40px 24px;
-            background-color: #fbfbfc;
-        }
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 25px;
-            letter-spacing: -0.5px;
-        }
-        .section-title span {
-            color: #c0392b;
-        }
-        .pain-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .pain-item {
-            background: #ffffff;
-            border: 1px solid #eef0f2;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            display: table;
-            width: 100%;
-        }
-        .pain-icon {
-            display: table-cell;
-            vertical-align: middle;
-            width: 40px;
-            font-size: 24px;
-            text-align: left;
-        }
-        .pain-text {
-            display: table-cell;
-            vertical-align: middle;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4a5568;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* Solution Section */
-        .section-solution {
-            padding: 50px 24px;
-            background-color: #ffffff;
-            text-align: center;
-        }
-        .solution-badge {
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .section-solution h2 {
-            font-size: 22px;
-            font-weight: 800;
-            margin: 0 0 20px 0;
-            letter-spacing: -0.5px;
-        }
-        .product-features {
-            text-align: left;
-            background: #f4f7f5;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 25px;
-        }
-        .feature-item {
-            margin-bottom: 15px;
-        }
-        .feature-item:last-child {
-            margin-bottom: 0;
-        }
-        .feature-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1a261f;
-            margin-bottom: 4px;
-        }
-        .feature-desc {
-            font-size: 13px;
-            color: #627569;
-        }
+    img, video, iframe {
+      max-width: 100%;
+      display: block;
+    }
 
-        /* Social Proof (Reviews) */
-        .section-reviews {
-            padding: 40px 24px;
-            background-color: #f7f9fa;
-        }
-        .review-card {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 15px;
-            border: 1px solid #e3e8eb;
-        }
-        .review-stars {
-            color: #f1c40f;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        .review-text {
-            font-size: 13.5px;
-            color: #334155;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        .review-user {
-            font-size: 12px;
-            color: #94a3b8;
-        }
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+    }
 
-        /* Scarcity Offer */
-        .section-offer {
-            padding: 45px 24px;
-            background-color: #fff9e6;
-            border: 2px solid #f39c12;
-            margin: 24px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .offer-tag {
-            background-color: #f39c12;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .price-box {
-            margin: 15px 0;
-        }
-        .price-original {
-            text-decoration: line-through;
-            color: #94a3b8;
-            font-size: 14px;
-        }
-        .price-discount {
-            font-size: 28px;
-            font-weight: 800;
-            color: #d35400;
-        }
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 10px;
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      z-index: 999;
+    }
 
-        /* Fixed Footer CTA */
-        .cta-container {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 600px;
-            background: #ffffff;
-            padding: 12px 24px;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.08);
-            z-index: 1000;
-        }
-        .cta-btn {
-            display: block;
-            background-color: #1e2d24;
-            color: #ffffff;
-            text-align: center;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background 0.2s;
-        }
-        .cta-btn:hover {
-            background-color: #111a15;
-        }
-        .cta-subtext {
-            text-align: center;
-            font-size: 11px;
-            color: #7f8c8d;
-            margin-top: 6px;
-        }
-    </style>
+    .skip-link:focus {
+      left: 10px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(247, 242, 234, 0.86);
+      border-bottom: 1px solid rgba(234, 223, 210, 0.9);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--brand-dark);
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: -0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-cta {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 86px 0 74px;
+      background:
+        radial-gradient(circle at top left, rgba(214, 164, 95, 0.32), transparent 34%),
+        radial-gradient(circle at 82% 8%, rgba(85, 107, 78, 0.18), transparent 28%),
+        linear-gradient(180deg, #fff8ee 0%, var(--bg) 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid rgba(106, 74, 49, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--brand);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(214, 164, 95, 0.16);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      margin: 22px 0 22px;
+      font-size: clamp(40px, 5.4vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.075em;
+      color: var(--brand-dark);
+    }
+
+    .hero h1 span {
+      color: var(--brand);
+    }
+
+    .hero-subcopy {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.7;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-subcopy strong {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+      border: 0;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--brand-dark);
+      color: #fff;
+      box-shadow: 0 16px 36px rgba(58, 42, 32, 0.22);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--brand-dark);
+      border: 1px solid rgba(106, 74, 49, 0.2);
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 34px;
+      max-width: 660px;
+    }
+
+    .trust-item {
+      padding: 16px 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(234, 223, 210, 0.9);
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 18px;
+      color: var(--brand-dark);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .trust-item span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 38px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .product-visual {
+      min-height: 520px;
+      border-radius: 28px;
+      background:
+        linear-gradient(155deg, rgba(106, 74, 49, 0.16), rgba(214, 164, 95, 0.22)),
+        #fffaf3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-visual::before {
+      content: "";
+      position: absolute;
+      inset: 60px 80px;
+      border-radius: 44% 56% 50% 50%;
+      background: linear-gradient(180deg, rgba(58, 42, 32, 0.92), rgba(106, 74, 49, 0.88));
+      transform: rotate(-5deg);
+      box-shadow: 0 30px 60px rgba(58, 42, 32, 0.24);
+    }
+
+    .product-visual::after {
+      content: "MUD MASTER\A SHAMPOO";
+      white-space: pre;
+      position: relative;
+      width: 210px;
+      height: 330px;
+      border-radius: 34px 34px 26px 26px;
+      background: linear-gradient(180deg, #1f1712 0%, #60422d 100%);
+      color: #f7ead9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      letter-spacing: .08em;
+      line-height: 1.4;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 18px 50px rgba(32, 25, 20, 0.3);
+      z-index: 1;
+    }
+
+    .visual-note {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 250, 243, 0.88);
+      border: 1px solid rgba(234, 223, 210, 0.9);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(12px);
+    }
+
+    /* ===== 히어로 이미지 슬라이더 ===== */
+    .hero-slider {
+      position: relative;
+      min-height: 520px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(155deg, rgba(106, 74, 49, 0.16), rgba(214, 164, 95, 0.22)), #fffaf3;
+    }
+
+    .hero-slider .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .9s ease;
+    }
+
+    .hero-slider .slide.active {
+      opacity: 1;
+    }
+
+    .hero-slider .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slider-dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .slider-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 0;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 0 1px rgba(58, 42, 32, 0.25);
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .slider-dots button.active {
+      background: var(--brand-dark);
+      transform: scale(1.25);
+    }
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .section-tight {
+      padding: 66px 0;
+    }
+
+    .section-header {
+      max-width: 820px;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--brand);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.16;
+      letter-spacing: -0.065em;
+      margin-bottom: 18px;
+      color: var(--brand-dark);
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.035em;
+      margin-bottom: 0;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .pain-card {
+      min-height: 260px;
+      background: var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 18px 46px rgba(46, 32, 22, 0.07);
+    }
+
+    .pain-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--brand);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .pain-card h3 {
+      font-size: 19px;
+      line-height: 1.35;
+      letter-spacing: -0.045em;
+      margin-bottom: 12px;
+      color: var(--brand-dark);
+    }
+
+    .pain-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: -0.025em;
+    }
+
+    .story-wrap {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .quote-card {
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: var(--brand-dark);
+      color: #fff;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-card::before {
+      content: "“";
+      position: absolute;
+      right: 28px;
+      top: -12px;
+      font-size: 140px;
+      line-height: 1;
+      color: rgba(255,255,255,0.08);
+      font-family: Georgia, serif;
+    }
+
+    .quote-card p {
+      font-size: 28px;
+      line-height: 1.35;
+      letter-spacing: -0.055em;
+      font-weight: 900;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .quote-card span {
+      color: rgba(255,255,255,0.72);
+      position: relative;
+    }
+
+    .story-copy {
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(234, 223, 210, 0.9);
+      padding: 32px;
+    }
+
+    .story-copy p {
+      color: var(--muted);
+      font-size: 17px;
+      letter-spacing: -0.03em;
+    }
+
+    .story-copy strong {
+      color: var(--brand-dark);
+      font-weight: 900;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 32px;
+      background: var(--surface-2);
+      border-radius: 28px;
+      border: 1px solid rgba(234, 223, 210, 0.9);
+      box-shadow: 0 18px 46px rgba(46, 32, 22, 0.07);
+    }
+
+    .feature-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--brand);
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.28;
+      letter-spacing: -0.055em;
+      color: var(--brand-dark);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      letter-spacing: -0.03em;
+      margin-bottom: 0;
+    }
+
+    .routine {
+      background: var(--brand-dark);
+      color: #fff;
+      border-radius: 36px;
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .routine::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      right: -180px;
+      top: -160px;
+      background: rgba(214, 164, 95, 0.22);
+    }
+
+    .routine-content {
+      position: relative;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .routine h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -0.065em;
+      margin-bottom: 18px;
+    }
+
+    .routine p {
+      color: rgba(255,255,255,0.74);
+      font-size: 17px;
+      letter-spacing: -0.03em;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.13);
+      backdrop-filter: blur(8px);
+    }
+
+    .step-card strong {
+      display: block;
+      color: #fff;
+      font-size: 21px;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .step-card span {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .final-cta {
+      text-align: center;
+      padding: 80px 28px;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at top, rgba(214, 164, 95, 0.24), transparent 38%),
+        var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .final-cta h2 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.14;
+      letter-spacing: -0.07em;
+      color: var(--brand-dark);
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      max-width: 720px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .form-section {
+      background: #efe5d7;
+      padding: 92px 0 120px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .form-copy {
+      position: sticky;
+      top: 100px;
+    }
+
+    .form-copy h2 {
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.14;
+      letter-spacing: -0.065em;
+      color: var(--brand-dark);
+      margin-bottom: 18px;
+    }
+
+    .form-copy p {
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .mini-list div {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--brand-dark);
+      font-weight: 800;
+    }
+
+    .mini-list div::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .form-card {
+      padding: 30px;
+      border-radius: 30px;
+      background: var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--brand-dark);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #e2d6c6;
+      border-radius: 16px;
+      min-height: 54px;
+      padding: 14px 15px;
+      font: inherit;
+      background: #fffaf5;
+      color: var(--ink);
+      outline: none;
+      transition: border .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(106, 74, 49, 0.1);
+      background: #fff;
+    }
+
+    .checkbox {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 16px;
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 4px 0 18px;
+    }
+
+    .checkbox input {
+      width: 18px;
+      height: 18px;
+      flex: none;
+      min-height: auto;
+      margin-top: 4px;
+      accent-color: var(--brand);
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 58px;
+      border: 0;
+      border-radius: 18px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+      box-shadow: 0 16px 34px rgba(58, 42, 32, 0.22);
+    }
+
+    .form-helper {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #eef6ea;
+      color: #3f5a39;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    /* ===== 주문 섹션 ===== */
+    .order-section {
+      background: #efe5d7;
+      padding: 92px 0 100px;
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .order-copy {
+      position: sticky;
+      top: 100px;
+    }
+
+    .order-copy h2 {
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.14;
+      letter-spacing: -0.065em;
+      color: var(--brand-dark);
+      margin-bottom: 18px;
+    }
+
+    .order-copy p {
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .order-flow {
+      display: grid;
+      gap: 8px;
+      margin-top: 24px;
+      counter-reset: flow;
+    }
+
+    .order-flow div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--brand-dark);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .order-flow div::before {
+      counter-increment: flow;
+      content: counter(flow);
+      width: 26px;
+      height: 26px;
+      flex: none;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .price-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--brand-dark);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .price-summary strong {
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .option-picker {
+      padding: 18px;
+      border: 1px solid #e2d6c6;
+      border-radius: 18px;
+      background: #fdf7ee;
+      margin-bottom: 16px;
+    }
+
+    .option-picker .field:last-of-type { margin-bottom: 0; }
+
+    .option-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .option-price-row span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .option-price-row span strong {
+      color: var(--brand-dark);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-left: 4px;
+    }
+
+    .add-option-btn {
+      flex: none;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--accent);
+      color: var(--brand-dark);
+      font: inherit;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 8px 20px rgba(214, 164, 95, 0.3);
+    }
+
+    .add-option-btn:hover { transform: translateY(-1px); }
+    .add-option-btn:active { transform: translateY(0); }
+
+    .cart-box { margin-bottom: 16px; }
+
+    .cart-empty {
+      padding: 16px;
+      border: 1px dashed #d9c9b3;
+      border-radius: 16px;
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fffaf5;
+      margin-bottom: 8px;
+    }
+
+    .cart-item:last-child { margin-bottom: 0; }
+
+    .cart-item-info { flex: 1; min-width: 0; }
+
+    .cart-item-name {
+      font-weight: 900;
+      color: var(--brand-dark);
+      font-size: 14.5px;
+      letter-spacing: -0.02em;
+    }
+
+    .cart-item-price {
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-top: 2px;
+    }
+
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: none;
+    }
+
+    .cart-qty button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #d9c9b3;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--brand-dark);
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .cart-qty span {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 900;
+      color: var(--brand-dark);
+    }
+
+    .cart-remove {
+      flex: none;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
+
+    .cart-remove:hover { color: #9a4a2a; }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field-hint {
+      margin: 6px 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .addr-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .addr-row input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .addr-search-btn {
+      flex: none;
+      min-height: 54px;
+      padding: 0 18px;
+      border: 1px solid rgba(106, 74, 49, 0.3);
+      border-radius: 16px;
+      background: var(--brand-dark);
+      color: #fff;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #postcode[readonly], #buyerAddress[readonly] {
+      cursor: pointer;
+      background: #fdf6ec;
+    }
+
+    /* 우편번호 검색 레이어 (팝업 대신 페이지 내 embed 방식) */
+    .postcode-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(32, 25, 20, 0.55);
+      padding: 20px;
+    }
+
+    .postcode-layer.show { display: flex; }
+
+    .postcode-box {
+      width: min(100%, 560px);
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .postcode-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-weight: 900;
+      color: var(--brand-dark);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .postcode-head button {
+      border: 0;
+      background: none;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px 8px;
+    }
+
+    .postcode-embed {
+      width: 100%;
+      height: min(70vh, 500px);
+    }
+
+    @media (max-width: 720px) {
+      .postcode-layer { padding: 0; }
+      .postcode-box { width: 100%; height: 100%; border-radius: 0; }
+      .postcode-embed { height: 100%; flex: 1; }
+    }
+
+    .notice-box {
+      margin: 4px 0 18px;
+      border: 1px solid #e2d6c6;
+      border-radius: 16px;
+      background: #fffaf5;
+      overflow: hidden;
+    }
+
+    .notice-box summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--brand-dark);
+      list-style: none;
+    }
+
+    .notice-box summary::-webkit-details-marker { display: none; }
+
+    .notice-box summary::after {
+      content: "＋";
+      float: right;
+      color: var(--brand);
+    }
+
+    .notice-box[open] summary::after { content: "－"; }
+
+    .notice-body {
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    .notice-body strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--brand-dark);
+    }
+
+    .notice-body strong:first-child { margin-top: 0; }
+
+    /* 주문 완료 화면 */
+    .order-complete {
+      display: none;
+      padding: 30px;
+      border-radius: 30px;
+      background: var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .order-complete.show { display: block; }
+
+    .order-complete h3 {
+      font-size: 24px;
+      letter-spacing: -0.05em;
+      color: var(--brand-dark);
+      margin-bottom: 6px;
+    }
+
+    .order-complete .complete-sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .deposit-card {
+      border-radius: 20px;
+      background: #f7f2ea;
+      border: 1px solid #eadfd2;
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .deposit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 15px;
+    }
+
+    .deposit-row span { color: var(--muted); flex: none; }
+
+    .deposit-row strong {
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .deposit-row strong.big { font-size: 20px; }
+
+    .depositor-highlight {
+      margin-top: 4px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-weight: 900;
+      text-align: center;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .copy-btn {
+      margin-top: 14px;
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid rgba(106, 74, 49, 0.25);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--brand-dark);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .complete-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    /* ===== 사업자 정보 푸터 ===== */
+    .biz-info {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--line);
+      display: grid;
+      gap: 4px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .biz-info strong {
+      color: var(--brand-dark);
+      font-size: 13px;
+    }
+
+    /* ===== 주문 조회 ===== */
+    .lookup-result {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lookup-msg {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #fffaf5;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .order-item {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      background: #fffaf5;
+    }
+
+    .order-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .order-item-top span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      flex: none;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14.5px;
+      margin-top: 4px;
+    }
+
+    .order-item-row span { color: var(--muted); }
+
+    .order-item-row b {
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .order-item-badges {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .badge-wait { background: var(--danger-soft); color: #9a4a2a; }
+    .badge-ok { background: #eef6ea; color: #3f5a39; }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .faq-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.66);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+    }
+
+    .faq-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-dark);
+      font-size: 17px;
+      letter-spacing: -0.035em;
+    }
+
+    .faq-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: -0.025em;
+    }
+
+    .legal-note {
+      margin-top: 26px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      padding: 44px 0 92px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .floating-cta {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(247, 242, 234, 0.92);
+      border-top: 1px solid rgba(234, 223, 210, 0.95);
+      backdrop-filter: blur(14px);
+      z-index: 60;
+      display: none;
+    }
+
+    .floating-cta a {
+      width: min(100%, 680px);
+      margin: 0 auto;
+      min-height: 54px;
+      border-radius: 16px;
+      background: var(--brand-dark);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      box-shadow: 0 10px 26px rgba(58, 42, 32, 0.2);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .story-wrap,
+      .routine-content,
+      .form-grid,
+      .order-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .order-copy {
+        position: static;
+      }
+
+      .product-visual {
+        min-height: 460px;
+      }
+
+      .hero-slider {
+        min-height: 460px;
+      }
+
+      .pain-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .form-copy {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        height: 64px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .hero {
+        padding: 54px 0 50px;
+      }
+
+      .hero h1 {
+        letter-spacing: -0.065em;
+      }
+
+      .trust-row,
+      .pain-grid,
+      .feature-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .section-tight {
+        padding: 48px 0;
+      }
+
+      .routine,
+      .form-card,
+      .order-complete,
+      .final-cta {
+        padding: 22px;
+        border-radius: 26px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .product-visual {
+        min-height: 390px;
+      }
+
+      .hero-slider {
+        min-height: 390px;
+      }
+
+      .product-visual::before {
+        inset: 52px 58px;
+      }
+
+      .product-visual::after {
+        width: 170px;
+        height: 280px;
+      }
+
+      .cta-row .button {
+        width: 100%;
+      }
+
+      .floating-cta {
+        display: block;
+      }
+
+      .footer {
+        padding-bottom: 100px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
 
-<div class="container">
-    
-    <!-- 상단 띠 배너 -->
-    <div class="top-bar">
-        📢 유튜브 [만다윤] 구독자 한정 혜택 (선착순 50명 종료 임박)
+  <header class="topbar" aria-label="상단 메뉴">
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="만다윤 랜딩페이지 상단으로 이동">
+        <span class="logo-mark">만다</span>
+        <span>만다윤 Hair Care</span>
+      </a>
+      <nav class="nav-links" aria-label="페이지 이동">
+        <a href="#problem">고민</a>
+        <a href="#why">제품 포인트</a>
+        <a href="#routine">사용법</a>
+        <a href="#apply">알림받기</a>
+        <a href="#track">주문 조회</a>
+        <a class="nav-cta" href="#order">지금 주문하기</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- 헤어 섹션 (유튜브 키 콘텐츠의 문제의식 연결) -->
-    <div class="hero">
-        <div class="badge">YouTube 시청자 전용 페이지</div>
-        <h1>좋다는 샴푸 다 써봐도<br><span>두피 가려움·각질</span>이 그대로인 진짜 이유</h1>
-        <p>조회수를 위한 영상이 아닙니다. 밤마다 긁다 지친 당신을 위한 본질적인 두피 해결책.</p>
-    </div>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">30년 미용 경력 · 7년째 정착한 샴푸</div>
+          <h1>
+            샴푸 순서까지 바꾸는<br />
+            번거로운 홈케어,<br />
+            <span>이제 그만하세요.</span>
+          </h1>
+          <p class="hero-subcopy">
+            7년의 살롱 케어 경험, 30년 미용 경력의 만다윤이 직접 써보고 정착한
+            <strong>두피 케어 중심 프리미엄 샴푸</strong>. 아름다운 모발은 결국 편안한 두피 환경에서 시작됩니다.
+          </p>
+          <div class="cta-row">
+            <a class="button button-primary" href="#order">지금 주문하기</a>
+            <a class="button button-secondary" href="#why">왜 머드마스타인지 보기</a>
+          </div>
+          <p class="field-hint" style="margin-top:10px;">계좌이체 입금 확인 후 순차 발송됩니다.</p>
 
-    <!-- 비디오/이미지 영역 플레이스홀더 (유튜브 연결감 극대화) -->
-    <div class="media-box">
-        <div class="media-box-tag">🎬 방금 보신 영상 속 그 제품</div>
-        <div class="media-box-title">머드마스타 탈모·두피 케어 솔루션</div>
-    </div>
-
-    <!-- 문제 제기 섹션 (Agitation) -->
-    <div class="section-problem">
-        <div class="section-title">아직도 <span>이런 고통</span>을 반복하고 계신가요?</div>
-        <ul class="pain-list">
-            <li class="pain-item">
-                <span class="pain-icon">😰</span>
-                <span class="pain-text">감고 나서 대낮만 되면 어깨에 하얗게 떨어지는 각질</span>
-            </li>
-            <li class="pain-item">
-                <span class="pain-icon">🔥</span>
-                <span class="pain-text">긁다 못해 피가 나고 붉게 달아오른 예민한 두피</span>
-            </li>
-            <li class="pain-item">
-                <span class="pain-icon">💸</span>
-                <span class="pain-text">유명하다는 미용실, 고가 클리닉에 수십만 원 낭비</span>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 해결책 제시 섹션 (Solution) -->
-    <div class="section-solution">
-        <span class="solution-badge">유튜브에서 유일하게 공개한 해답</span>
-        <h2>더 이상 숨기지 마세요.<br>두피 마스터, '머드마스타'</h2>
-        <p style="font-size: 14px; color: #4b5563; margin: 0 0 20px 0;">화학 성분으로 일시적인 시원함만 주는 샴푸는 끝났습니다. 두피 모공 속 노폐물을 자극 없이 강력하게 흡착하는 고밀도 머드 포뮬러.</p>
-        
-        <div class="product-features">
-            <div class="feature-item">
-                <div class="feature-title">🌿 01. 청정 머드의 강력한 흡착력</div>
-                <div class="feature-desc">일반 샴푸가 닿지 못하는 모공 깊숙한 피지와 각질을 자극 없이 끌어당겨 비워냅니다.</div>
+          <div class="trust-row" aria-label="제품 신뢰 요소">
+            <div class="trust-item">
+              <strong>30년</strong>
+              <span>미용 경력 기반의 선택</span>
             </div>
-            <div class="feature-item">
-                <div class="feature-title">❄️ 02. 즉각적인 두피 쿨링 & 진정</div>
-                <div class="feature-desc">두피 열은 탈모의 주범! 즉각적인 온도 감소 특허 성분으로 하루 종일 상쾌하게 유지합니다.</div>
+            <div class="trust-item">
+              <strong>7년째</strong>
+              <span>직접 사용하고 정착한 샴푸</span>
             </div>
-            <div class="feature-item">
-                <div class="feature-title">🧪 03. 자연 유래 약산성 포뮬러</div>
-                <div class="feature-desc">무너진 두피 밸런스를 바로잡아 자생력을 키워주는 안심 처방 샴푸입니다.</div>
+            <div class="trust-item">
+              <strong>2펌핑</strong>
+              <span>애벌 1회 + 본 샴푸 1회 루틴</span>
             </div>
+          </div>
         </div>
+
+        <div class="hero-card" aria-label="제품 대표 이미지 영역">
+          <!-- 슬라이드 추가: <div class="slide"> 줄 복사 / 전환 속도: 스크립트의 SLIDE_INTERVAL -->
+          <div class="hero-slider" id="heroSlider">
+            <div class="slide active"><img src="images/product-1.png" alt="머드마스터 제품 이미지 1"></div>
+            <div class="slide"><img src="images/product-2.png" alt="머드마스터 제품 이미지 2"></div>
+            <div class="slide"><img src="images/product-3.png" alt="머드마스터 제품 이미지 3"></div>
+            <div class="slide"><img src="images/product-4.png" alt="머드마스터 제품 이미지 4"></div>
+            <div class="slide"><img src="images/product-5.png" alt="머드마스터 제품 이미지 5"></div>
+            <div class="slider-dots" id="sliderDots" aria-label="슬라이드 선택"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Problem</div>
+          <h2 class="section-title">유행하는 홈케어를 따라 해도 계속 제자리걸음인 이유</h2>
+          <p class="section-desc">
+            두피와 모발 고민이 반복되는 이유는 단순히 “관리를 덜 해서”가 아닐 수 있습니다. 샴푸의 기준부터 다시 잡아야 할 때입니다.
+          </p>
+        </div>
+
+        <div class="pain-grid">
+          <article class="pain-card">
+            <div class="pain-num">1</div>
+            <h3>두피가 자주 가렵고 예민하게 느껴지는 분</h3>
+            <p>세정력만 강한 샴푸를 사용하면 두피가 쉽게 불편해질 수 있습니다.</p>
+          </article>
+          <article class="pain-card">
+            <div class="pain-num">2</div>
+            <h3>샴푸 후 두피 당김이 느껴지는 분</h3>
+            <p>필요한 유분까지 과하게 씻겨 나가면 두피 밸런스가 무너질 수 있습니다.</p>
+          </article>
+          <article class="pain-card">
+            <div class="pain-num">3</div>
+            <h3>두피를 챙기면 모발이 뻣뻣한 분</h3>
+            <p>두피는 개운한데 모발이 뻣뻣하거나, 모발은 부드러운데 두피가 답답한 경험이 있으셨을 겁니다.</p>
+          </article>
+          <article class="pain-card">
+            <div class="pain-num">4</div>
+            <h3>아직도 내 샴푸를 찾지 못한 분</h3>
+            <p>여러 제품을 써봐도 정착하지 못하고 계속 바꾸고 있다면, 이제 기준을 바꿔야 합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="story">
+      <div class="container story-wrap">
+        <div class="quote-card">
+          <p>이제 다른 샴푸는 못 쓰겠어요.</p>
+          <span>살롱 고객님의 실제 반응에서 시작된 확신</span>
+        </div>
+        <div class="story-copy">
+          <div class="section-kicker">Salon Episode</div>
+          <h2 class="section-title">살롱에서 반복해서 확인한 하나의 분명한 반응</h2>
+          <p>
+            살롱 고객님 중 한 분이 여행지에서 호텔 샴푸를 사용하신 뒤, 머릿결이 너무 뻣뻣해져 고생하신 적이 있었습니다.
+          </p>
+          <p>
+            그런데 집에 돌아와 다시 이 샴푸를 사용하자마자 모발이 부드럽게 정돈되는 느낌을 경험하셨고, 이후 “이제 다른 샴푸는 못 쓰겠어요.”라고 말씀해주셨습니다.
+          </p>
+          <p>
+            이런 반응은 한 번의 우연이 아니었습니다. 수많은 단골 고객님들의 실제 경험, 그리고 미용사로서 성분과 사용감을 까다롭게 살펴본 끝에 제가 7년째 정착한 샴푸. 바로 <strong>머드마스타 샴푸</strong>입니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Why Mud Master</div>
+          <h2 class="section-title">왜 머드마스타 샴푸인가요?</h2>
+          <p class="section-desc">
+            두피는 개운하게, 모발은 부드럽게. 매일 감는 샴푸 하나로 루틴의 시작을 바꿔보세요.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">泥</div>
+              <h3>자석처럼 노폐물을 끌어당기는 천연 머드 클렌징</h3>
+            </div>
+            <p>
+              두피를 손톱으로 빡빡 문지르지 마세요. 강한 마찰은 오히려 두피를 예민하게 만들 수 있습니다. 머드마스타 샴푸는 천연 머드 성분이 모공 속 미세먼지, 피지, 묵은 각질을 부드럽게 흡착해 지문 롤링만으로도 개운한 클렌징을 도와줍니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">葉</div>
+              <h3>낮 동안 지친 두피를 위한 식물성 진정 케어</h3>
+            </div>
+            <p>
+              자외선, 외부 자극, 잦은 스타일링으로 두피는 생각보다 쉽게 지칩니다. 병풀, 황금, 녹차, 로즈마리잎 추출물 등 자연 유래 식물성 성분이 예민하게 느껴지는 두피를 부드럽게 케어해줍니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">潤</div>
+              <h3>샴푸만으로도 느껴지는 부드러운 마무리감</h3>
+            </div>
+            <p>
+              좋은 샴푸는 두피만 개운하게 하는 데서 끝나지 않습니다. 보습과 세정의 밸런스를 고려한 배합으로 샴푸 후에도 모발이 과하게 뻣뻣해지지 않고, 한 올 한 올 부드럽게 마무리되는 사용감을 선사합니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">香</div>
+              <h3>감는 순간 기분까지 상쾌해지는 시트러스 향</h3>
+            </div>
+            <p>
+              상큼한 오렌지와 레몬의 시트러스 계열 향에 은은한 멘톨감이 더해져 샴푸하는 내내 산뜻하고 개운한 기분을 느낄 수 있습니다. 매일 반복되는 샴푸 시간이 하루의 피로를 씻어내는 작은 힐링 루틴이 됩니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="routine">
+      <div class="container">
+        <div class="routine">
+          <div class="routine-content">
+            <div>
+              <div class="section-kicker" style="color:#f0d29e;">How to Use</div>
+              <h2>여러 번 펌핑하지 마세요.</h2>
+              <p>
+                머드마스타 샴푸는 물처럼 흐르는 묽은 제형이 아닙니다. 쫀쫀하고 밀도 있는 고점도 제형이라 많은 양을 사용할 필요가 없습니다. 단 2번의 펌핑이면 충분합니다.
+              </p>
+            </div>
+            <div class="steps">
+              <div class="step-card">
+                <strong>STEP 1. 애벌 샴푸 — 1펌핑</strong>
+                <span>첫 번째 샴푸로 두피 겉면의 가벼운 노폐물과 유분기를 먼저 걷어냅니다.</span>
+              </div>
+              <div class="step-card">
+                <strong>STEP 2. 본 샴푸 — 1펌핑</strong>
+                <span>두 번째 샴푸에서 더욱 풍성하고 밀도 있는 거품이 올라오며, 두피와 모발을 더욱 개운하게 케어할 수 있습니다.</span>
+              </div>
+              <div class="step-card">
+                <strong>적은 양으로도 충분한 사용감</strong>
+                <span>제품은 아끼고, 살롱 케어 루틴은 더 효과적으로 이어갈 수 있습니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="final">
+      <div class="container">
+        <div class="final-cta">
+          <h2>두피가 편안해야,<br />모든 헤어 관리가 빛납니다.</h2>
+          <p>
+            좋은 트리트먼트, 비싼 에센스, 열심히 하는 홈케어도 두피가 불편하면 만족스러운 사용감을 느끼기 어렵습니다. 매일 반복되던 건조함, 가려움, 답답함, 뻣뻣함. 이제 샴푸부터 바꿔보세요.
+          </p>
+          <a class="button button-primary" href="#order">지금 주문하기</a>
+          <p class="field-hint" style="margin-top:12px;">입금 확인 후 순차 발송됩니다. 아직 고민 중이라면 <a href="#apply" style="text-decoration:underline;">알림 신청</a>만 해두셔도 좋습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="container order-grid">
+        <div class="order-copy">
+          <div class="section-kicker">Order</div>
+          <h2>머드마스타 샴푸<br />주문하기</h2>
+          <p>
+            주문서를 작성하신 후 안내된 계좌로 입금해주시면, 입금 확인 후 순차 발송됩니다.
+          </p>
+          <div class="order-flow" aria-label="주문 절차">
+            <div>주문서 작성</div>
+            <div>안내된 계좌로 입금 (입금자명 확인 필수)</div>
+            <div>입금 확인 후 영업일 기준 1~3일 내 발송</div>
+            <div>문자/카톡으로 운송장 번호 안내</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="form-card" id="orderCard">
+            <!-- 주문서 구글시트 연동 방법
+              1) Google Apps Script 웹앱 URL을 만든 뒤
+              2) 아래 form 태그의 data-endpoint="" 안에 URL을 넣으세요.
+              3) 전송되는 필드는 주문관리 시트 컬럼과 1:1 매핑됩니다.
+                 (orderedAt, orderNo, channel, productName, option, qty, amount,
+                  buyerName, phone, postcode, address, addressDetail, depositorName, cashReceipt, cashReceiptNo)
+              4) 현재는 데모 모드라 제출 시 완료 화면만 표시됩니다.
+            -->
+            <form id="orderForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
+              <div class="option-picker">
+                <div class="field">
+                  <label for="orderProduct">제품 선택</label>
+                  <select id="orderProduct" name="product"></select>
+                </div>
+
+                <div class="field-row">
+                  <div class="field">
+                    <label for="orderVolume">용량 선택</label>
+                    <select id="orderVolume" name="volume"></select>
+                  </div>
+                  <div class="field">
+                    <label for="orderQty">수량</label>
+                    <select id="orderQty">
+                      <option value="1">1개</option>
+                      <option value="2">2개</option>
+                      <option value="3">3개</option>
+                      <option value="4">4개</option>
+                      <option value="5">5개</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="option-price-row">
+                  <span>단품 가격 <strong id="optionUnitPrice">0원</strong></span>
+                  <button type="button" class="add-option-btn" id="addOptionBtn">＋ 옵션 담기</button>
+                </div>
+              </div>
+
+              <div class="cart-box">
+                <div class="cart-empty" id="cartEmpty">담긴 옵션이 없습니다. 제품·용량·수량을 고르고 “＋ 옵션 담기”를 눌러주세요. 여러 옵션을 한 번에 담아 주문할 수 있습니다.</div>
+                <div id="cartList"></div>
+              </div>
+
+              <div class="price-summary">
+                <span>총 결제금액</span>
+                <div style="text-align:right;">
+                  <strong id="orderAmountText">0원</strong>
+                  <div id="orderCalcText" style="font-size:12.5px; font-weight:700; opacity:.75; margin-top:2px;"></div>
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="buyerName">주문자명</label>
+                  <input id="buyerName" name="buyerName" type="text" autocomplete="name" placeholder="이름" required />
+                </div>
+                <div class="field">
+                  <label for="buyerPhone">연락처</label>
+                  <input id="buyerPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" pattern="01[016789]-\d{3,4}-\d{4}" title="휴대폰 번호를 확인해주세요. 예: 010-1234-5678" placeholder="010-0000-0000" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="postcode">배송지 주소</label>
+                <div class="addr-row">
+                  <input id="postcode" name="postcode" type="text" placeholder="우편번호" readonly />
+                  <button type="button" class="addr-search-btn" id="addrSearchBtn">우편번호 검색</button>
+                </div>
+                <input id="buyerAddress" name="address" type="text" placeholder="우편번호 검색을 누르면 자동 입력됩니다" readonly style="margin-top:8px;" />
+                <input id="buyerAddressDetail" name="addressDetail" type="text" placeholder="상세주소 (동/호수 등)" style="margin-top:8px;" />
+              </div>
+
+              <div class="field">
+                <label for="depositorName">입금자명</label>
+                <input id="depositorName" name="depositorName" type="text" placeholder="예: 홍길동4860" required />
+                <p class="field-hint">입금 확인을 위해 <strong>이름 + 휴대폰 뒷자리 4자리</strong>로 입금해주세요. 이름과 연락처를 입력하면 자동으로 채워집니다.</p>
+              </div>
+
+              <div class="field">
+                <label for="cashReceipt">현금영수증 신청</label>
+                <select id="cashReceipt" name="cashReceipt">
+                  <option value="미신청">신청 안 함</option>
+                  <option value="신청(소득공제)">개인 소득공제용</option>
+                  <option value="신청(지출증빙)">사업자 지출증빙용</option>
+                </select>
+              </div>
+
+              <div class="field" id="cashReceiptNoField" style="display:none;">
+                <label for="cashReceiptNo">현금영수증 발급 번호</label>
+                <input id="cashReceiptNo" name="cashReceiptNo" type="text" placeholder="휴대폰 번호 또는 사업자등록번호" />
+              </div>
+
+              <details class="notice-box">
+                <summary>배송 / 교환 / 반품 / 입금 안내</summary>
+                <div class="notice-body">
+                  <strong>배송 안내</strong>
+                  입금 확인 후 영업일 기준 1~3일 내 발송됩니다. 택배사 사정에 따라 배송 기간은 달라질 수 있습니다.
+                  <strong>교환/반품 안내</strong>
+                  상품 수령 후 7일 이내 교환/반품 신청이 가능합니다. 단, 사용 흔적이 있거나 포장이 훼손된 경우 교환/반품이 제한될 수 있습니다. 단순 변심 반품의 왕복 배송비는 고객 부담입니다.
+                  <strong>입금 안내</strong>
+                  주문 후 24시간 내 미입금 시 주문이 취소될 수 있습니다. 입금자명이 다를 경우 고객센터로 연락 부탁드립니다.
+                </div>
+              </details>
+
+              <details class="notice-box">
+                <summary>개인정보 수집·이용 안내</summary>
+                <div class="notice-body">
+                  <strong>수집 항목</strong>
+                  이름, 연락처, 주소, 입금자명, 현금영수증 발급 정보
+                  <strong>수집 목적</strong>
+                  주문 확인, 결제 확인, 상품 배송, 고객 응대, 현금영수증 발급
+                  <strong>보유 기간</strong>
+                  전자상거래 관련 법령에 따른 보관 기간 또는 목적 달성 후 파기
+                  <br />동의를 거부할 수 있으나, 동의하지 않을 경우 주문 접수가 어렵습니다.
+                </div>
+              </details>
+
+              <label class="checkbox" for="orderPrivacy">
+                <input id="orderPrivacy" name="privacyAgree" type="checkbox" required />
+                <span>(필수) 개인정보 수집·이용에 동의합니다.</span>
+              </label>
+
+              <label class="checkbox" for="orderPolicy">
+                <input id="orderPolicy" name="policyAgree" type="checkbox" required />
+                <span>(필수) 배송/교환/반품 및 입금 안내를 확인했습니다.</span>
+              </label>
+
+              <button class="submit-btn" type="submit">주문 접수하기</button>
+              <p class="form-helper">제출 후 입금 계좌가 안내됩니다. 입금 확인 후 순차 발송됩니다.</p>
+            </form>
+          </div>
+
+          <div class="order-complete" id="orderComplete" role="status" aria-live="polite">
+            <h3>주문이 접수되었습니다</h3>
+            <p class="complete-sub">아래 계좌로 입금해주시면 확인 후 순차 발송됩니다.</p>
+            <div class="deposit-card">
+              <div class="deposit-row"><span>주문번호</span><strong id="cOrderNo">-</strong></div>
+              <div class="deposit-row"><span>상품</span><strong id="cProduct">-</strong></div>
+              <div class="deposit-row"><span>입금금액</span><strong class="big" id="cAmount">-</strong></div>
+              <div class="deposit-row"><span>입금계좌</span><strong id="cAccount">-</strong></div>
+              <div class="depositor-highlight">
+                입금자명: <span id="cDepositor">-</span>
+              </div>
+            </div>
+            <button class="copy-btn" type="button" id="copyAccountBtn">계좌번호 복사하기</button>
+            <p class="complete-note">
+              입금자명은 반드시 위와 같이 입력해주세요.<br />
+              24시간 내 미입금 시 주문은 자동 취소될 수 있습니다.<br />
+              입금자명이 다를 경우 카카오톡 또는 문자로 연락 부탁드립니다.<br />
+              입금 확인/배송 상태는 <a href="#track" style="text-decoration:underline;">주문 조회</a>에서 확인하실 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="track">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Order Check</div>
+          <h2 class="section-title">주문 조회</h2>
+          <p class="section-desc">
+            주문 시 입력한 이름과 휴대폰 번호 뒷 4자리를 입력하면 입금 확인·배송 상태를 확인할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="form-card" style="max-width: 560px;">
+          <form id="trackForm">
+            <div class="field-row">
+              <div class="field">
+                <label for="trackName">주문자명</label>
+                <input id="trackName" type="text" autocomplete="name" placeholder="주문 시 입력한 이름" required />
+              </div>
+              <div class="field">
+                <label for="trackLast4">휴대폰 뒷 4자리</label>
+                <input id="trackLast4" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" title="휴대폰 번호 뒷 4자리 숫자를 입력해주세요." placeholder="예: 4860" required />
+              </div>
+            </div>
+            <button class="submit-btn" type="submit">주문 조회하기</button>
+            <p class="form-helper">주문 직후에는 시트 반영까지 잠시 시간이 걸릴 수 있습니다.</p>
+          </form>
+          <div class="lookup-result" id="trackResult" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" id="apply">
+      <div class="container form-grid">
+        <div class="form-copy">
+          <div class="section-kicker">Apply</div>
+          <h2>아직 고민 중이라면,<br />알림만 받아보세요</h2>
+          <p>
+            지금 주문이 망설여진다면 연락처만 남겨주세요. 할인/이벤트 소식, 만다윤 추천 사용 루틴, 두피 고민 상담을 안내드립니다.
+          </p>
+          <div class="mini-list">
+            <div>할인 · 공동구매 · 이벤트 알림</div>
+            <div>만다윤 추천 사용 루틴</div>
+            <div>두피 고민별 상담/문의 연결</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <!-- 구글시트 연동 방법
+            1) Google Apps Script 웹앱 URL을 만든 뒤
+            2) 아래 form 태그의 data-endpoint="" 안에 URL을 넣으세요.
+            3) 현재는 데모 모드라 제출 시 화면에 성공 메시지만 표시됩니다.
+          -->
+          <form id="leadForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
+            <div class="field">
+              <label for="name">이름</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="이름을 입력해주세요" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">연락처</label>
+              <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" pattern="01[016789]-\d{3,4}-\d{4}" title="휴대폰 번호를 확인해주세요. 예: 010-1234-5678" placeholder="010-0000-0000" required />
+            </div>
+
+            <div class="field">
+              <label for="concern">가장 큰 두피/모발 고민</label>
+              <select id="concern" name="concern" required>
+                <option value="">선택해주세요</option>
+                <option value="가려움/예민함">가려움/예민함</option>
+                <option value="건조함/당김">건조함/당김</option>
+                <option value="유분/냄새">유분/냄새</option>
+                <option value="모발 뻣뻣함">모발 뻣뻣함</option>
+                <option value="샴푸 정착 실패">어떤 샴푸를 써야 할지 모르겠음</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="purchaseTiming">구매 예정 시점</label>
+              <select id="purchaseTiming" name="purchaseTiming">
+                <option value="">선택해주세요</option>
+                <option value="지금">지금 바로</option>
+                <option value="이번 주">이번 주 안에</option>
+                <option value="나중에">나중에 (알림만 받기)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" placeholder="궁금한 점이나 현재 사용 중인 샴푸, 두피 고민을 적어주세요."></textarea>
+            </div>
+
+            <label class="checkbox" for="privacy">
+              <input id="privacy" name="privacy" type="checkbox" required />
+              <span>(필수) 제품 안내, 상담을 위한 개인정보 수집·이용에 동의합니다.</span>
+            </label>
+
+            <label class="checkbox" for="marketing">
+              <input id="marketing" name="marketingAgree" type="checkbox" />
+              <span>(선택) 할인/이벤트 등 마케팅 정보 수신에 동의합니다.</span>
+            </label>
+
+            <button class="submit-btn" type="submit">만다윤 추천 샴푸 안내받기</button>
+            <p class="form-helper">제출 후 담당자가 순차적으로 안내드립니다.</p>
+            <div id="successMessage" class="success-message" role="status">
+              신청이 완료되었습니다. 남겨주신 연락처로 안내드리겠습니다.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">자주 묻는 질문</h2>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-card">
+            <strong>Q. 샴푸만 바꿔도 두피 케어가 되나요?</strong>
+            <p>두피 케어의 시작은 매일 반복하는 샴푸 루틴입니다. 머드마스타 샴푸는 세정감, 사용감, 마무리감을 함께 고려한 제품입니다.</p>
+          </div>
+          <div class="faq-card">
+            <strong>Q. 린스를 꼭 같이 써야 하나요?</strong>
+            <p>모발 상태에 따라 다르지만, 샴푸 후에도 과하게 뻣뻣하지 않은 부드러운 마무리감을 느낄 수 있도록 설계된 제품입니다.</p>
+          </div>
+          <div class="faq-card">
+            <strong>Q. 얼마나 사용하면 되나요?</strong>
+            <p>고점도 제형이라 많은 양을 사용할 필요가 없습니다. 애벌 샴푸 1펌핑, 본 샴푸 1펌핑의 2단계 루틴을 권장합니다.</p>
+          </div>
+          <div class="faq-card">
+            <strong>Q. 어떤 향인가요?</strong>
+            <p>오렌지와 레몬의 시트러스 계열 향에 은은한 멘톨감이 더해져 산뜻하고 개운한 사용감을 줍니다.</p>
+          </div>
+        </div>
+
+        <div class="legal-note">
+          ※ 본 페이지의 표현은 제품의 사용감과 일반적인 두피·모발 케어 루틴에 대한 설명입니다. 개인의 두피 및 모발 상태에 따라 사용감에는 차이가 있을 수 있습니다.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <strong>만다윤 Hair Care</strong><br />
+          30년 미용 경력의 전문가가 제안하는 두피 케어 루틴
+        </div>
+        <div>
+          © Mandayun. All rights reserved.
+        </div>
+      </div>
+      <!-- 아래 사업자 정보는 실제 정보로 반드시 교체하세요. (전자상거래법상 필수 표시 항목) -->
+      <div class="biz-info">
+        <strong>판매자 정보</strong>
+        <span>상호명: ○○○ &nbsp;|&nbsp; 대표자: ○○○ &nbsp;|&nbsp; 사업자등록번호: 000-00-00000</span>
+        <span>통신판매업 신고번호: 제0000-○○○○-0000호</span>
+        <span>주소: ○○시 ○○구 ○○로 00</span>
+        <span>고객센터: 010-0000-0000 &nbsp;|&nbsp; 이메일: example@example.com &nbsp;|&nbsp; 운영시간: 평일 10:00~17:00</span>
+        <span style="margin-top:6px;">배송: 입금 확인 후 영업일 기준 1~3일 내 발송 &nbsp;|&nbsp; 교환/반품: 상품 수령 후 7일 이내 (단순 변심 시 왕복 배송비 고객 부담)</span>
+      </div>
     </div>
+  </footer>
 
-    <!-- 사회적 증거 섹션 (Proof) -->
-    <div class="section-reviews">
-        <div class="section-title" style="margin-bottom: 15px;">먼저 경험한 분들의 <span>진짜 후기</span></div>
-        
-        <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <div class="review-text">"유튜브 만다윤 채널 보고 반신반의하며 샀는데, 맨날 어깨 털던 버릇이 2주 만에 사라졌어요. 진짜 인생 샴푸입니다."</div>
-            <div class="review-user">이*민 (34세, 직장인)</div>
-        </div>
-        
-        <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <div class="review-text">"두피가 예민해서 붉은 기가 심했는데 머드마스타 쓰고 나서 엄청 진정됐어요. 기름기도 확실히 덜 껴요!"</div>
-            <div class="review-user">김*우 (29세, 대학생)</div>
-        </div>
+  <!-- 우편번호 검색 레이어 -->
+  <div class="postcode-layer" id="postcodeLayer" role="dialog" aria-modal="true" aria-label="우편번호 검색">
+    <div class="postcode-box">
+      <div class="postcode-head">
+        <span>우편번호 검색</span>
+        <button type="button" id="postcodeClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="postcode-embed" id="postcodeEmbed"></div>
     </div>
+  </div>
 
-    <!-- 거절할 수 없는 제안 섹션 (Scarcity) -->
-    <div class="section-offer">
-        <div class="offer-tag">만다윤 구독자 전용 혜택</div>
-        <h3 style="margin: 0; font-size: 18px; color: #1a261f;">오늘 단 하루, 무료 배송 + 40% OFF</h3>
-        <div class="price-box">
-            <span class="price-original">39,000원</span><br>
-            <span class="price-discount">23,400원</span>
-        </div>
-        <p style="font-size: 12px; color: #e67e22; margin: 0; font-weight: bold;">⚠️ 준비된 선착순 수량 소진 시 예고 없이 가격이 인상됩니다.</p>
-    </div>
+  <div class="floating-cta" aria-label="하단 고정 주문 버튼">
+    <a href="#order">지금 주문하기 · 입금 확인 후 발송</a>
+  </div>
 
-</div>
+  <!-- 카카오(다음) 우편번호 서비스 — 무료, API 키 불필요 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    /* =====================================================
+       주문 설정 — 실제 값으로 반드시 수정하세요.
+       - options의 price는 예시 가격입니다.
+       - bank / account / holder는 실제 입금 계좌로 교체하세요.
+       ===================================================== */
+    const ORDER_CONFIG = {
+      productName: '머드마스터',
+      // 제품별로 용량(용량/가격) 옵션을 묶어서 관리합니다.
+      // 새 제품/용량을 추가하려면 아래 products 배열만 수정하세요.
+      products: [
+        { name: '샴푸 건성', variants: [
+          { volume: '300ml', price: 35000 },
+          { volume: '1000ml', price: 80000 }
+        ] },
+        { name: '샴푸 지성', variants: [
+          { volume: '300ml', price: 35000 },
+          { volume: '1000ml', price: 83000 }
+        ] },
+        { name: '팩 건성', variants: [
+          { volume: '300g', price: 45000 },
+          { volume: '1000g', price: 120000 }
+        ] },
+        { name: '팩 지성', variants: [
+          { volume: '300g', price: 45000 },
+          { volume: '1000g', price: 120000 }
+        ] },
+        { name: '핑크클레이 젤', variants: [
+          { volume: '150ml', price: 36000 }
+        ] }
+      ],
+      bank: '국민은행',
+      account: '000000-00-000000',
+      holder: '예금주 ○○○'
+    };
 
-<!-- 하단 고정 CTA 버튼 -->
-<div class="cta-container">
-    <a href="#구매링크_또는_스마트스토어링크" class="cta-btn">머드마스타 구독자 혜택가로 구매하기</a>
-    <div class="cta-subtext">본 혜택은 본 페이지 유입 고객에게만 적용됩니다.</div>
-</div>
+    const won = n => n.toLocaleString('ko-KR') + '원';
+    const channel = new URLSearchParams(location.search).get('utm_source') || '랜딩페이지';
 
+    /* ---------- 히어로 이미지 슬라이더 ---------- */
+    const SLIDE_INTERVAL = 4000; // 슬라이드 전환 시간(밀리초). 4000 = 4초
+
+    (function () {
+      const slider = document.getElementById('heroSlider');
+      if (!slider) return;
+      const slides = Array.from(slider.querySelectorAll('.slide'));
+      const dotsWrap = document.getElementById('sliderDots');
+      if (slides.length <= 1) { if (dotsWrap) dotsWrap.style.display = 'none'; return; }
+
+      let current = 0;
+      let timer = null;
+
+      const dots = slides.map((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', (i + 1) + '번째 슬라이드 보기');
+        b.addEventListener('click', () => { show(i); restart(); });
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      function show(i) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (i + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(() => show(current + 1), SLIDE_INTERVAL);
+      }
+
+      dots[0].classList.add('active');
+      restart();
+
+      // 마우스를 올리는 동안은 자동 전환 일시정지
+      slider.addEventListener('mouseenter', () => clearInterval(timer));
+      slider.addEventListener('mouseleave', restart);
+    })();
+
+    /* ---------- 관심고객(알림) 폼 ---------- */
+    const leadForm = document.getElementById('leadForm');
+    const successMessage = document.getElementById('successMessage');
+
+    leadForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const endpoint = leadForm.dataset.endpoint.trim();
+      const button = leadForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+      const payload = Object.fromEntries(new FormData(leadForm).entries());
+      payload.type = 'lead';
+      payload.channel = channel;
+      payload.createdAt = new Date().toISOString();
+      payload.page = '만다윤 머드마스타 샴푸 랜딩페이지';
+
+      button.disabled = true;
+      button.textContent = '제출 중입니다...';
+
+      try {
+        if (endpoint) {
+          await fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          console.log('데모 제출 데이터(lead):', payload);
+        }
+        leadForm.reset();
+        successMessage.style.display = 'block';
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (error) {
+        alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        console.error(error);
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    });
+
+    /* ---------- 주문 폼 ---------- */
+    const orderForm = document.getElementById('orderForm');
+    const orderCard = document.getElementById('orderCard');
+    const orderComplete = document.getElementById('orderComplete');
+    const productSelect = document.getElementById('orderProduct');
+    const volumeSelect = document.getElementById('orderVolume');
+    const qtySelect = document.getElementById('orderQty');
+    const unitPriceText = document.getElementById('optionUnitPrice');
+    const addOptionBtn = document.getElementById('addOptionBtn');
+    const cartListEl = document.getElementById('cartList');
+    const cartEmptyEl = document.getElementById('cartEmpty');
+    const amountText = document.getElementById('orderAmountText');
+    const calcText = document.getElementById('orderCalcText');
+    const nameInput = document.getElementById('buyerName');
+    const phoneInput = document.getElementById('buyerPhone');
+    const depositorInput = document.getElementById('depositorName');
+    const cashReceiptSelect = document.getElementById('cashReceipt');
+    const cashReceiptNoField = document.getElementById('cashReceiptNoField');
+    const cashReceiptNoInput = document.getElementById('cashReceiptNo');
+
+    // 장바구니: 여러 옵션을 담아 한 번에 주문할 수 있습니다.
+    // 각 항목 { key, name, volume, price, qty }
+    let cart = [];
+
+    // 제품 드롭다운 채우기
+    ORDER_CONFIG.products.forEach((p, i) => {
+      const o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = p.name;
+      productSelect.appendChild(o);
+    });
+
+    function currentProduct() {
+      return ORDER_CONFIG.products[Number(productSelect.value) || 0];
+    }
+
+    function currentVariant() {
+      const p = currentProduct();
+      return p.variants[Number(volumeSelect.value) || 0];
+    }
+
+    // 선택된 제품에 맞춰 용량 드롭다운 다시 채우기
+    function fillVolumes() {
+      const p = currentProduct();
+      volumeSelect.innerHTML = '';
+      p.variants.forEach((v, i) => {
+        const o = document.createElement('option');
+        o.value = String(i);
+        o.textContent = `${v.volume} — ${won(v.price)}`;
+        volumeSelect.appendChild(o);
+      });
+      renderUnitPrice();
+    }
+
+    function renderUnitPrice() {
+      unitPriceText.textContent = won(currentVariant().price);
+    }
+
+    function cartTotal() {
+      return cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+    }
+
+    function cartQtyTotal() {
+      return cart.reduce((sum, c) => sum + c.qty, 0);
+    }
+
+    function cartSummary() {
+      // 완료 화면/주문서에 표시할 텍스트
+      return cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(', ');
+    }
+
+    function renderAmount() {
+      amountText.textContent = won(cartTotal());
+      calcText.textContent = cart.length ? cartSummary() : '';
+    }
+
+    function renderCart() {
+      if (!cart.length) {
+        cartEmptyEl.style.display = 'block';
+        cartListEl.innerHTML = '';
+      } else {
+        cartEmptyEl.style.display = 'none';
+        cartListEl.innerHTML = cart.map((c, i) =>
+          '<div class="cart-item">'
+          + '<div class="cart-item-info">'
+          + '<div class="cart-item-name">' + esc(c.name) + ' · ' + esc(c.volume) + '</div>'
+          + '<div class="cart-item-price">' + won(c.price) + ' × ' + c.qty + ' = ' + won(c.price * c.qty) + '</div>'
+          + '</div>'
+          + '<div class="cart-qty">'
+          + '<button type="button" data-act="dec" data-i="' + i + '" aria-label="수량 감소">−</button>'
+          + '<span>' + c.qty + '</span>'
+          + '<button type="button" data-act="inc" data-i="' + i + '" aria-label="수량 증가">+</button>'
+          + '</div>'
+          + '<button type="button" class="cart-remove" data-act="del" data-i="' + i + '" aria-label="삭제">✕</button>'
+          + '</div>'
+        ).join('');
+      }
+      renderAmount();
+    }
+
+    // 옵션 담기
+    addOptionBtn.addEventListener('click', () => {
+      const p = currentProduct();
+      const v = currentVariant();
+      const qty = Number(qtySelect.value) || 1;
+      const key = p.name + '|' + v.volume;
+      const existing = cart.find(c => c.key === key);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ key: key, name: p.name, volume: v.volume, price: v.price, qty: qty });
+      }
+      renderCart();
+    });
+
+    // 장바구니 수량 조절 / 삭제 (이벤트 위임)
+    cartListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-act]');
+      if (!btn) return;
+      const i = Number(btn.dataset.i);
+      const act = btn.dataset.act;
+      if (!cart[i]) return;
+      if (act === 'inc') cart[i].qty += 1;
+      else if (act === 'dec') cart[i].qty = Math.max(1, cart[i].qty - 1);
+      else if (act === 'del') cart.splice(i, 1);
+      renderCart();
+    });
+
+    productSelect.addEventListener('change', fillVolumes);
+    volumeSelect.addEventListener('change', renderUnitPrice);
+    fillVolumes();
+    renderCart();
+
+    // 입금자명 자동 생성 (이름 + 휴대폰 뒷자리 4자리) — 직접 수정하면 자동 갱신 중단
+    let depositorEdited = false;
+    depositorInput.addEventListener('input', () => {
+      depositorEdited = depositorInput.value.trim() !== '';
+      if (!depositorEdited) autoDepositor();
+    });
+
+    function autoDepositor() {
+      if (depositorEdited) return;
+      const name = nameInput.value.trim();
+      const digits = phoneInput.value.replace(/\D/g, '');
+      const last4 = digits.length >= 4 ? digits.slice(-4) : '';
+      if (name) depositorInput.value = name + last4;
+    }
+
+    nameInput.addEventListener('input', autoDepositor);
+    phoneInput.addEventListener('input', autoDepositor);
+
+    // 연락처 입력 시 자동 하이픈
+    function attachPhoneFormat(el) {
+      if (!el) return;
+      el.addEventListener('input', function () {
+        const d = this.value.replace(/\D/g, '').slice(0, 11);
+        let out;
+        if (d.length < 4) out = d;
+        else if (d.length < 8) out = d.slice(0, 3) + '-' + d.slice(3);
+        else out = d.slice(0, 3) + '-' + d.slice(3, 7) + '-' + d.slice(7);
+        this.value = out;
+      });
+    }
+    attachPhoneFormat(phoneInput);
+    attachPhoneFormat(document.getElementById('phone'));
+
+    /* ---------- 우편번호 검색 (카카오/다음 우편번호 서비스) ---------- */
+    const postcodeInput = document.getElementById('postcode');
+    const addressInput = document.getElementById('buyerAddress');
+    const addressDetailInput = document.getElementById('buyerAddressDetail');
+
+    function openPostcodeSearch() {
+      if (typeof daum === 'undefined' || !daum.Postcode) {
+        // 스크립트 로드 실패(오프라인 등) 시 직접 입력으로 전환
+        postcodeInput.readOnly = false;
+        addressInput.readOnly = false;
+        addressInput.placeholder = '주소를 직접 입력해주세요';
+        addressInput.focus();
+        return;
+      }
+      openPostcodeLayer();
+    }
+
+    const postcodeLayer = document.getElementById('postcodeLayer');
+    const postcodeEmbed = document.getElementById('postcodeEmbed');
+
+    function closePostcodeLayer() {
+      postcodeLayer.classList.remove('show');
+      postcodeEmbed.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    function openPostcodeLayer() {
+      postcodeLayer.classList.add('show');
+      document.body.style.overflow = 'hidden'; // 뒤 배경 스크롤 잠금
+      postcodeEmbed.innerHTML = '';
+      new daum.Postcode({
+        width: '100%',
+        height: '100%',
+        oncomplete: function (data) {
+          // 도로명/지번 중 사용자가 선택한 주소 사용
+          let addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+          let extra = '';
+          if (data.userSelectedType === 'R') {
+            if (data.bname && /[동로가]$/.test(data.bname)) extra += data.bname;
+            if (data.buildingName && data.apartment === 'Y') extra += (extra ? ', ' : '') + data.buildingName;
+            if (extra) addr += ' (' + extra + ')';
+          }
+          postcodeInput.value = data.zonecode;
+          addressInput.value = addr;
+          closePostcodeLayer();
+          addressDetailInput.focus(); // 바로 상세주소 입력으로 이동
+        }
+      }).embed(postcodeEmbed);
+    }
+
+    document.getElementById('postcodeClose').addEventListener('click', closePostcodeLayer);
+    postcodeLayer.addEventListener('click', function (e) {
+      if (e.target === postcodeLayer) closePostcodeLayer();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && postcodeLayer.classList.contains('show')) closePostcodeLayer();
+    });
+
+    document.getElementById('addrSearchBtn').addEventListener('click', openPostcodeSearch);
+    postcodeInput.addEventListener('click', openPostcodeSearch);
+    addressInput.addEventListener('click', openPostcodeSearch);
+
+    // 현금영수증 선택 시 번호 입력칸 표시
+    cashReceiptSelect.addEventListener('change', () => {
+      const need = cashReceiptSelect.value !== '미신청';
+      cashReceiptNoField.style.display = need ? 'block' : 'none';
+      cashReceiptNoInput.required = need;
+      if (!need) cashReceiptNoInput.value = '';
+    });
+
+    // 주문번호 생성: MDY-YYYYMMDD-순번
+    // 클라이언트에서는 시간 기반 3자리를 사용합니다.
+    // Apps Script에서 시트 기준 일련번호로 재발급하도록 구성하면 더 정확합니다.
+    function makeOrderNo(d) {
+      const ymd = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+      const seq = String((d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) % 1000).padStart(3, '0');
+      return `MDY-${ymd}-${seq}`;
+    }
+
+    orderForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      if (!addressInput.value.trim()) {
+        alert('우편번호 검색 버튼을 눌러 배송지 주소를 선택해주세요.');
+        openPostcodeSearch();
+        return;
+      }
+
+      const endpoint = orderForm.dataset.endpoint.trim();
+      const button = orderForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+
+      if (!cart.length) {
+        alert('주문할 옵션을 담아주세요. 제품·용량을 고르고 "＋ 옵션 담기"를 눌러주세요.');
+        return;
+      }
+
+      const now = new Date();
+      const orderNo = makeOrderNo(now);
+      const optionSummary = cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(' / ');
+      const qty = cartQtyTotal();
+      const amount = cartTotal();
+      const fullAddress = [
+        postcodeInput.value.trim() ? '[' + postcodeInput.value.trim() + ']' : '',
+        addressInput.value.trim(),
+        addressDetailInput.value.trim()
+      ].filter(Boolean).join(' ');
+
+      // 주문관리 시트 컬럼과 매핑되는 payload
+      const payload = {
+        type: 'order',
+        orderedAt: now.toISOString(),          // 주문일시
+        orderNo: orderNo,                      // 주문번호
+        channel: channel,                      // 유입경로
+        productName: ORDER_CONFIG.productName, // 상품명
+        option: optionSummary,                 // 옵션 (담은 전체 항목 요약)
+        items: JSON.stringify(cart.map(c => ({ name: c.name, volume: c.volume, price: c.price, qty: c.qty }))), // 옵션 상세(JSON)
+        qty: qty,                              // 총 수량
+        amount: amount,                        // 결제금액
+        buyerName: nameInput.value.trim(),     // 주문자명
+        phone: phoneInput.value.trim(),        // 연락처
+        postcode: postcodeInput.value.trim(),  // 우편번호
+        address: fullAddress,                  // 주소 (우편번호+기본+상세 합본)
+        addressDetail: addressDetailInput.value.trim(), // 상세주소
+        depositorName: depositorInput.value.trim(), // 입금자명
+        cashReceipt: cashReceiptSelect.value,  // 현금영수증
+        cashReceiptNo: cashReceiptNoInput.value.trim(), // 현금영수증 번호
+        paymentStatus: '미입금',               // 입금상태 초기값
+        shippingStatus: '배송전'               // 배송상태 초기값
+      };
+
+      button.disabled = true;
+      button.textContent = '주문 접수 중입니다...';
+
+      try {
+        if (endpoint) {
+          await fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          console.log('데모 제출 데이터(order):', payload);
+        }
+
+        // 완료 화면 표시
+        document.getElementById('cOrderNo').textContent = orderNo;
+        document.getElementById('cProduct').textContent = optionSummary;
+        document.getElementById('cAmount').textContent = won(amount);
+        document.getElementById('cAccount').textContent = `${ORDER_CONFIG.bank} ${ORDER_CONFIG.account} (${ORDER_CONFIG.holder})`;
+        document.getElementById('cDepositor').textContent = payload.depositorName || '주문자명+휴대폰 뒷자리';
+
+        orderCard.style.display = 'none';
+        orderComplete.classList.add('show');
+        orderComplete.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (error) {
+        alert('주문 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        console.error(error);
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    });
+
+    // 주문/알림 폼이 화면에 보이면 하단 고정 버튼 숨김 (모바일 입력창 가림 방지)
+    const floatingCta = document.querySelector('.floating-cta');
+    const ctaHideTargets = [document.getElementById('order'), document.getElementById('track'), document.getElementById('apply')].filter(Boolean);
+    if (floatingCta && 'IntersectionObserver' in window && ctaHideTargets.length) {
+      const visibleSections = new Set();
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) visibleSections.add(e.target);
+          else visibleSections.delete(e.target);
+        });
+        floatingCta.style.display = visibleSections.size ? 'none' : '';
+      }, { threshold: 0.12 });
+      ctaHideTargets.forEach(function (t) { io.observe(t); });
+    }
+
+    // 계좌번호 복사
+    document.getElementById('copyAccountBtn').addEventListener('click', async function () {
+      const text = ORDER_CONFIG.account; // 은행 앱에 바로 붙여넣을 수 있도록 계좌번호만 복사
+      try {
+        await navigator.clipboard.writeText(text);
+        this.textContent = '복사되었습니다!';
+      } catch (e) {
+        prompt('아래 계좌번호를 복사해주세요.', text);
+      }
+      setTimeout(() => { this.textContent = '계좌번호 복사하기'; }, 2000);
+    });
+
+    /* ---------- 주문 조회 ----------
+       Apps Script에 doGet(조회) 코드가 배포되어 있어야 작동합니다.
+       (함께 제공된 apps-script-order-lookup.gs 참고) */
+    const trackForm = document.getElementById('trackForm');
+    const trackResult = document.getElementById('trackResult');
+
+    function esc(t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function fmtDate(v) {
+      const d = new Date(v);
+      if (isNaN(d)) return esc(v);
+      return d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function badge(text, good) {
+      return '<span class="status-badge ' + (good ? 'badge-ok' : 'badge-wait') + '">' + esc(text) + '</span>';
+    }
+
+    function renderOrders(orders) {
+      trackResult.innerHTML = orders.map(function (o) {
+        const pay = String(o.paymentStatus || '입금 확인 전');
+        const ship = String(o.shippingStatus || '배송 준비 전');
+        const payGood = /확인|완료/.test(pay);
+        const shipGood = /발송|배송중|완료|출고/.test(ship);
+        return '<div class="order-item">'
+          + '<div class="order-item-top"><div>' + esc(o.productName) + ' · ' + esc(o.option) + ' × ' + esc(o.qty) + '</div><span>' + fmtDate(o.orderedAt) + '</span></div>'
+          + '<div class="order-item-row"><span>주문번호</span><b>' + esc(o.orderNo) + '</b></div>'
+          + '<div class="order-item-row"><span>결제금액</span><b>' + won(Number(o.amount) || 0) + '</b></div>'
+          + '<div class="order-item-badges">'
+          + badge('입금: ' + pay, payGood)
+          + badge('배송: ' + ship, shipGood)
+          + (o.trackingNo ? badge('운송장 ' + o.trackingNo, true) : '')
+          + '</div></div>';
+      }).join('');
+    }
+
+    trackForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const endpoint = orderForm.dataset.endpoint.trim();
+      const name = document.getElementById('trackName').value.trim();
+      const last4 = document.getElementById('trackLast4').value.trim();
+      const button = trackForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+
+      if (!endpoint) {
+        trackResult.innerHTML = '<div class="lookup-msg">조회 서비스 준비 중입니다. 잠시 후 다시 시도해주세요.</div>';
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = '조회 중입니다...';
+      trackResult.innerHTML = '';
+
+      try {
+        const url = endpoint + '?type=lookup&name=' + encodeURIComponent(name) + '&last4=' + encodeURIComponent(last4);
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data && data.ok && data.orders && data.orders.length) {
+          renderOrders(data.orders);
+        } else {
+          trackResult.innerHTML = '<div class="lookup-msg">일치하는 주문 내역이 없습니다. 주문 시 입력한 이름과 휴대폰 뒷 4자리를 다시 확인해주세요.<br />방금 주문하셨다면 잠시 후 다시 조회해주세요.</div>';
+        }
+      } catch (error) {
+        console.error(error);
+        trackResult.innerHTML = '<div class="lookup-msg">조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</div>';
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    });
+  </script>
 </body>
 </html>
