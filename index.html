@@ -59,7 +59,36 @@ h3{font-size:17px;font-weight:600;margin-bottom:6px}
   display:flex;align-items:center;justify-content:space-between}
 .logo{font-weight:700;font-size:16px;letter-spacing:-.02em}
 .logo span{color:var(--mdy)}
-.nav a{font-size:14px;color:var(--text-sub);text-decoration:none;margin-left:16px}
+.nav a{font-size:14px;color:var(--text-sub);text-decoration:none;margin-left:14px}
+.nav-links{display:flex;align-items:center}
+.nav-cta{border:1px solid var(--mdy);color:var(--mdy) !important;border-radius:999px;
+  padding:6px 13px;font-weight:600}
+.nav-cta:hover{background:var(--mdy);color:#fff !important}
+@media(max-width:400px){
+  .nav a{font-size:13px;margin-left:10px}
+  .nav-links a:first-child{display:none}
+}
+
+/* 주문조회 */
+.lookup-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.lookup-form .field{flex:1;min-width:150px;margin-top:0}
+.order-card{background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:18px;margin-top:10px}
+.order-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  padding-bottom:12px;border-bottom:1px solid var(--line)}
+.order-no{font-size:15px;font-weight:600}
+.order-date{font-size:13px;color:var(--text-sub);margin-top:2px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;flex:none}
+.badge2{font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.b-wait{background:#FDF0EE;color:#A8341F}
+.b-ok{background:#E6F4E6;color:#2C6B2C}
+.b-neutral{background:var(--bg-soft);color:var(--text-sub)}
+.order-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:14px}
+.order-row dt{color:var(--text-sub);flex:none}
+.order-row dd{text-align:right;word-break:break-all}
+.track{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.track button{border:1px solid var(--line);background:#fff;border-radius:6px;
+  font-size:12px;padding:4px 9px;color:var(--text-sub)}
 
 /* hero */
 .hero{background:var(--mdy);color:#fff;padding:64px 0 56px}
@@ -167,10 +196,22 @@ h3{font-size:17px;font-weight:600;margin-bottom:6px}
 .prod-role{font-size:13px;color:var(--text-sub);margin-top:2px}
 .freq{font-size:12px;padding:4px 9px;border-radius:999px;background:var(--accent-light);
   color:var(--accent);white-space:nowrap;flex:none}
-.price-row{display:flex;justify-content:space-between;align-items:center;
-  padding:9px 0;border-top:1px solid var(--line);font-size:15px;margin-top:12px}
+.price-row{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:11px 0;border-top:1px solid var(--line);font-size:15px;margin-top:12px}
 .price-row:first-of-type{margin-top:12px}
+.price-row + .price-row{margin-top:0}
 .price-row b{font-weight:600}
+.opt-label{flex:1;min-width:0}
+.opt-price{white-space:nowrap}
+.btn-add{flex:none;padding:9px 18px;border-radius:var(--radius);
+  border:1px solid var(--accent);background:var(--accent);color:#fff;
+  font-size:14px;font-weight:600;transition:.15s}
+.btn-add:hover{opacity:.88}
+.btn-add:active{transform:scale(.97)}
+@media(max-width:400px){
+  .price-row{font-size:14px}
+  .btn-add{padding:9px 14px}
+}
 .more-btn{background:none;border:none;color:var(--accent);font-size:14px;font-weight:600;
   padding:8px 0;text-decoration:underline}
 .bundle{background:var(--accent-light);border-radius:12px;padding:18px;margin-top:12px}
@@ -245,6 +286,9 @@ details.pinned{background:var(--accent-light);border-radius:var(--radius);
   border-radius:7px;font-size:15px;color:var(--text-sub);line-height:1}
 .cart-ctl b{min-width:20px;text-align:center;font-size:14px;font-weight:600}
 .cart-del{border:none !important;color:#C0392B !important;font-size:12px !important;width:auto !important;padding:0 4px}
+.cart-line{display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--line);padding:9px 0;font-size:14px;color:var(--text-sub)}
+.cart-line + .cart-line{border-top:none;padding-top:0}
 .cart-sum{display:flex;justify-content:space-between;align-items:center;
   border-top:2px solid var(--text);margin-top:6px;padding-top:14px}
 .cart-sum b{font-size:20px;font-weight:700;color:var(--accent)}
@@ -293,9 +337,10 @@ footer .fl a{margin-right:14px}
 <nav class="nav">
   <div class="nav-in">
     <div class="logo">만다윤<span>·</span> 두피 모발 관리</div>
-    <div>
+    <div class="nav-links">
       <a href="#check">타입 테스트</a>
       <a href="#brands">제품</a>
+      <a href="#lookup" class="nav-cta">주문조회</a>
     </div>
   </div>
 </nav>
@@ -395,6 +440,23 @@ footer .fl a{margin-right:14px}
 </div>
 <div id="brandContent"></div>
 
+<!-- ================= 주문조회 ================= -->
+<section id="lookup">
+  <div class="wrap">
+    <div class="eyebrow">ORDER</div>
+    <h2>주문조회</h2>
+    <p class="lead">주문하실 때 적으신 <b>이름과 연락처</b>를 넣어주세요. 최근 주문부터 보여드립니다.</p>
+    <form id="lookupForm" class="lookup-form">
+      <div class="field"><label for="lkName">주문자명</label><input type="text" id="lkName" autocomplete="name" required></div>
+      <div class="field"><label for="lkPhone">연락처</label><input type="tel" id="lkPhone" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" required></div>
+      <div class="field" style="flex:none;min-width:0;align-self:flex-end">
+        <button type="submit" class="btn btn-primary" id="lkBtn" style="height:44px">조회하기</button></div>
+    </form>
+    <p class="small mt12" id="lkMsg"></p>
+    <div id="lkResult"></div>
+  </div>
+</section>
+
 <!-- ================= C1 관심고객 ================= -->
 <section class="soft" id="apply">
   <div class="wrap">
@@ -433,12 +495,14 @@ footer .fl a{margin-right:14px}
     <h2>자주 묻는 질문</h2>
     <div class="mt24">
       <details><summary>배송은 얼마나 걸리나요?</summary><div class="a">입금 확인 후 영업일 기준 1~3일 이내 발송됩니다. 주말·공휴일은 제외됩니다.</div></details>
-      <details><summary>입금 확인은 어떻게 되나요?</summary><div class="a">주문 시 안내된 계좌로 입금해 주시면 순차적으로 확인 후 발송해 드립니다. 입금자명은 주문서에 표시된 이름으로 보내주셔야 확인이 빠릅니다.</div></details>
+      <details><summary>입금 확인은 어떻게 되나요? 기한이 있나요?</summary><div class="a">주문 시 안내된 계좌로 입금해 주시면 순차적으로 확인 후 발송해 드립니다. <b>주문일로부터 2일 이내</b>에 입금해 주세요. 그때까지 확인되지 않으면 주문이 취소될 수 있습니다.<br><br>입금자명은 주문서에 표시된 이름으로 보내주셔야 확인이 빠릅니다. 가족 명의 등 다른 이름으로 보내실 예정이라면 주문서의 <b>입금자명 칸을 직접 고쳐서</b> 제출해 주세요.</div></details>
+      <details><summary>배송비는 얼마인가요?</summary><div class="a">배송비는 <b>무료</b>입니다. (도서·산간 지역은 추가 비용이 발생할 수 있습니다)</div></details>
+      <details><summary>주문번호를 잊어버렸어요.</summary><div class="a">상단 <b>주문조회</b>에서 주문하실 때 적으신 이름과 연락처를 넣으시면 바로 확인하실 수 있습니다.</div></details>
       <details><summary>머드마스타랑 메르윈을 같이 주문할 수 있나요?</summary><div class="a">네, 가능합니다. 각 탭에서 원하시는 상품을 <b>담기</b> 해주시면 장바구니에 함께 담기고, 한 번에 주문·배송됩니다.</div></details>
       <details><summary>교환·반품은 어떻게 하나요?</summary><div class="a">단순 변심에 의한 교환·반품은 수령일로부터 7일 이내 가능하며 왕복 배송비는 고객 부담입니다. 제품 하자의 경우 배송비를 부담하지 않으셔도 됩니다. 다만 <b>개봉하여 사용한 화장품은 교환·반품이 어렵습니다.</b></div></details>
       <details><summary>현금영수증·세금계산서를 받을 수 있나요?</summary><div class="a">주문서에서 현금영수증 발급을 선택하시고 번호를 입력해 주세요. 세금계산서는 별도 문의 부탁드립니다.</div></details>
       <details><summary>주문 후 취소·변경이 되나요?</summary><div class="a">발송 전이라면 가능합니다. 고객센터로 주문번호와 함께 연락 주세요.</div></details>
-      <details><summary>배송 조회는 어디서 하나요?</summary><div class="a">발송 완료 시 문자로 택배사와 운송장 번호를 안내해 드립니다.</div></details>
+      <details><summary>배송 조회는 어디서 하나요?</summary><div class="a">상단 <b>주문조회</b>에서 입금·배송 상태와 운송장 번호를 확인하실 수 있습니다. 발송 완료 시 문자로도 안내해 드립니다.</div></details>
     </div>
   </div>
 </section>
@@ -491,11 +555,17 @@ const SUBSCRIBERS = '';   // 예: '1.2만' — 비워두면 해당 칸이 숨겨
 const PAYMENT_CONFIG = {
   method:'bank',
   bank:'국민은행', account:'437201-04-293375', holder:'윤금연',
+  depositDeadlineDays:2,        // 입금 기한(일). 0으로 두면 기한 안내를 표시하지 않습니다
   pg:{ provider:null, clientKey:null, successUrl:null, failUrl:null }
 };
 
+/* 배송비 — ⚠️ 현재 '무료배송'으로 설정되어 있습니다. 실제 정책에 맞게 반드시 확인하세요.
+   유료라면 fee에 금액을, 일정 금액 이상 무료라면 freeOver에 기준 금액을 넣으세요.
+   예) 3,000원 / 50,000원 이상 무료  →  { fee:3000, freeOver:50000 } */
+const SHIPPING = { fee:0, freeOver:0 };
+
 /* 주문/관심고객 데이터를 받을 Apps Script 웹앱 URL */
-const ENDPOINT = '';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxdPZsv_EjD8_stTyryboPq3Q7DTsoWn-ESy0RuTKuCfYjVriAmAhz3sj7XiKV7DC6z/exec';
 
 /* 브랜드 데이터 — 브랜드 추가 시 이 배열에만 객체를 추가하세요 */
 const BRANDS = [
@@ -929,9 +999,12 @@ function renderBrand(b){
         <div class="prod-role">${esc(p.role)}</div></div>
         <span class="freq">${esc(p.freq)}</span>
       </div>
-      ${p.options.map(o=>`<div class="price-row"><span>${esc(o.label)}</span><b>${won(o.price)}</b></div>`).join('')}
+      ${p.options.map((o,oi)=>`<div class="price-row">
+        <span class="opt-label">${esc(o.label)}</span>
+        <b class="opt-price">${won(o.price)}</b>
+        <button class="btn-add" data-add="${p.sku}" data-oi="${oi}">담기</button>
+      </div>`).join('')}
       ${p.bundle?`<p class="small mt8">매일은 샴푸로, 주 1~2회는 팩으로. 같이 쓰는 게 순서입니다.</p>`:''}
-      <button class="btn btn-primary btn-block mt12" data-buy="${p.sku}">담기</button>
     </div>`;
   });
 
@@ -1021,31 +1094,32 @@ function renderOrder(b){
     <button type="button" class="btn btn-outline btn-block mt12" id="oAdd">＋ 담기</button>
   </div>
 
-  <form id="orderForm" data-endpoint="${esc(ENDPOINT)}" class="mt24">
+  <form id="orderForm" data-endpoint="${esc(ENDPOINT)}" class="mt24" novalidate>
     <div class="row2">
-      <div class="field"><label>주문자명 <em>*</em></label><input type="text" id="oName" required></div>
-      <div class="field"><label>연락처 <em>*</em></label><input type="tel" id="oPhone" placeholder="010-0000-0000" required></div>
+      <div class="field"><label for="oName">주문자명 <em>*</em></label><input type="text" id="oName" autocomplete="name" required></div>
+      <div class="field"><label for="oPhone">연락처 <em>*</em></label><input type="tel" id="oPhone" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" required></div>
     </div>
 
-    <div class="field"><label>우편번호 <em>*</em></label>
+    <div class="field"><label for="oZip">우편번호 <em>*</em></label>
       <div class="addr-row">
-        <input type="text" id="oZip" placeholder="주소 검색을 눌러주세요" readonly required>
+        <input type="text" id="oZip" inputmode="numeric" autocomplete="postal-code" placeholder="주소 검색을 눌러주세요" readonly required>
         <button type="button" class="btn btn-outline" id="oZipBtn">주소 검색</button>
       </div>
     </div>
-    <div class="field"><label>기본 주소 <em>*</em></label>
-      <input type="text" id="oAddr1" required placeholder="주소 검색을 누르면 자동으로 입력됩니다">
+    <div class="field"><label for="oAddr1">기본 주소 <em>*</em></label>
+      <input type="text" id="oAddr1" autocomplete="address-line1" required placeholder="주소 검색을 누르면 자동으로 입력됩니다">
       <p class="small mt8" id="oAddrHint">검색이 안 되면 이 칸에 직접 입력하셔도 됩니다.</p></div>
-    <div class="field"><label>상세 주소 <em>*</em></label><input type="text" id="oAddr2" placeholder="동·호수 등 나머지 주소를 적어주세요" required></div>
+    <div class="field"><label for="oAddr2">상세 주소 <em>*</em></label><input type="text" id="oAddr2" autocomplete="address-line2" placeholder="동·호수 등 나머지 주소를 적어주세요" required></div>
 
     ${PAYMENT_CONFIG.method==='bank'?`
-    <div class="field"><label>입금자명</label><input type="text" id="oDepositor" readonly placeholder="주문자명과 연락처를 입력하면 자동으로 생성됩니다">
-      <p class="small mt8">이 이름으로 입금해 주셔야 확인이 빠릅니다.</p></div>`:''}
-    <div class="field"><label>현금영수증</label>
+    <div class="field"><label for="oDepositor">입금자명</label>
+      <input type="text" id="oDepositor" placeholder="주문자명과 연락처를 입력하면 자동으로 만들어집니다">
+      <p class="small mt8">가족 명의 등 <b>다른 이름으로 입금하실 거면 여기를 고쳐주세요.</b></p></div>`:''}
+    <div class="field"><label for="oReceipt">현금영수증</label>
       <select id="oReceipt"><option value="신청안함">신청 안 함</option>
         <option value="소득공제">소득공제 (휴대폰번호)</option>
         <option value="지출증빙">지출증빙 (사업자번호)</option></select></div>
-    <div class="field hidden" id="oReceiptNoWrap"><label>발급 번호</label><input type="text" id="oReceiptNo" placeholder="- 없이 숫자만"></div>
+    <div class="field hidden" id="oReceiptNoWrap"><label for="oReceiptNo">발급 번호</label><input type="text" id="oReceiptNo" inputmode="numeric" placeholder="- 없이 숫자만"></div>
 
     <details class="mt16"><summary>배송 · 교환 · 반품 · 입금 안내</summary><div class="a">
       · 입금 확인 후 영업일 기준 1~3일 이내 발송됩니다.<br>
@@ -1071,9 +1145,16 @@ function renderOrder(b){
 }
 
 /* ---------- 장바구니 ---------- */
-function cartTotal(){ return S.cart.reduce((a,c)=>a+c.price*c.qty,0); }
+function cartTotal(){ return S.cart.reduce((a,c)=>a+c.price*c.qty,0); }   // 상품 금액
 function cartQty(){   return S.cart.reduce((a,c)=>a+c.qty,0); }
 function cartSummary(){ return S.cart.map(c=>`${c.name} ${c.option} × ${c.qty}`).join(' / '); }
+function shipFee(){
+  if(!S.cart.length) return 0;
+  if(!SHIPPING.fee) return 0;
+  if(SHIPPING.freeOver && cartTotal() >= SHIPPING.freeOver) return 0;
+  return SHIPPING.fee;
+}
+function grandTotal(){ return cartTotal() + shipFee(); }
 
 function addToCart(item){
   const k = S.cart.find(c=>c.sku===item.sku && c.option===item.option);
@@ -1103,7 +1184,11 @@ function renderCart(){
           <button type="button" class="cart-del" data-act="del" data-i="${i}">삭제</button>
         </div>
       </div>`).join('')
-      + `<div class="cart-sum"><span>결제금액 <span class="small">(${cartQty()}개)</span></span><b>${won(cartTotal())}</b></div>`;
+      + `<div class="cart-line"><span>상품 금액 <span class="small">(${cartQty()}개)</span></span><span>${won(cartTotal())}</span></div>`
+      + `<div class="cart-line"><span>배송비</span><span>${shipFee()?won(shipFee()):'무료'}</span></div>`
+      + (SHIPPING.fee && SHIPPING.freeOver && cartTotal()<SHIPPING.freeOver
+          ? `<div class="cart-line small" style="color:var(--accent)">${won(SHIPPING.freeOver-cartTotal())} 더 담으면 배송비가 무료입니다</div>` : '')
+      + `<div class="cart-sum"><span>결제금액</span><b>${won(grandTotal())}</b></div>`;
   }
 }
 function toast(msg){
@@ -1119,14 +1204,19 @@ function bindBrand(b){
     track('scalp_type_select',{type:S.scalpType,source:'manual'});
     selectBrand(b.id,S.scalpType,false,true);
   }));
-  /* 제품 카드 담기 — 기본(첫) 옵션으로 바로 담습니다. 다른 용량은 주문 영역에서 선택 */
-  $$('[data-buy]').forEach(btn=>btn.addEventListener('click',()=>{
-    const p = b.products.find(x=>x.sku===btn.dataset.buy); if(!p) return;
-    const o = p.options[0];
+  /* 제품 카드 담기 — 용량 줄마다 버튼이 따로 있습니다 */
+  $$('[data-add]').forEach(btn=>btn.addEventListener('click',()=>{
+    const p = b.products.find(x=>x.sku===btn.dataset.add); if(!p) return;
+    const o = p.options[+btn.dataset.oi]; if(!o) return;
     addToCart({sku:p.sku,name:p.name,option:o.label,price:o.price,
       qty:1,brandId:b.id,brandName:b.name,scalpType:p.scalpType});
     if(p.bundle) track('bundle_click',{type:S.scalpType});
-    const P=$('#oProduct'); if(P){ P.value=p.sku; syncOptions(); }
+    /* 주문 영역의 셀렉트도 방금 담은 것에 맞춰둡니다 */
+    const P=$('#oProduct'), O=$('#oOption');
+    if(P){ P.value=p.sku; syncOptions(); if(O) O.value=o.label; }
+    /* 눌렀다는 걸 버튼 자체로도 알려줍니다 */
+    const t=btn.textContent; btn.textContent='담김 ✓'; btn.disabled=true;
+    setTimeout(()=>{ btn.textContent=t; btn.disabled=false; },900);
   }));
   /* 크로스링크 */
   $$('[data-cross]').forEach(btn=>btn.addEventListener('click',()=>{
@@ -1158,11 +1248,14 @@ function bindOrder(b){
       ? `담으신 상품에 <b>${lb}용</b>이 포함되어 있습니다. 타입이 맞는지 한 번만 더 확인해 주세요.`
       : `주문 내용을 다시 한 번 확인해 주세요.`;
   }
+  /* 입금자명은 자동으로 만들어주되, 사용자가 고치면 그 값을 존중합니다.
+     (가족 명의 계좌로 입금하는 경우가 흔합니다) */
   function depositor(){
-    const n=$('#oName')?.value.trim(), p=$('#oPhone')?.value.replace(/\D/g,'');
     const d=$('#oDepositor'); if(!d) return '';
-    const v = (n && p.length>=4) ? n+p.slice(-4) : '';
-    d.value = v; return v;
+    if(d.dataset.edited==='1') return d.value.trim();
+    const n=$('#oName')?.value.trim()||'', p=($('#oPhone')?.value||'').replace(/\D/g,'');
+    d.value = (n && p.length>=4) ? n+p.slice(-4) : '';
+    return d.value;
   }
   P.addEventListener('change',()=>{ syncOptions(); track('order_start',{brand:b.id}); });
   $$('[data-q]').forEach(btn=>btn.addEventListener('click',()=>{
@@ -1197,26 +1290,64 @@ function bindOrder(b){
   $('#oZip').addEventListener('click',openPostcode);
   /* 기본주소는 직접 입력이 가능해야 하므로 클릭으로 검색창을 열지 않습니다 */
 
-  /* ----- 입력 유지 ----- */
+  /* ----- 입력 유지 (탭을 옮겨도 다시 안 쓰게) ----- */
   ['oName','oPhone'].forEach(id=>$('#'+id).addEventListener('input',depositor));
+  const dep=$('#oDepositor');
+  if(dep) dep.addEventListener('input',()=>{ dep.dataset.edited='1'; S.keep.oDepositor=dep.value; });
+
   $('#oReceipt').addEventListener('change',e=>{
     $('#oReceiptNoWrap').classList.toggle('hidden', e.target.value==='신청안함');
   });
-  ['oName','oPhone','oZip','oAddr1','oAddr2'].forEach(id=>{
+
+  const KEEP=['oName','oPhone','oZip','oAddr1','oAddr2','oDepositor','oReceipt','oReceiptNo'];
+  KEEP.forEach(id=>{
     const el=$('#'+id); if(!el) return;
-    if(S.keep[id]) el.value=S.keep[id];
-    el.addEventListener('change',()=>{ S.keep[id]=el.value; });
+    if(S.keep[id]!==undefined && S.keep[id]!=='') el.value=S.keep[id];
+    ['input','change'].forEach(ev=>el.addEventListener(ev,()=>{ S.keep[id]=el.value; }));
   });
+  ['oAgree1','oAgree2'].forEach(id=>{
+    const el=$('#'+id); if(!el) return;
+    if(S.keep[id]) el.checked=true;
+    el.addEventListener('change',()=>{ S.keep[id]=el.checked; });
+  });
+  if(S.keep.oDepositor) dep && (dep.dataset.edited='1');
+  $('#oReceiptNoWrap').classList.toggle('hidden', $('#oReceipt').value==='신청안함');
+
   depositor(); syncOptions(); renderCart();
 
   /* ----- 제출 ----- */
   $('#orderForm').addEventListener('submit',async e=>{
     e.preventDefault();
     const msg=$('#oMsg');
+    const fail=(text,sel)=>{
+      msg.style.color='#C0392B'; msg.textContent=text;
+      const el=$(sel); if(el){ go(el,{block:'center'}); if(!el.readOnly) el.focus(); }
+    };
     if(!S.cart.length){
-      msg.style.color='#C0392B';
-      msg.textContent='주문할 상품을 먼저 담아주세요.';
+      msg.style.color='#C0392B'; msg.textContent='주문할 상품을 먼저 담아주세요.';
       go('#cart',{block:'center'}); return;
+    }
+    /* ⚠️ 읽기전용(readonly) 입력칸은 브라우저 기본 검증에서 제외됩니다.
+       우편번호를 비운 채로도 제출이 통과되므로 여기서 직접 확인합니다. */
+    const need=[
+      ['#oName','주문자명을 입력해주세요.'],
+      ['#oPhone','연락처를 입력해주세요.'],
+      ['#oZip','주소 검색으로 우편번호를 입력해주세요.'],
+      ['#oAddr1','기본 주소를 입력해주세요.'],
+      ['#oAddr2','상세 주소를 입력해주세요.']
+    ];
+    for(const [sel,text] of need){
+      if(!$(sel) || !$(sel).value.trim()){ fail(text,sel); return; }
+      /* 연락처는 비어 있는지 확인한 직후에 형식까지 봅니다 (뒤로 미루면 안내 순서가 뒤엉킵니다) */
+      if(sel==='#oPhone' && $(sel).value.replace(/\D/g,'').length < 10){
+        fail('연락처를 정확히 입력해주세요.','#oPhone'); return;
+      }
+    }
+    if($('#oReceipt').value!=='신청안함' && !$('#oReceiptNo').value.trim()){
+      fail('현금영수증 발급 번호를 입력해주세요.','#oReceiptNo'); return;
+    }
+    if(!$('#oAgree1').checked || !$('#oAgree2').checked){
+      fail('필수 동의 항목에 체크해주세요.','#oAgree1'); return;
     }
     const btn=$('#oSubmit');
     const now = new Date();
@@ -1229,7 +1360,7 @@ function bindOrder(b){
       + p2(now.getHours())+p2(now.getMinutes())+p2(now.getSeconds());
 
     const zip=$('#oZip').value.trim(), a1=$('#oAddr1').value.trim(), a2=$('#oAddr2').value.trim();
-    const amount = cartTotal();
+    const goods = cartTotal(), ship = shipFee(), amount = grandTotal();
 
     /* 기존 Apps Script(주문관리 시트)와 동일한 필드명으로 전송 */
     const payload = {
@@ -1245,7 +1376,9 @@ function bindOrder(b){
         sku:c.sku, brand:c.brandName, name:c.name, volume:c.option, price:c.price, qty:c.qty
       }))),
       qty: cartQty(),
-      amount: amount,
+      goodsAmount: goods,
+      shippingFee: ship,
+      amount: amount,          // 상품금액 + 배송비
       buyerName: $('#oName').value.trim(),
       phone: $('#oPhone').value.trim(),
       postcode: zip,
@@ -1379,32 +1512,169 @@ function showDone(d){
   $('#orderForm').classList.add('hidden');
   $('#cart').classList.add('hidden');
   $$('.adder').forEach(el=>el.classList.add('hidden'));
+
+  let deadline='';
+  if(pc.method==='bank' && pc.depositDeadlineDays>0){
+    const t=new Date(); t.setDate(t.getDate()+pc.depositDeadlineDays);
+    deadline = `${t.getMonth()+1}월 ${t.getDate()}일`;
+  }
+  const dep = esc(d.depositorName||d.buyerName);
+
   $('#orderDone').innerHTML = `<div class="done">
     <h3>주문이 접수되었습니다</h3>
     <p class="no mt8">주문번호 ${esc(d.orderNo)}</p>
     <dl>
       <div><dt>상품</dt><dd style="text-align:right;max-width:65%">${esc(d.productName)}</dd></div>
       <div><dt>총 수량</dt><dd>${d.qty}개</dd></div>
-      <div><dt>결제금액</dt><dd>${won(d.amount)}</dd></div>
+      <div><dt>상품 금액</dt><dd>${won(d.goodsAmount)}</dd></div>
+      <div><dt>배송비</dt><dd>${d.shippingFee?won(d.shippingFee):'무료'}</dd></div>
+      <div style="border-top:1px solid var(--line);margin-top:4px;padding-top:8px">
+        <dt><b>입금하실 금액</b></dt><dd style="font-size:18px;color:var(--accent)">${won(d.amount)}</dd></div>
       ${pc.method==='bank'?`
       <div><dt>입금 은행</dt><dd>${esc(pc.bank)}</dd></div>
       <div><dt>계좌번호</dt><dd>${esc(pc.account)}</dd></div>
       <div><dt>예금주</dt><dd>${esc(pc.holder)}</dd></div>
-      <div><dt>입금자명</dt><dd>${esc(d.depositorName||d.buyerName)}</dd></div>`:''}
+      <div><dt>입금자명</dt><dd>${dep}</dd></div>`:''}
     </dl>
     ${pc.method==='bank'?`
     <button class="btn btn-primary btn-block mt16" id="copyAcct">계좌번호 복사하기</button>
-    <p class="small mt12">입금자명을 <b>${esc(d.depositorName||d.buyerName)}</b>으로 보내주셔야 확인이 빠릅니다.</p>`:''}
+    <div class="confirm-line" style="text-align:left">
+      <b>입금자명은 «${dep}»으로 보내주세요.</b><br>
+      다른 이름으로 보내시면 확인이 늦어집니다.
+      ${deadline?`<br>입금 기한은 <b>${deadline}</b>까지입니다. 그때까지 확인되지 않으면 주문이 취소될 수 있습니다.`:''}
+    </div>`:''}
+    <p class="small mt12">이 화면을 닫으셔도 괜찮습니다. 위쪽 <b>주문조회</b>에서 이름과 연락처로 다시 확인하실 수 있습니다.</p>
+    <div class="result-actions" style="margin-top:14px">
+      <button class="btn btn-primary" id="doneLookup">주문조회로 가기</button>
+      <button class="btn btn-outline" id="doneMore">다른 제품 더 보기</button>
+      <button class="btn btn-outline" id="doneTop">맨 위로</button>
+    </div>
   </div>`;
   S.cart = []; updateMobileCta();
   go('#orderDone',{block:'center'});
+
   const c=$('#copyAcct');
   if(c) c.addEventListener('click',()=>{
-    const done=()=>{ c.textContent='복사되었습니다'; setTimeout(()=>c.textContent='계좌번호 복사하기',1600); };
-    if(navigator.clipboard) navigator.clipboard.writeText(pc.account).then(done).catch(done);
-    else done();
+    const ok=()=>{ c.textContent='복사되었습니다'; setTimeout(()=>c.textContent='계좌번호 복사하기',1600); };
+    if(navigator.clipboard) navigator.clipboard.writeText(pc.account).then(ok).catch(ok);
+    else ok();
+  });
+  const more=$('#doneMore');
+  if(more) more.addEventListener('click',()=>{ S.keep={}; selectBrand(S.brand,null,null,false); });
+  const top=$('#doneTop');
+  if(top) top.addEventListener('click',()=>go('#top'));
+  const lk=$('#doneLookup');
+  if(lk) lk.addEventListener('click',()=>{
+    /* 방금 주문한 정보로 조회칸을 미리 채워둡니다 */
+    if($('#lkName'))  $('#lkName').value  = d.buyerName || '';
+    if($('#lkPhone')) $('#lkPhone').value = d.phone || '';
+    go('#lookup');
   });
 }
+
+/* =========================================================
+   7-2. 주문조회
+   ---------------------------------------------------------
+   Apps Script 웹앱은 브라우저에서 fetch로 응답을 읽으려 하면
+   CORS에 막히는 경우가 많습니다. 그래서 <script> 태그로 불러오는
+   JSONP 방식을 씁니다. (Code.gs 의 doGet 이 callback 을 지원합니다)
+   ========================================================= */
+function jsonp(url, params, timeout){
+  return new Promise(function(resolve,reject){
+    if(!url){ reject(new Error('endpoint')); return; }
+    var cb = 'mdyCb' + Date.now() + Math.floor(Math.random()*1000);
+    var s = document.createElement('script');
+    var q = new URLSearchParams(Object.assign({callback:cb}, params||{}));
+    var timer = setTimeout(function(){ done(); reject(new Error('timeout')); }, timeout||12000);
+    function done(){ clearTimeout(timer); try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
+                     if(s.parentNode) s.parentNode.removeChild(s); }
+    window[cb] = function(data){ done(); resolve(data); };
+    s.onerror = function(){ done(); reject(new Error('network')); };
+    s.src = url + (url.indexOf('?')>=0?'&':'?') + q.toString();
+    document.body.appendChild(s);
+  });
+}
+
+function badgeClass(v){
+  if(v==='입금완료'||v==='발송완료'||v==='발급완료') return 'b-ok';
+  if(v==='미입금'||v==='입금자명불일치'||v==='반품요청'||v==='취소'||v==='배송보류') return 'b-wait';
+  return 'b-neutral';
+}
+
+function initLookup(){
+  var f=$('#lookupForm'); if(!f) return;
+  f.addEventListener('submit',async function(e){
+    e.preventDefault();
+    var msg=$('#lkMsg'), box=$('#lkResult'), btn=$('#lkBtn');
+    var name=$('#lkName').value.trim();
+    var phone=$('#lkPhone').value.replace(/\D/g,'');
+    box.innerHTML='';
+    if(!name){ msg.style.color='#C0392B'; msg.textContent='주문자명을 입력해주세요.'; $('#lkName').focus(); return; }
+    if(phone.length<10){ msg.style.color='#C0392B'; msg.textContent='연락처를 정확히 입력해주세요.'; $('#lkPhone').focus(); return; }
+
+    btn.disabled=true; btn.textContent='조회 중...';
+    msg.style.color='var(--text-sub)'; msg.textContent='주문을 찾고 있습니다...';
+    track('order_lookup',{});
+
+    try{
+      var res = await jsonp(ENDPOINT, {action:'lookup', name:name, phone:phone});
+      if(!res || res.result!=='ok') throw new Error('server');
+      renderLookup(res.orders||[]);
+      msg.textContent = (res.orders&&res.orders.length)
+        ? '최근 주문 ' + res.orders.length + '건입니다.'
+        : '';
+      if(!res.orders || !res.orders.length){
+        msg.style.color='#C0392B';
+        msg.innerHTML='해당하는 주문을 찾지 못했습니다. 주문하실 때 적으신 이름·연락처가 맞는지 확인해 주세요.<br>계속 안 되면 고객센터(<b>'+esc(BIZ.tel)+'</b>)로 연락 주세요.';
+      }
+    }catch(err){
+      msg.style.color='#C0392B';
+      msg.innerHTML='지금은 조회가 어렵습니다. 잠시 후 다시 시도해 주세요.<br>급하시면 고객센터(<b>'+esc(BIZ.tel)+'</b>)로 연락 주세요.';
+    }finally{
+      btn.disabled=false; btn.textContent='조회하기';
+    }
+  });
+}
+
+function renderLookup(orders){
+  var box=$('#lkResult');
+  if(!orders.length){ box.innerHTML=''; return; }
+  box.innerHTML = orders.map(function(o){
+    var pay=o.paymentStatus||'미입금', ship=o.shippingStatus||'배송전';
+    return '<div class="order-card">'
+      + '<div class="order-top"><div>'
+      +   '<div class="order-no">'+esc(o.orderNo||'')+'</div>'
+      +   '<div class="order-date">'+esc(o.orderedAt||'')+'</div>'
+      + '</div><div class="badges">'
+      +   '<span class="badge2 '+badgeClass(pay)+'">'+esc(pay)+'</span>'
+      +   '<span class="badge2 '+badgeClass(ship)+'">'+esc(ship)+'</span>'
+      + '</div></div>'
+      + '<dl style="margin-top:6px">'
+      +   row('상품', esc(o.productName||''))
+      +   row('결제금액', won(Number(o.amount)||0))
+      +   row('받는 주소', esc(o.address||''))
+      +   (o.courier ? row('택배사', esc(o.courier)) : '')
+      +   (o.trackingNo
+            ? '<div class="order-row"><dt>운송장번호</dt><dd><div class="track"><span>'+esc(o.trackingNo)+'</span>'
+              + '<button type="button" data-copy="'+esc(o.trackingNo)+'">복사</button></div></dd></div>'
+            : '')
+      + '</dl>'
+      + (pay==='미입금'
+          ? '<div class="confirm-line" style="text-align:left">아직 입금이 확인되지 않았습니다.<br>'
+            + '<b>'+esc(PAYMENT_CONFIG.bank)+' '+esc(PAYMENT_CONFIG.account)+'</b> ('+esc(PAYMENT_CONFIG.holder)+')<br>'
+            + '입금자명 <b>'+esc(o.depositorName||'')+'</b></div>'
+          : '')
+      + '</div>';
+  }).join('');
+  $$('#lkResult [data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.dataset.copy;
+      var ok=function(){ b.textContent='복사됨'; setTimeout(function(){ b.textContent='복사'; },1400); };
+      if(navigator.clipboard) navigator.clipboard.writeText(t).then(ok).catch(ok); else ok();
+    });
+  });
+}
+function row(k,v){ return '<div class="order-row"><dt>'+k+'</dt><dd>'+v+'</dd></div>'; }
 
 /* =========================================================
    8. 관심고객 폼
@@ -1484,6 +1754,7 @@ function updateMobileCta(){
 
   renderTabs();
   initLead();
+  initLookup();
 
   /* 우편번호 레이어 닫기 */
   $('#pcClose').addEventListener('click',closePostcode);
