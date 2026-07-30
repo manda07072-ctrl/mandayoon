@@ -308,6 +308,18 @@ details.pinned{background:var(--accent-light);border-radius:var(--radius);
   padding:14px 16px;border-bottom:1px solid var(--line);font-weight:600}
 .pc-head button{border:none;background:none;font-size:22px;color:var(--text-sub);line-height:1}
 .pc-embed{flex:1;overflow:hidden}
+.doc-box{max-width:640px;height:min(700px,86vh)}
+.doc-body{flex:1;overflow-y:auto;padding:18px 20px 28px;font-size:14px;line-height:1.75;color:var(--text)}
+.doc-body h4{font-size:15px;font-weight:600;margin:22px 0 8px;color:var(--mdy)}
+.doc-body h4:first-child{margin-top:0}
+.doc-body p{margin-bottom:8px}
+.doc-body ul{margin:0 0 10px 18px}
+.doc-body li{margin-bottom:4px}
+.doc-body table{width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:13px}
+.doc-body th,.doc-body td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.doc-body th{background:var(--bg-soft);font-weight:600;white-space:nowrap}
+.doc-body .meta{font-size:13px;color:var(--text-sub);border-top:1px solid var(--line);
+  margin-top:22px;padding-top:12px}
 .addr-row{display:flex;gap:8px}
 .addr-row input{flex:1}
 .addr-row .btn{padding:12px 16px;font-size:14px;white-space:nowrap;flex:none}
@@ -480,7 +492,7 @@ footer .fl a{margin-right:14px}
         </select>
       </div>
       <div class="field"><label>문의 내용</label><textarea name="message"></textarea></div>
-      <label class="agree"><input type="checkbox" name="privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. (이름·연락처 / 상담 및 안내 목적 / 목적 달성 후 파기)</span></label>
+      <label class="agree"><input type="checkbox" name="privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. (이름·연락처 / 상담 및 안내 목적 / 목적 달성 후 파기) <a href="#" data-doc="privacy">전문 보기</a></span></label>
       <label class="agree"><input type="checkbox" name="marketing"><span>[선택] 마케팅 정보 수신에 동의합니다.</span></label>
       <button type="submit" class="btn btn-primary btn-block mt16">알림 신청하기</button>
       <p class="small center mt12" id="leadMsg"></p>
@@ -533,6 +545,13 @@ footer .fl a{margin-right:14px}
   </div>
 </div>
 
+<div class="pc-layer" id="docLayer">
+  <div class="pc-box doc-box">
+    <div class="pc-head"><span id="docTitle"></span><button type="button" id="docClose" aria-label="닫기">×</button></div>
+    <div class="doc-body" id="docBody"></div>
+  </div>
+</div>
+
 <script>
 /* =========================================================
    1. 설정 — 여기만 수정하면 됩니다
@@ -544,9 +563,9 @@ const BIZ = {
   ceo:'윤금연',
   regno:'292-30-62185',
   mailorder:'제2026-호평평내-0261호',
-  addr:'[ 주소 ]',
+  addr:'경기도 남양주시 호평로 9, 2403동 1702호',
   tel:'010-9441-6582',
-  email:'[ 이메일 ]',
+  email:'manda07072@gmail.com',
   hours:'10:00 - 17:00'
 };
 const SUBSCRIBERS = '';   // 예: '1.2만' — 비워두면 해당 칸이 숨겨집니다
@@ -1131,10 +1150,11 @@ function renderOrder(b){
       · 수집 항목: 이름, 연락처, 주소, 입금자명, (선택) 현금영수증 번호<br>
       · 수집 목적: 주문 처리, 배송, 고객 응대<br>
       · 보유 기간: 전자상거래법에 따라 거래 기록 5년 보관 후 파기<br>
-      · 동의를 거부하실 수 있으나, 이 경우 주문이 불가합니다.
+      · 동의를 거부하실 수 있으나, 이 경우 주문이 불가합니다.<br>
+      · 자세한 내용은 <a href="#" data-doc="privacy"><b>개인정보처리방침</b></a>을 확인해 주세요.
     </div></details>
 
-    <label class="agree"><input type="checkbox" id="oAgree1" required><span>[필수] 개인정보 수집·이용에 동의합니다.</span></label>
+    <label class="agree"><input type="checkbox" id="oAgree1" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="#" data-doc="privacy">전문 보기</a></span></label>
     <label class="agree"><input type="checkbox" id="oAgree2" required><span>[필수] 배송·교환·반품 안내를 확인했습니다.</span></label>
 
     ${b.scalpTypeFilter?`<div class="confirm-line" id="oConfirm"></div>`:''}
@@ -1677,6 +1697,217 @@ function renderLookup(orders){
 function row(k,v){ return '<div class="order-row"><dt>'+k+'</dt><dd>'+v+'</dd></div>'; }
 
 /* =========================================================
+   7-3. 개인정보처리방침 · 이용약관
+   ---------------------------------------------------------
+   ⚠️ 아래는 만다윤의 실제 운영 내용에 맞춰 작성한 초안입니다.
+      법률 자문을 받은 문서가 아니므로 오픈 전 한 번 검토받으시길 권합니다.
+      운영이 바뀌면(택배사 추가, PG 도입 등) 반드시 함께 고치세요.
+   ========================================================= */
+const EFFECTIVE_DATE = '2026년 7월 30일';   // 시행일 — 내용을 고치면 이 날짜도 바꾸세요
+
+const LEGAL = {
+privacy: {
+  title:'개인정보처리방침',
+  html:`
+<p>만다윤(이하 "회사")은 개인정보보호법 등 관련 법령을 준수하며, 이용자의 개인정보를 소중히 다루고 있습니다.</p>
+
+<h4>1. 수집하는 개인정보 항목과 수집 방법</h4>
+<table>
+  <tr><th>구분</th><th>필수 항목</th><th>선택 항목</th></tr>
+  <tr><td>상품 주문</td><td>이름, 연락처, 우편번호, 주소, 입금자명</td><td>현금영수증 발급번호</td></tr>
+  <tr><td>알림 신청</td><td>이름, 연락처</td><td>두피·모발 고민, 관심 브랜드, 구매 예정 시점, 문의 내용, 마케팅 수신 동의</td></tr>
+  <tr><td>자동 수집</td><td colspan="2">접속 경로(유입 채널), 접속 일시, 브라우저 정보</td></tr>
+</table>
+<p>수집 방법: 홈페이지의 주문서 및 알림 신청 양식을 통한 이용자의 직접 입력, 서비스 이용 과정에서의 자동 생성</p>
+
+<h4>2. 개인정보의 처리 목적</h4>
+<ul>
+  <li>주문 접수, 입금 확인, 상품 배송, 배송 조회 안내</li>
+  <li>교환·반품·환불 등 고객 응대 및 분쟁 처리</li>
+  <li>현금영수증 발급 (선택하신 경우에 한함)</li>
+  <li>재입고·신제품·할인 정보 안내 (마케팅 수신에 동의하신 경우에 한함)</li>
+</ul>
+<p>회사는 위 목적 이외의 용도로 개인정보를 이용하지 않으며, 목적이 변경될 경우 사전에 동의를 받습니다.</p>
+
+<h4>3. 개인정보의 보유 및 이용 기간</h4>
+<p>원칙적으로 처리 목적이 달성되면 지체 없이 파기합니다. 다만 아래 법령에 따라 일정 기간 보관합니다.</p>
+<table>
+  <tr><th>보관 항목</th><th>기간</th><th>근거</th></tr>
+  <tr><td>계약 또는 청약철회 등에 관한 기록</td><td>5년</td><td>전자상거래법</td></tr>
+  <tr><td>대금 결제 및 재화 공급에 관한 기록</td><td>5년</td><td>전자상거래법</td></tr>
+  <tr><td>소비자 불만 또는 분쟁 처리에 관한 기록</td><td>3년</td><td>전자상거래법</td></tr>
+  <tr><td>표시·광고에 관한 기록</td><td>6개월</td><td>전자상거래법</td></tr>
+  <tr><td>알림 신청 정보</td><td>동의 철회 시 또는 신청일로부터 2년</td><td>동의</td></tr>
+</table>
+
+<h4>4. 개인정보의 제3자 제공</h4>
+<p>회사는 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 법령에 따라 수사기관 등이 적법한 절차로 요구하는 경우에는 예외로 합니다.</p>
+
+<h4>5. 개인정보 처리의 위탁</h4>
+<p>회사는 원활한 서비스 제공을 위해 아래와 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
+<table>
+  <tr><th>수탁자</th><th>위탁 업무</th></tr>
+  <tr><td>CJ대한통운, 한진택배, 롯데택배, 우체국택배, 로젠택배</td><td>주문 상품의 배송</td></tr>
+  <tr><td>Google LLC</td><td>주문·문의 정보의 저장 및 관리 (Google Sheets, Google Apps Script)</td></tr>
+</table>
+<p>회사는 위탁 계약 시 개인정보가 안전하게 관리되도록 필요한 사항을 규정하고 관리·감독합니다.</p>
+
+<h4>6. 개인정보의 국외 이전</h4>
+<p>회사는 주문 정보 보관을 위해 Google LLC의 서비스를 이용하며, 이 과정에서 개인정보가 국외에 저장될 수 있습니다.</p>
+<table>
+  <tr><th>이전받는 자</th><td>Google LLC</td></tr>
+  <tr><th>이전 국가</th><td>미국 등 Google이 데이터센터를 운영하는 국가</td></tr>
+  <tr><th>이전 항목</th><td>이름, 연락처, 주소, 주문 내역, 입금자명</td></tr>
+  <tr><th>이전 목적</th><td>주문 정보의 저장 및 관리</td></tr>
+  <tr><th>보유 기간</th><td>위 제3항의 보유 기간과 동일</td></tr>
+</table>
+<p>이용자는 국외 이전을 거부할 수 있으며, 이 경우 온라인 주문이 제한될 수 있습니다. 거부를 원하시면 아래 연락처로 문의해 주세요.</p>
+
+<h4>7. 정보주체의 권리와 행사 방법</h4>
+<p>이용자는 언제든지 자신의 개인정보에 대해 열람·정정·삭제·처리정지를 요구할 수 있습니다. 아래 연락처로 서면, 전화, 이메일을 통해 요청하시면 지체 없이 조치합니다.</p>
+<p>다만 법령에서 보관을 의무화한 정보는 삭제가 제한될 수 있습니다.</p>
+
+<h4>8. 개인정보의 파기 절차 및 방법</h4>
+<ul>
+  <li>파기 절차: 보유 기간이 지나거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다.</li>
+  <li>파기 방법: 전자적 파일은 복구할 수 없는 방법으로 영구 삭제하고, 출력물은 분쇄하거나 소각합니다.</li>
+</ul>
+
+<h4>9. 자동 수집 장치(쿠키)의 설치·운영 및 거부</h4>
+<p>회사는 서비스 이용 현황 분석을 위해 쿠키를 사용할 수 있습니다. 이용자는 브라우저 설정에서 쿠키 저장을 거부할 수 있으며, 거부하시더라도 주문에는 지장이 없습니다.</p>
+<p>설정 방법: 브라우저의 [설정] → [개인정보 및 보안] → [쿠키 및 사이트 데이터]</p>
+
+<h4>10. 개인정보의 안전성 확보 조치</h4>
+<ul>
+  <li>개인정보 취급자를 최소한으로 제한하고, 접근 권한을 관리합니다.</li>
+  <li>개인정보가 저장된 시스템은 계정 인증을 거쳐야만 접근할 수 있습니다.</li>
+  <li>개인정보 처리 내역을 기록하고 보관합니다.</li>
+</ul>
+
+<h4>11. 개인정보 보호책임자</h4>
+<table>
+  <tr><th>성명</th><td>윤금연 (대표)</td></tr>
+  <tr><th>연락처</th><td>010-9441-6582</td></tr>
+  <tr><th>이메일</th><td>manda07072@gmail.com</td></tr>
+</table>
+<p>개인정보와 관련한 문의·불만·피해구제에 관한 사항은 위 연락처로 문의해 주시면 신속히 답변드리겠습니다.</p>
+
+<h4>12. 권익침해 구제 방법</h4>
+<p>개인정보 침해로 도움이 필요하시면 아래 기관에 문의하실 수 있습니다.</p>
+<ul>
+  <li>개인정보분쟁조정위원회 : 1833-6972 (www.kopico.go.kr)</li>
+  <li>개인정보침해신고센터 : 118 (privacy.kisa.or.kr)</li>
+  <li>대검찰청 사이버수사과 : 1301 (www.spo.go.kr)</li>
+  <li>경찰청 사이버수사국 : 182 (ecrm.police.go.kr)</li>
+</ul>
+
+<h4>13. 개인정보처리방침의 변경</h4>
+<p>이 방침의 내용이 추가·삭제·수정될 경우 시행 7일 전부터 홈페이지를 통해 알려드립니다. 다만 이용자 권리에 중요한 변경이 있을 때는 30일 전에 알려드립니다.</p>
+
+<div class="meta">시행일: ${EFFECTIVE_DATE}</div>`
+},
+
+terms: {
+  title:'이용약관',
+  html:`
+<h4>제1조 (목적)</h4>
+<p>이 약관은 만다윤(이하 "회사")이 운영하는 온라인 판매 페이지에서 제공하는 서비스의 이용과 관련하여, 회사와 이용자의 권리·의무 및 책임사항을 정함을 목적으로 합니다.</p>
+
+<h4>제2조 (정의)</h4>
+<ul>
+  <li>"서비스"란 회사가 이 페이지를 통해 제공하는 상품 판매 및 관련 서비스를 말합니다.</li>
+  <li>"이용자"란 이 페이지에 접속하여 서비스를 이용하는 자를 말합니다.</li>
+  <li>"구매자"란 이 페이지를 통해 상품을 주문한 이용자를 말합니다.</li>
+</ul>
+
+<h4>제3조 (약관의 명시와 개정)</h4>
+<p>회사는 이 약관을 페이지 하단에 게시합니다. 관련 법령을 위배하지 않는 범위에서 약관을 개정할 수 있으며, 개정 시 적용일자와 개정 사유를 명시하여 적용일 7일 전부터 공지합니다. 이용자에게 불리한 개정의 경우 30일 전부터 공지합니다.</p>
+
+<h4>제4조 (서비스의 제공)</h4>
+<p>회사는 상품 정보 제공, 주문 접수, 배송 및 이에 부수하는 업무를 제공합니다. 상품의 품절, 사양 변경 등이 있을 경우 회사는 해당 사실을 공지하거나 구매자에게 개별 통지합니다.</p>
+
+<h4>제5조 (구매 신청 및 계약의 성립)</h4>
+<p>이용자는 주문서에 필요한 정보를 입력하고 약관 및 개인정보 수집·이용에 동의함으로써 구매를 신청합니다.</p>
+<p>매매계약은 <b>회사가 구매자의 입금을 확인한 시점</b>에 성립합니다. 회사는 다음의 경우 구매 신청을 승낙하지 않을 수 있습니다.</p>
+<ul>
+  <li>입력 정보에 허위 또는 누락이 있는 경우</li>
+  <li>재고가 부족한 경우</li>
+  <li>기타 회사의 정상적인 업무 수행에 지장을 초래한다고 판단되는 경우</li>
+</ul>
+
+<h4>제6조 (결제 방법 및 입금 기한)</h4>
+<p>결제는 <b>계좌이체</b>로 이루어집니다.</p>
+<table>
+  <tr><th>입금 계좌</th><td>국민은행 437201-04-293375</td></tr>
+  <tr><th>예금주</th><td>윤금연</td></tr>
+</table>
+<p>구매자는 주문일로부터 <b>2일 이내</b>에 입금해야 하며, 기한 내 입금이 확인되지 않으면 주문이 취소될 수 있습니다.</p>
+<p>입금 확인을 위해 주문서에 표시된 입금자명으로 입금해 주셔야 합니다. 다른 이름으로 입금하실 경우 주문서의 입금자명 항목을 수정해 주시기 바랍니다.</p>
+
+<h4>제7조 (배송)</h4>
+<ul>
+  <li>배송비: <b>무료</b> (도서·산간 지역은 추가 비용이 발생할 수 있습니다)</li>
+  <li>배송 기간: 입금 확인 후 영업일 기준 1~3일 이내 발송 (주말·공휴일 제외)</li>
+  <li>택배사 사정, 천재지변, 주문 폭주 등으로 배송이 지연될 수 있으며, 이 경우 회사는 구매자에게 안내합니다.</li>
+  <li>구매자가 입력한 주소가 부정확하여 발생한 배송 지연·오배송에 대해 회사는 책임지지 않습니다.</li>
+</ul>
+
+<h4>제8조 (청약철회)</h4>
+<p>구매자는 상품을 수령한 날로부터 <b>7일 이내</b>에 청약철회를 할 수 있습니다. 청약철회를 원하시면 고객센터로 연락해 주세요.</p>
+<p>단순 변심에 의한 청약철회의 경우 반품 배송비는 구매자가 부담합니다. 상품의 하자 또는 오배송의 경우에는 회사가 부담합니다.</p>
+
+<h4>제9조 (청약철회의 제한)</h4>
+<p>다음의 경우에는 청약철회가 제한됩니다.</p>
+<ul>
+  <li><b>구매자가 개봉하여 사용하였거나, 사용에 준하는 정도로 상태가 변한 화장품</b></li>
+  <li>구매자의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우</li>
+  <li>구매자의 사용 또는 일부 소비로 상품의 가치가 현저히 감소한 경우</li>
+  <li>시간이 지나 다시 판매하기 곤란할 정도로 상품의 가치가 감소한 경우</li>
+</ul>
+<p>회사는 위 사유에 해당하는 상품에 대해 청약철회가 제한된다는 사실을 상품 페이지 및 주문 과정에서 안내하고 있습니다.</p>
+
+<h4>제10조 (환불)</h4>
+<p>회사는 청약철회 요청을 받고 반품 상품을 회수한 날로부터 <b>3영업일 이내</b>에 결제 대금을 환불합니다. 환불은 구매자가 입금한 계좌로 이루어지며, 계좌 정보가 확인되지 않는 경우 환불이 지연될 수 있습니다.</p>
+
+<h4>제11조 (개인정보 보호)</h4>
+<p>회사는 이용자의 개인정보를 관련 법령에 따라 보호하며, 자세한 내용은 별도의 개인정보처리방침에 따릅니다.</p>
+
+<h4>제12조 (회사의 의무)</h4>
+<p>회사는 관련 법령과 이 약관을 준수하며, 상품을 안전하게 배송하고 이용자의 불만을 신속히 처리하기 위해 노력합니다.</p>
+
+<h4>제13조 (이용자의 의무)</h4>
+<p>이용자는 주문 시 정확한 정보를 입력해야 하며, 타인의 정보를 도용해서는 안 됩니다. 허위 정보 입력으로 발생한 불이익은 이용자가 부담합니다.</p>
+
+<h4>제14조 (면책)</h4>
+<p>회사는 천재지변, 통신 장애 등 회사의 통제를 벗어난 사유로 서비스를 제공할 수 없는 경우 그 책임이 면제됩니다.</p>
+<p>이 페이지에서 제공하는 두피·모발 관리 정보 및 두피 타입 테스트 결과는 <b>일반적인 참고 정보</b>이며 의학적 진단이나 치료를 대신하지 않습니다. 피부 이상이 있으신 경우 전문의와 상담하시기 바랍니다.</p>
+
+<h4>제15조 (분쟁 해결 및 관할)</h4>
+<p>회사와 이용자 사이에 분쟁이 발생한 경우 상호 협의하여 해결하는 것을 원칙으로 합니다. 협의가 이루어지지 않을 경우 소비자기본법에 따른 분쟁조정기구의 조정을 신청할 수 있으며, 소송이 제기되는 경우 민사소송법상의 관할 법원에 제기합니다.</p>
+
+<div class="meta">시행일: ${EFFECTIVE_DATE}<br>
+상호 만다윤 · 대표 윤금연 · 사업자등록번호 292-30-62185<br>
+통신판매업 신고번호 제2026-호평평내-0261호<br>
+경기도 남양주시 호평로 9, 2403동 1702호<br>
+고객센터 010-9441-6582 (평일 10:00-17:00) · manda07072@gmail.com</div>`
+}
+};
+
+function openDoc(key){
+  const doc = LEGAL[key]; if(!doc) return;
+  $('#docTitle').textContent = doc.title;
+  $('#docBody').innerHTML = doc.html;
+  $('#docBody').scrollTop = 0;
+  $('#docLayer').classList.add('show');
+  document.body.style.overflow='hidden';
+  track('doc_open',{doc:key});
+}
+function closeDoc(){
+  $('#docLayer').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+/* =========================================================
    8. 관심고객 폼
    ========================================================= */
 function initLead(){
@@ -1759,8 +1990,23 @@ function updateMobileCta(){
   /* 우편번호 레이어 닫기 */
   $('#pcClose').addEventListener('click',closePostcode);
   $('#pcLayer').addEventListener('click',e=>{ if(e.target===$('#pcLayer')) closePostcode(); });
+
+  /* 약관·처리방침 모달 */
+  $('#privacyLink').addEventListener('click',e=>{ e.preventDefault(); openDoc('privacy'); });
+  $('#termsLink').addEventListener('click',e=>{ e.preventDefault(); openDoc('terms'); });
+  $('#docClose').addEventListener('click',closeDoc);
+  /* 본문 어디서든 data-doc 링크로 모달을 엽니다.
+     라벨 안에 있는 링크라 체크박스가 같이 토글되지 않도록 전파를 막습니다. */
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('[data-doc]'); if(!a) return;
+    e.preventDefault(); e.stopPropagation(); openDoc(a.dataset.doc);
+  });
+  $('#docLayer').addEventListener('click',e=>{ if(e.target===$('#docLayer')) closeDoc(); });
+
   addEventListener('keydown',e=>{
-    if(e.key==='Escape' && $('#pcLayer').classList.contains('show')) closePostcode();
+    if(e.key!=='Escape') return;
+    if($('#pcLayer').classList.contains('show')) closePostcode();
+    if($('#docLayer').classList.contains('show')) closeDoc();
   });
 
   /* 연락처 자동 하이픈 */
