@@ -1,2034 +1,2698 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>만다윤 · 두피 모발 관리</title>
-<meta name="description" content="30년간 미용실에서 500명이 넘는 두피를 직접 만져봤습니다. 그 중에 제가 계속 쓰고 있는 것만 모았습니다.">
-<meta property="og:title" content="만다윤 · 두피 모발 관리">
-<meta property="og:description" content="두피부터 바꿔야, 머리카락이 바뀝니다.">
-<meta property="og:type" content="website">
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style>
-:root{
-  --mdy:#3A4A3F;          /* 만다윤 브랜드 컬러 */
-  --mdy-light:#EDF1EE;
-  --accent:#3A4A3F;       /* 활성 브랜드 컬러 (JS가 교체) */
-  --accent-light:#F5F1EE;
-  --bg:#FFFFFF;
-  --bg-soft:#FAF9F7;
-  --text:#2B2B2B;
-  --text-sub:#767676;
-  --line:#E8E6E1;
-  --radius:10px;
-  --max:720px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-  color:var(--text);background:var(--bg);
-  font-size:16px;line-height:1.7;letter-spacing:-.01em;
-  padding-bottom:72px;
-}
-img{max-width:100%;display:block}
-button{font-family:inherit;cursor:pointer}
-input,select,textarea{font-family:inherit;font-size:16px}
-a{color:inherit}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="30년 미용 경력의 만다윤이 7년째 정착한 두피 케어 샴푸, 머드마스타 샴푸 랜딩페이지" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="만다윤 추천 | 머드마스타 샴푸" />
+  <meta property="og:description" content="30년 미용 경력의 만다윤이 7년째 정착한 두피 케어 샴푸" />
+  <!-- 카카오톡/SNS 공유 썸네일: 제품 이미지 URL 준비 후 아래 주석을 해제하세요.
+  <meta property="og:image" content="https://예시.com/제품이미지.jpg" /> -->
+  <title>만다윤 추천 | 머드마스타 샴푸</title>
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --surface: #fffaf3;
+      --surface-2: #fff;
+      --ink: #201914;
+      --muted: #6f6258;
+      --line: #eadfd2;
+      --brand: #6a4a31;
+      --brand-dark: #3a2a20;
+      --accent: #d6a45f;
+      --accent-soft: #f0dfc2;
+      --green: #556b4e;
+      --danger-soft: #fff0e8;
+      --shadow: 0 24px 70px rgba(46, 32, 22, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
 
-.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-section{padding:56px 0}
-section.soft{background:var(--bg-soft)}
-.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:600;margin-bottom:10px}
-h1{font-size:28px;line-height:1.4;font-weight:700;letter-spacing:-.02em}
-h2{font-size:22px;line-height:1.45;font-weight:700;margin-bottom:8px;letter-spacing:-.02em}
-h3{font-size:17px;font-weight:600;margin-bottom:6px}
-.lead{color:var(--text-sub);font-size:15px}
-.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}
-.mt24{margin-top:24px}.mt32{margin-top:32px}.mt40{margin-top:40px}
-.muted{color:var(--text-sub);font-size:14px}
-.small{font-size:13px;color:var(--text-sub)}
-.center{text-align:center}
-.hidden{display:none !important}
+    * {
+      box-sizing: border-box;
+    }
 
-/* nav */
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.nav-in{max-width:var(--max);margin:0 auto;padding:12px 20px;
-  display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:700;font-size:16px;letter-spacing:-.02em}
-.logo span{color:var(--mdy)}
-.nav a{font-size:14px;color:var(--text-sub);text-decoration:none;margin-left:14px}
-.nav-links{display:flex;align-items:center}
-.nav-cta{border:1px solid var(--mdy);color:var(--mdy) !important;border-radius:999px;
-  padding:6px 13px;font-weight:600}
-.nav-cta:hover{background:var(--mdy);color:#fff !important}
-@media(max-width:400px){
-  .nav a{font-size:13px;margin-left:10px}
-  .nav-links a:first-child{display:none}
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+    }
 
-/* 주문조회 */
-.lookup-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-.lookup-form .field{flex:1;min-width:150px;margin-top:0}
-.order-card{background:#fff;border:1px solid var(--line);border-radius:12px;
-  padding:18px;margin-top:10px}
-.order-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
-  padding-bottom:12px;border-bottom:1px solid var(--line)}
-.order-no{font-size:15px;font-weight:600}
-.order-date{font-size:13px;color:var(--text-sub);margin-top:2px}
-.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;flex:none}
-.badge2{font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;white-space:nowrap}
-.b-wait{background:#FDF0EE;color:#A8341F}
-.b-ok{background:#E6F4E6;color:#2C6B2C}
-.b-neutral{background:var(--bg-soft);color:var(--text-sub)}
-.order-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:14px}
-.order-row dt{color:var(--text-sub);flex:none}
-.order-row dd{text-align:right;word-break:break-all}
-.track{display:flex;align-items:center;gap:8px;justify-content:flex-end}
-.track button{border:1px solid var(--line);background:#fff;border-radius:6px;
-  font-size:12px;padding:4px 9px;color:var(--text-sub)}
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      word-break: keep-all;
+    }
 
-/* hero */
-.hero{background:var(--mdy);color:#fff;padding:64px 0 56px}
-.hero .eyebrow{color:rgba(255,255,255,.75)}
-.hero h1{color:#fff}
-.hero p{color:rgba(255,255,255,.85);margin-top:16px;font-size:16px}
-.hero-cta{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  padding:14px 22px;border-radius:var(--radius);border:1px solid transparent;
-  font-size:15px;font-weight:600;text-decoration:none;transition:.15s}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{opacity:.9}
-.btn-light{background:#fff;color:var(--mdy)}
-.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
-.btn-outline{background:#fff;color:var(--text);border-color:var(--line)}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
-.btn-block{width:100%}
-.btn:disabled{opacity:.4;cursor:not-allowed}
+    img, video, iframe {
+      max-width: 100%;
+      display: block;
+    }
 
-/* profile */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
-.stat{background:var(--mdy-light);border-radius:var(--radius);padding:16px 10px;text-align:center}
-.stat b{display:block;font-size:22px;color:var(--mdy);font-weight:700;line-height:1.3}
-.stat span{font-size:12px;color:var(--text-sub)}
-.avatar{width:88px;height:88px;border-radius:50%;background:var(--mdy-light);
-  display:flex;align-items:center;justify-content:center;color:var(--mdy);
-  font-weight:700;font-size:15px;flex:none;overflow:hidden}
-.profile-head{display:flex;gap:16px;align-items:center}
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+    }
 
-/* card */
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
-.card + .card{margin-top:10px}
-.card-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:10px}
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 10px;
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      z-index: 999;
+    }
 
-/* check */
-.check-list{display:grid;gap:8px;margin-top:20px}
-.check-item{display:flex;gap:10px;align-items:flex-start;background:#fff;
-  border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:.15s}
-.check-item:hover{border-color:var(--accent)}
-.check-item.on{border-color:var(--accent);background:var(--accent-light)}
-.check-item input{margin-top:5px;flex:none;width:18px;height:18px;accent-color:var(--accent)}
-.check-item span{font-size:15px}
+    .skip-link:focus {
+      left: 10px;
+    }
 
-.result{border-radius:12px;padding:20px;background:var(--mdy-light);margin-top:20px}
-.result h3{color:var(--mdy)}
-.result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.result-actions .btn{flex:1;min-width:130px;padding:12px 16px;font-size:14px}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(247, 242, 234, 0.86);
+      border-bottom: 1px solid rgba(234, 223, 210, 0.9);
+    }
 
-/* test */
-.test-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:20px}
-.test-note{background:#FFF8E8;border-radius:var(--radius);padding:14px 16px;font-size:14px;line-height:1.6}
-.progress{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin:18px 0 6px}
-.progress i{display:block;height:100%;background:var(--accent);transition:width .25s}
-.q-count{font-size:13px;color:var(--text-sub)}
-.q-title{font-size:17px;font-weight:600;margin:10px 0 16px;line-height:1.5}
-.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);
-  border-radius:var(--radius);padding:14px 16px;cursor:pointer;margin-bottom:8px;transition:.15s}
-.opt:hover{border-color:var(--accent)}
-.opt.on{border-color:var(--accent);background:var(--accent-light)}
-.opt input{margin-top:4px;flex:none;width:18px;height:18px;accent-color:var(--accent)}
-.opt span{font-size:15px;line-height:1.55}
-.test-nav{display:flex;justify-content:space-between;margin-top:14px}
-.link-btn{background:none;border:none;color:var(--text-sub);font-size:14px;text-decoration:underline;padding:6px 0}
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
 
-/* tabs */
-.tabs-wrap{position:sticky;top:49px;z-index:40;background:#fff;border-bottom:1px solid var(--line)}
-.tabs{max-width:var(--max);margin:0 auto;padding:10px 20px;display:flex;gap:8px;overflow-x:auto;
-  scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex:1;min-width:140px;white-space:nowrap;padding:11px 16px;border-radius:999px;
-  border:1px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--text-sub);transition:.15s}
-.tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.tab small{display:block;font-size:11px;font-weight:400;opacity:.85}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--brand-dark);
+    }
 
-/* brand */
-.brand-head{display:flex;align-items:center;gap:12px}
-.brand-mark{width:44px;height:44px;border-radius:10px;background:var(--accent-light);
-  color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:none}
-.tag{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;
-  background:var(--accent-light);color:var(--accent);margin:0 6px 6px 0}
-.quote{border-left:3px solid var(--accent);background:var(--bg-soft);
-  border-radius:0 var(--radius) var(--radius) 0;padding:18px 18px 18px 20px;margin-top:20px}
-.quote p{font-size:15px;line-height:1.75}
-.quote p + p{margin-top:10px}
-.quote .who{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--text-sub)}
-.quote .who i{width:26px;height:26px;border-radius:50%;background:var(--mdy-light);flex:none}
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: -0.08em;
+    }
 
-/* type toggle */
-.type-box{background:var(--bg-soft);border-radius:12px;padding:18px;margin-top:20px}
-.type-btns{display:flex;gap:8px;margin-top:12px}
-.type-btn{flex:1;padding:14px 10px;border-radius:var(--radius);border:1px solid var(--line);
-  background:#fff;text-align:center;transition:.15s}
-.type-btn b{display:block;font-size:16px;font-weight:600}
-.type-btn small{font-size:12px;color:var(--text-sub)}
-.type-btn.on{border-color:var(--accent);background:var(--accent);color:#fff}
-.type-btn.on small{color:rgba(255,255,255,.8)}
-.notice{background:#FFF8E8;border-radius:var(--radius);padding:12px 14px;font-size:14px;margin-top:12px}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
 
-/* product */
-.prod{border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:10px}
-.prod-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.prod-name{font-size:17px;font-weight:600}
-.prod-role{font-size:13px;color:var(--text-sub);margin-top:2px}
-.freq{font-size:12px;padding:4px 9px;border-radius:999px;background:var(--accent-light);
-  color:var(--accent);white-space:nowrap;flex:none}
-.price-row{display:flex;justify-content:space-between;align-items:center;gap:10px;
-  padding:11px 0;border-top:1px solid var(--line);font-size:15px;margin-top:12px}
-.price-row:first-of-type{margin-top:12px}
-.price-row + .price-row{margin-top:0}
-.price-row b{font-weight:600}
-.opt-label{flex:1;min-width:0}
-.opt-price{white-space:nowrap}
-.btn-add{flex:none;padding:9px 18px;border-radius:var(--radius);
-  border:1px solid var(--accent);background:var(--accent);color:#fff;
-  font-size:14px;font-weight:600;transition:.15s}
-.btn-add:hover{opacity:.88}
-.btn-add:active{transform:scale(.97)}
-@media(max-width:400px){
-  .price-row{font-size:14px}
-  .btn-add{padding:9px 14px}
-}
-.more-btn{background:none;border:none;color:var(--accent);font-size:14px;font-weight:600;
-  padding:8px 0;text-decoration:underline}
-.bundle{background:var(--accent-light);border-radius:12px;padding:18px;margin-top:12px}
+    .nav-cta {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-weight: 800;
+    }
 
-/* steps */
-.week{display:flex;gap:5px;margin-top:14px;text-align:center}
-.week div{flex:1;padding:10px 2px;border-radius:8px;background:var(--bg-soft);font-size:12px}
-.week div b{display:block;font-size:14px;color:var(--accent);margin-top:2px}
-.caution{background:#FDF0EE;border-radius:var(--radius);padding:14px 16px;font-size:14px;margin-top:14px;line-height:1.65}
-.caution p + p{margin-top:6px}
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 86px 0 74px;
+      background:
+        radial-gradient(circle at top left, rgba(214, 164, 95, 0.32), transparent 34%),
+        radial-gradient(circle at 82% 8%, rgba(85, 107, 78, 0.18), transparent 28%),
+        linear-gradient(180deg, #fff8ee 0%, var(--bg) 100%);
+    }
 
-/* set steps */
-.setstep{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line)}
-.setstep:first-child{border-top:none}
-.setstep i{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;
-  font-style:normal;font-size:13px;font-weight:700;display:flex;align-items:center;
-  justify-content:center;flex:none;margin-top:2px}
-.setstep b{font-size:15px}
-.setstep small{display:block;font-size:13px;color:var(--text-sub)}
-.pricebox{background:var(--accent-light);border-radius:12px;padding:20px;text-align:center;margin-top:16px}
-.pricebox .big{font-size:26px;font-weight:700;color:var(--accent)}
-.pricebox .per{font-size:15px;margin-top:6px}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 46px;
+      align-items: center;
+    }
 
-/* faq */
-details{border-bottom:1px solid var(--line)}
-details summary{padding:16px 28px 16px 0;font-size:15px;font-weight:500;cursor:pointer;
-  list-style:none;position:relative}
-details summary::-webkit-details-marker{display:none}
-details summary::after{content:"+";position:absolute;right:4px;top:15px;color:var(--text-sub);font-size:18px}
-details[open] summary::after{content:"−"}
-details .a{padding:0 0 16px;font-size:15px;color:var(--text-sub);line-height:1.7}
-details.pinned{background:var(--accent-light);border-radius:var(--radius);
-  border-bottom:none;padding:0 16px;margin-bottom:8px}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid rgba(106, 74, 49, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--brand);
+      font-weight: 900;
+      font-size: 14px;
+    }
 
-/* form */
-.field{margin-top:14px}
-.field label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
-.field label em{color:#C0392B;font-style:normal}
-.field input[type=text],.field input[type=tel],.field select,.field textarea{
-  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);
-  background:#fff;color:var(--text)}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-.field textarea{min-height:76px;resize:vertical}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.qty{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:var(--radius);width:132px}
-.qty button{width:42px;height:44px;border:none;background:none;font-size:18px;color:var(--text-sub)}
-.qty input{width:48px;text-align:center;border:none;padding:12px 0}
-.total{display:flex;justify-content:space-between;align-items:center;
-  background:var(--bg-soft);border-radius:var(--radius);padding:16px;margin-top:16px}
-.total b{font-size:20px;font-weight:700;color:var(--accent)}
-.agree{display:flex;gap:9px;align-items:flex-start;margin-top:10px;font-size:14px;cursor:pointer}
-.agree input{margin-top:4px;width:17px;height:17px;flex:none;accent-color:var(--accent)}
-.confirm-line{background:#FFF8E8;border-radius:var(--radius);padding:13px 15px;font-size:14px;margin-top:14px}
-.done{background:var(--accent-light);border-radius:12px;padding:24px;text-align:center}
-.done .no{font-size:13px;color:var(--text-sub)}
-.done dl{text-align:left;margin-top:18px;background:#fff;border-radius:var(--radius);padding:16px}
-.done dl div{display:flex;justify-content:space-between;padding:7px 0;font-size:15px}
-.done dl dt{color:var(--text-sub);font-size:14px}
-.done dl dd{font-weight:600}
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(214, 164, 95, 0.16);
+    }
 
-/* cart */
-.cart{border:1px solid var(--line);border-radius:12px;padding:6px 16px 16px;margin-top:16px}
-.cart-empty{padding:22px 0;text-align:center;color:var(--text-sub);font-size:14px}
-.cart-item{display:flex;gap:10px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
-.cart-item:first-child{border-top:none}
-.cart-info{flex:1;min-width:0}
-.cart-nm{font-size:15px;font-weight:500;line-height:1.4}
-.cart-nm small{display:block;font-size:12px;color:var(--text-sub);font-weight:400}
-.cart-pr{font-size:13px;color:var(--text-sub);margin-top:3px}
-.cart-ctl{display:flex;align-items:center;gap:6px;flex:none}
-.cart-ctl button{width:30px;height:30px;border:1px solid var(--line);background:#fff;
-  border-radius:7px;font-size:15px;color:var(--text-sub);line-height:1}
-.cart-ctl b{min-width:20px;text-align:center;font-size:14px;font-weight:600}
-.cart-del{border:none !important;color:#C0392B !important;font-size:12px !important;width:auto !important;padding:0 4px}
-.cart-line{display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid var(--line);padding:9px 0;font-size:14px;color:var(--text-sub)}
-.cart-line + .cart-line{border-top:none;padding-top:0}
-.cart-sum{display:flex;justify-content:space-between;align-items:center;
-  border-top:2px solid var(--text);margin-top:6px;padding-top:14px}
-.cart-sum b{font-size:20px;font-weight:700;color:var(--accent)}
-.adder{background:var(--bg-soft);border-radius:12px;padding:16px;margin-top:12px}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:80;
-  background:var(--text);color:#fff;padding:12px 20px;border-radius:999px;font-size:14px;
-  opacity:0;pointer-events:none;transition:.25s}
-.toast.on{opacity:1;bottom:96px}
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
 
-/* postcode layer */
-.pc-layer{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.45);
-  display:none;align-items:center;justify-content:center;padding:20px}
-.pc-layer.show{display:flex}
-.pc-box{background:#fff;border-radius:12px;width:100%;max-width:500px;height:min(560px,80vh);
-  display:flex;flex-direction:column;overflow:hidden}
-.pc-head{display:flex;justify-content:space-between;align-items:center;
-  padding:14px 16px;border-bottom:1px solid var(--line);font-weight:600}
-.pc-head button{border:none;background:none;font-size:22px;color:var(--text-sub);line-height:1}
-.pc-embed{flex:1;overflow:hidden}
-.doc-box{max-width:640px;height:min(700px,86vh)}
-.doc-body{flex:1;overflow-y:auto;padding:18px 20px 28px;font-size:14px;line-height:1.75;color:var(--text)}
-.doc-body h4{font-size:15px;font-weight:600;margin:22px 0 8px;color:var(--mdy)}
-.doc-body h4:first-child{margin-top:0}
-.doc-body p{margin-bottom:8px}
-.doc-body ul{margin:0 0 10px 18px}
-.doc-body li{margin-bottom:4px}
-.doc-body table{width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:13px}
-.doc-body th,.doc-body td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
-.doc-body th{background:var(--bg-soft);font-weight:600;white-space:nowrap}
-.doc-body .meta{font-size:13px;color:var(--text-sub);border-top:1px solid var(--line);
-  margin-top:22px;padding-top:12px}
-.addr-row{display:flex;gap:8px}
-.addr-row input{flex:1}
-.addr-row .btn{padding:12px 16px;font-size:14px;white-space:nowrap;flex:none}
+    .hero h1 {
+      margin: 22px 0 22px;
+      font-size: clamp(40px, 5.4vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.075em;
+      color: var(--brand-dark);
+    }
 
-/* mobile cta */
-.mcta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;
-  border-top:1px solid var(--line);padding:10px 20px calc(10px + env(safe-area-inset-bottom))}
-.mcta .btn{width:100%;max-width:var(--max);margin:0 auto;display:flex}
-.mcta .badge{background:rgba(255,255,255,.25);border-radius:999px;
-  padding:1px 8px;font-size:13px;margin-left:2px}
+    .hero h1 span {
+      color: var(--brand);
+    }
 
-footer{background:var(--bg-soft);padding:36px 0;font-size:13px;color:var(--text-sub);line-height:1.9}
-footer b{color:var(--text)}
-footer .fl{margin-top:12px}
-footer .fl a{margin-right:14px}
+    .hero-subcopy {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.7;
+      letter-spacing: -0.035em;
+    }
 
-@media(min-width:640px){
-  h1{font-size:40px}h2{font-size:28px}
-  section{padding:72px 0}
-  .hero{padding:88px 0 76px}
-  .stat b{font-size:26px}
-}
-</style>
+    .hero-subcopy strong {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+      border: 0;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--brand-dark);
+      color: #fff;
+      box-shadow: 0 16px 36px rgba(58, 42, 32, 0.22);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--brand-dark);
+      border: 1px solid rgba(106, 74, 49, 0.2);
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 34px;
+      max-width: 660px;
+    }
+
+    .trust-item {
+      padding: 16px 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(234, 223, 210, 0.9);
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 18px;
+      color: var(--brand-dark);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .trust-item span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 38px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .product-visual {
+      min-height: 520px;
+      border-radius: 28px;
+      background:
+        linear-gradient(155deg, rgba(106, 74, 49, 0.16), rgba(214, 164, 95, 0.22)),
+        #fffaf3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-visual::before {
+      content: "";
+      position: absolute;
+      inset: 60px 80px;
+      border-radius: 44% 56% 50% 50%;
+      background: linear-gradient(180deg, rgba(58, 42, 32, 0.92), rgba(106, 74, 49, 0.88));
+      transform: rotate(-5deg);
+      box-shadow: 0 30px 60px rgba(58, 42, 32, 0.24);
+    }
+
+    .product-visual::after {
+      content: "MUD MASTER\A SHAMPOO";
+      white-space: pre;
+      position: relative;
+      width: 210px;
+      height: 330px;
+      border-radius: 34px 34px 26px 26px;
+      background: linear-gradient(180deg, #1f1712 0%, #60422d 100%);
+      color: #f7ead9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      letter-spacing: .08em;
+      line-height: 1.4;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 18px 50px rgba(32, 25, 20, 0.3);
+      z-index: 1;
+    }
+
+    .visual-note {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 250, 243, 0.88);
+      border: 1px solid rgba(234, 223, 210, 0.9);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(12px);
+    }
+
+    /* ===== 히어로 이미지 슬라이더 ===== */
+    .hero-slider {
+      position: relative;
+      min-height: 520px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(155deg, rgba(106, 74, 49, 0.16), rgba(214, 164, 95, 0.22)), #fffaf3;
+    }
+
+    .hero-slider .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .9s ease;
+    }
+
+    .hero-slider .slide.active {
+      opacity: 1;
+    }
+
+    .hero-slider .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slider-dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .slider-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 0;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 0 1px rgba(58, 42, 32, 0.25);
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .slider-dots button.active {
+      background: var(--brand-dark);
+      transform: scale(1.25);
+    }
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .section-tight {
+      padding: 66px 0;
+    }
+
+    .section-header {
+      max-width: 820px;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--brand);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.16;
+      letter-spacing: -0.065em;
+      margin-bottom: 18px;
+      color: var(--brand-dark);
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.035em;
+      margin-bottom: 0;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .pain-card {
+      min-height: 260px;
+      background: var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 18px 46px rgba(46, 32, 22, 0.07);
+    }
+
+    .pain-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--brand);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .pain-card h3 {
+      font-size: 19px;
+      line-height: 1.35;
+      letter-spacing: -0.045em;
+      margin-bottom: 12px;
+      color: var(--brand-dark);
+    }
+
+    .pain-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: -0.025em;
+    }
+
+    .story-wrap {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .quote-card {
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: var(--brand-dark);
+      color: #fff;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-card::before {
+      content: "“";
+      position: absolute;
+      right: 28px;
+      top: -12px;
+      font-size: 140px;
+      line-height: 1;
+      color: rgba(255,255,255,0.08);
+      font-family: Georgia, serif;
+    }
+
+    .quote-card p {
+      font-size: 28px;
+      line-height: 1.35;
+      letter-spacing: -0.055em;
+      font-weight: 900;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .quote-card span {
+      color: rgba(255,255,255,0.72);
+      position: relative;
+    }
+
+    .story-copy {
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(234, 223, 210, 0.9);
+      padding: 32px;
+    }
+
+    .story-copy p {
+      color: var(--muted);
+      font-size: 17px;
+      letter-spacing: -0.03em;
+    }
+
+    .story-copy strong {
+      color: var(--brand-dark);
+      font-weight: 900;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 32px;
+      background: var(--surface-2);
+      border-radius: 28px;
+      border: 1px solid rgba(234, 223, 210, 0.9);
+      box-shadow: 0 18px 46px rgba(46, 32, 22, 0.07);
+    }
+
+    .feature-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--brand);
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.28;
+      letter-spacing: -0.055em;
+      color: var(--brand-dark);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      letter-spacing: -0.03em;
+      margin-bottom: 0;
+    }
+
+    .routine {
+      background: var(--brand-dark);
+      color: #fff;
+      border-radius: 36px;
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .routine::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      right: -180px;
+      top: -160px;
+      background: rgba(214, 164, 95, 0.22);
+    }
+
+    .routine-content {
+      position: relative;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .routine h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -0.065em;
+      margin-bottom: 18px;
+    }
+
+    .routine p {
+      color: rgba(255,255,255,0.74);
+      font-size: 17px;
+      letter-spacing: -0.03em;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.13);
+      backdrop-filter: blur(8px);
+    }
+
+    .step-card strong {
+      display: block;
+      color: #fff;
+      font-size: 21px;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .step-card span {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .final-cta {
+      text-align: center;
+      padding: 80px 28px;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at top, rgba(214, 164, 95, 0.24), transparent 38%),
+        var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .final-cta h2 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.14;
+      letter-spacing: -0.07em;
+      color: var(--brand-dark);
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      max-width: 720px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .form-section {
+      background: #efe5d7;
+      padding: 92px 0 120px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .form-copy {
+      position: sticky;
+      top: 100px;
+    }
+
+    .form-copy h2 {
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.14;
+      letter-spacing: -0.065em;
+      color: var(--brand-dark);
+      margin-bottom: 18px;
+    }
+
+    .form-copy p {
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .mini-list div {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--brand-dark);
+      font-weight: 800;
+    }
+
+    .mini-list div::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .form-card {
+      padding: 30px;
+      border-radius: 30px;
+      background: var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--brand-dark);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #e2d6c6;
+      border-radius: 16px;
+      min-height: 54px;
+      padding: 14px 15px;
+      font: inherit;
+      background: #fffaf5;
+      color: var(--ink);
+      outline: none;
+      transition: border .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(106, 74, 49, 0.1);
+      background: #fff;
+    }
+
+    .checkbox {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 16px;
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 4px 0 18px;
+    }
+
+    .checkbox input {
+      width: 18px;
+      height: 18px;
+      flex: none;
+      min-height: auto;
+      margin-top: 4px;
+      accent-color: var(--brand);
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 58px;
+      border: 0;
+      border-radius: 18px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+      box-shadow: 0 16px 34px rgba(58, 42, 32, 0.22);
+    }
+
+    .form-helper {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #eef6ea;
+      color: #3f5a39;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    /* ===== 주문 섹션 ===== */
+    .order-section {
+      background: #efe5d7;
+      padding: 92px 0 100px;
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .order-copy {
+      position: sticky;
+      top: 100px;
+    }
+
+    .order-copy h2 {
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.14;
+      letter-spacing: -0.065em;
+      color: var(--brand-dark);
+      margin-bottom: 18px;
+    }
+
+    .order-copy p {
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .order-flow {
+      display: grid;
+      gap: 8px;
+      margin-top: 24px;
+      counter-reset: flow;
+    }
+
+    .order-flow div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--brand-dark);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .order-flow div::before {
+      counter-increment: flow;
+      content: counter(flow);
+      width: 26px;
+      height: 26px;
+      flex: none;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .price-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--brand-dark);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .price-summary strong {
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .option-picker {
+      padding: 18px;
+      border: 1px solid #e2d6c6;
+      border-radius: 18px;
+      background: #fdf7ee;
+      margin-bottom: 16px;
+    }
+
+    .option-picker .field:last-of-type { margin-bottom: 0; }
+
+    .option-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .option-price-row span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .option-price-row span strong {
+      color: var(--brand-dark);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-left: 4px;
+    }
+
+    .add-option-btn {
+      flex: none;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--accent);
+      color: var(--brand-dark);
+      font: inherit;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 8px 20px rgba(214, 164, 95, 0.3);
+    }
+
+    .add-option-btn:hover { transform: translateY(-1px); }
+    .add-option-btn:active { transform: translateY(0); }
+
+    .cart-box { margin-bottom: 16px; }
+
+    .cart-empty {
+      padding: 16px;
+      border: 1px dashed #d9c9b3;
+      border-radius: 16px;
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fffaf5;
+      margin-bottom: 8px;
+    }
+
+    .cart-item:last-child { margin-bottom: 0; }
+
+    .cart-item-info { flex: 1; min-width: 0; }
+
+    .cart-item-name {
+      font-weight: 900;
+      color: var(--brand-dark);
+      font-size: 14.5px;
+      letter-spacing: -0.02em;
+    }
+
+    .cart-item-price {
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-top: 2px;
+    }
+
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: none;
+    }
+
+    .cart-qty button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #d9c9b3;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--brand-dark);
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .cart-qty span {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 900;
+      color: var(--brand-dark);
+    }
+
+    .cart-remove {
+      flex: none;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
+
+    .cart-remove:hover { color: #9a4a2a; }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field-hint {
+      margin: 6px 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .addr-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .addr-row input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .addr-search-btn {
+      flex: none;
+      min-height: 54px;
+      padding: 0 18px;
+      border: 1px solid rgba(106, 74, 49, 0.3);
+      border-radius: 16px;
+      background: var(--brand-dark);
+      color: #fff;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #postcode[readonly], #buyerAddress[readonly] {
+      cursor: pointer;
+      background: #fdf6ec;
+    }
+
+    /* 우편번호 검색 레이어 (팝업 대신 페이지 내 embed 방식) */
+    .postcode-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(32, 25, 20, 0.55);
+      padding: 20px;
+    }
+
+    .postcode-layer.show { display: flex; }
+
+    .postcode-box {
+      width: min(100%, 560px);
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .postcode-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-weight: 900;
+      color: var(--brand-dark);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .postcode-head button {
+      border: 0;
+      background: none;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px 8px;
+    }
+
+    .postcode-embed {
+      width: 100%;
+      height: min(70vh, 500px);
+    }
+
+    @media (max-width: 720px) {
+      .postcode-layer { padding: 0; }
+      .postcode-box { width: 100%; height: 100%; border-radius: 0; }
+      .postcode-embed { height: 100%; flex: 1; }
+    }
+
+    .notice-box {
+      margin: 4px 0 18px;
+      border: 1px solid #e2d6c6;
+      border-radius: 16px;
+      background: #fffaf5;
+      overflow: hidden;
+    }
+
+    .notice-box summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--brand-dark);
+      list-style: none;
+    }
+
+    .notice-box summary::-webkit-details-marker { display: none; }
+
+    .notice-box summary::after {
+      content: "＋";
+      float: right;
+      color: var(--brand);
+    }
+
+    .notice-box[open] summary::after { content: "－"; }
+
+    .notice-body {
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    .notice-body strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--brand-dark);
+    }
+
+    .notice-body strong:first-child { margin-top: 0; }
+
+    /* 주문 완료 화면 */
+    .order-complete {
+      display: none;
+      padding: 30px;
+      border-radius: 30px;
+      background: var(--surface-2);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .order-complete.show { display: block; }
+
+    .order-complete h3 {
+      font-size: 24px;
+      letter-spacing: -0.05em;
+      color: var(--brand-dark);
+      margin-bottom: 6px;
+    }
+
+    .order-complete .complete-sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .deposit-card {
+      border-radius: 20px;
+      background: #f7f2ea;
+      border: 1px solid #eadfd2;
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .deposit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 15px;
+    }
+
+    .deposit-row span { color: var(--muted); flex: none; }
+
+    .deposit-row strong {
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .deposit-row strong.big { font-size: 20px; }
+
+    .depositor-highlight {
+      margin-top: 4px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-weight: 900;
+      text-align: center;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .copy-btn {
+      margin-top: 14px;
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid rgba(106, 74, 49, 0.25);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--brand-dark);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .complete-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    /* ===== 사업자 정보 푸터 ===== */
+    .biz-info {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--line);
+      display: grid;
+      gap: 4px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .biz-info strong {
+      color: var(--brand-dark);
+      font-size: 13px;
+    }
+
+    /* ===== 주문 조회 ===== */
+    .lookup-result {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lookup-msg {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #fffaf5;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .order-item {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      background: #fffaf5;
+    }
+
+    .order-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .order-item-top span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      flex: none;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14.5px;
+      margin-top: 4px;
+    }
+
+    .order-item-row span { color: var(--muted); }
+
+    .order-item-row b {
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .order-item-badges {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .badge-wait { background: var(--danger-soft); color: #9a4a2a; }
+    .badge-ok { background: #eef6ea; color: #3f5a39; }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .faq-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.66);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+    }
+
+    .faq-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-dark);
+      font-size: 17px;
+      letter-spacing: -0.035em;
+    }
+
+    .faq-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: -0.025em;
+    }
+
+    .legal-note {
+      margin-top: 26px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(234, 223, 210, 0.95);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      padding: 44px 0 92px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .floating-cta {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(247, 242, 234, 0.92);
+      border-top: 1px solid rgba(234, 223, 210, 0.95);
+      backdrop-filter: blur(14px);
+      z-index: 60;
+      display: none;
+    }
+
+    .floating-cta a {
+      width: min(100%, 680px);
+      margin: 0 auto;
+      min-height: 54px;
+      border-radius: 16px;
+      background: var(--brand-dark);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      box-shadow: 0 10px 26px rgba(58, 42, 32, 0.2);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .story-wrap,
+      .routine-content,
+      .form-grid,
+      .order-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .order-copy {
+        position: static;
+      }
+
+      .product-visual {
+        min-height: 460px;
+      }
+
+      .hero-slider {
+        min-height: 460px;
+      }
+
+      .pain-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .form-copy {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        height: 64px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .hero {
+        padding: 54px 0 50px;
+      }
+
+      .hero h1 {
+        letter-spacing: -0.065em;
+      }
+
+      .trust-row,
+      .pain-grid,
+      .feature-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .section-tight {
+        padding: 48px 0;
+      }
+
+      .routine,
+      .form-card,
+      .order-complete,
+      .final-cta {
+        padding: 22px;
+        border-radius: 26px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .product-visual {
+        min-height: 390px;
+      }
+
+      .hero-slider {
+        min-height: 390px;
+      }
+
+      .product-visual::before {
+        inset: 52px 58px;
+      }
+
+      .product-visual::after {
+        width: 170px;
+        height: 280px;
+      }
+
+      .cta-row .button {
+        width: 100%;
+      }
+
+      .floating-cta {
+        display: block;
+      }
+
+      .footer {
+        padding-bottom: 100px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
 
-<nav class="nav">
-  <div class="nav-in">
-    <div class="logo">만다윤<span>·</span> 두피 모발 관리</div>
-    <div class="nav-links">
-      <a href="#check">타입 테스트</a>
-      <a href="#brands">제품</a>
-      <a href="#lookup" class="nav-cta">주문조회</a>
+  <header class="topbar" aria-label="상단 메뉴">
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="만다윤 랜딩페이지 상단으로 이동">
+        <span class="logo-mark">만다</span>
+        <span>만다윤 Hair Care</span>
+      </a>
+      <nav class="nav-links" aria-label="페이지 이동">
+        <a href="#problem">고민</a>
+        <a href="#why">제품 포인트</a>
+        <a href="#routine">사용법</a>
+        <a href="#apply">알림받기</a>
+        <a href="#track">주문 조회</a>
+        <a class="nav-cta" href="#order">지금 주문하기</a>
+      </nav>
     </div>
-  </div>
-</nav>
+  </header>
 
-<!-- ================= A1 히어로 ================= -->
-<section class="hero" id="top">
-  <div class="wrap">
-    <div class="eyebrow">만다윤 · 두피 모발 관리</div>
-    <h1>두피부터 바꿔야,<br>머리카락이 바뀝니다</h1>
-    <p>30년간 미용실에서 500명이 넘는 두피를 직접 만져봤습니다.<br>그 중에 제가 계속 쓰고 있는 것만 여기 모았습니다.</p>
-    <div class="hero-cta">
-      <a href="#brands" class="btn btn-light">제품 보러가기</a>
-      <a href="https://www.youtube.com/@%EB%A7%8C%EB%8B%A4%EC%9C%A4%EB%B7%B0%ED%8B%B0%EB%9E%A9" target="_blank" rel="noopener" class="btn btn-ghost">유튜브 채널 보기</a>
-    </div>
-  </div>
-</section>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">30년 미용 경력 · 7년째 정착한 샴푸</div>
+          <h1>
+            샴푸 순서까지 바꾸는<br />
+            번거로운 홈케어,<br />
+            <span>이제 그만하세요.</span>
+          </h1>
+          <p class="hero-subcopy">
+            7년의 살롱 케어 경험, 30년 미용 경력의 만다윤이 직접 써보고 정착한
+            <strong>두피 케어 중심 프리미엄 샴푸</strong>. 아름다운 모발은 결국 편안한 두피 환경에서 시작됩니다.
+          </p>
+          <div class="cta-row">
+            <a class="button button-primary" href="#order">지금 주문하기</a>
+            <a class="button button-secondary" href="#why">왜 머드마스타인지 보기</a>
+          </div>
+          <p class="field-hint" style="margin-top:10px;">계좌이체 입금 확인 후 순차 발송됩니다.</p>
 
-<!-- ================= A2 전문가 프로필 ================= -->
-<section id="profile">
-  <div class="wrap">
-    <div class="eyebrow">PROFILE</div>
-    <h2>제가 누구인지부터</h2>
-    <div class="profile-head mt24">
-      <div class="avatar">만다윤</div>
-      <div>
-        <h3>만다윤</h3>
-        <p class="small">30년차 미용전문가 · 미용실 원장</p>
-      </div>
-    </div>
-    <div class="stats">
-      <div class="stat"><b>30년</b><span>미용 경력</span></div>
-      <div class="stat"><b>500명+</b><span>두피 상담·시술</span></div>
-      <div class="stat"><b data-subscribers>—</b><span>채널 구독자</span></div>
-    </div>
-    <p class="mt24">미용실을 운영하면서 매일 손님들 두피를 들여다봤습니다. 좋다는 제품을 써도 그대로인 분들, 오히려 더 나빠진 분들을 수없이 봤어요.</p>
-    <p class="mt12">대부분은 제품 탓이 아니라 <b>자기 두피에 안 맞는 걸 쓰고 있어서</b>였습니다. 그래서 유튜브를 시작했고, 지금은 제가 직접 써보고 괜찮았던 것만 소개하고 있습니다.</p>
-  </div>
-</section>
-
-<!-- ================= A3 셀프 체크 ================= -->
-<section class="soft" id="check">
-  <div class="wrap">
-    <div class="eyebrow">SELF CHECK</div>
-    <h2>지금 뭐부터 봐야 할까요</h2>
-    <p class="lead">해당하는 것만 골라주세요. 30초면 됩니다.</p>
-
-    <!-- A3-1 -->
-    <div id="step1">
-      <div class="check-list" id="checkList"></div>
-      <div class="mt16"><button class="btn btn-primary btn-block" id="checkSubmit" disabled>결과 보기</button></div>
-      <div id="check1Result"></div>
-    </div>
-
-    <!-- A3-2 두피 타입 테스트 -->
-    <div id="testWrap" class="hidden">
-      <div class="test-box">
-        <div class="test-note">
-          최근 <b>2주 동안의 평소 두피 상태</b>를 기준으로 선택해 주세요.<br>
-          운동 직후나 땀을 많이 흘린 날은 제외해 주세요.
+          <div class="trust-row" aria-label="제품 신뢰 요소">
+            <div class="trust-item">
+              <strong>30년</strong>
+              <span>미용 경력 기반의 선택</span>
+            </div>
+            <div class="trust-item">
+              <strong>7년째</strong>
+              <span>직접 사용하고 정착한 샴푸</span>
+            </div>
+            <div class="trust-item">
+              <strong>2펌핑</strong>
+              <span>애벌 1회 + 본 샴푸 1회 루틴</span>
+            </div>
+          </div>
         </div>
-        <div class="progress"><i id="testBar" style="width:20%"></i></div>
-        <div class="q-count" id="testCount">1 / 5</div>
-        <div class="q-title" id="testQ"></div>
-        <div id="testOpts"></div>
-        <div class="test-nav">
-          <button class="link-btn" id="testPrev">← 이전</button>
-          <button class="link-btn" id="testQuit">나중에 할게요</button>
+
+        <div class="hero-card" aria-label="제품 대표 이미지 영역">
+          <!-- 슬라이드 추가: <div class="slide"> 줄 복사 / 전환 속도: 스크립트의 SLIDE_INTERVAL -->
+          <div class="hero-slider" id="heroSlider">
+            <div class="slide active"><img src="images/product-1.png" alt="머드마스터 제품 이미지 1"></div>
+            <div class="slide"><img src="images/shampoo-oil.png" alt="머드마스터 제품 이미지 2"></div>
+            <div class="slide"><img src="images/pack-dry.png" alt="머드마스터 제품 이미지 3"></div>
+            <div class="slide"><img src="images/pack-oil.png" alt="머드마스터 제품 이미지 4"></div>
+            <div class="slide"><img src="images/gel.png" alt="머드마스터 제품 이미지 5"></div>
+            <div class="slide"><img src="images/cl 1.png" alt="머드마스터 제품 이미지 6"></div>
+            <div class="slider-dots" id="sliderDots" aria-label="슬라이드 선택"></div>
+
+          </div>
         </div>
       </div>
-      <div id="testResult"></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ================= A4 선정 기준 ================= -->
-<section id="criteria">
-  <div class="wrap">
-    <div class="eyebrow">CRITERIA</div>
-    <h2>아무거나 소개하지 않습니다</h2>
-    <p class="lead">제안이 들어와도 대부분은 거절합니다. 아래 3가지를 통과한 것만 올립니다.</p>
-    <div class="mt24">
-      <div class="card"><div class="card-num">1</div><h3>직접 써봤는가</h3>
-        <p class="muted">제 두피와 손님들 두피에 충분히 써보고 판단합니다.</p></div>
-      <div class="card"><div class="card-num">2</div><h3>성분이 설명 가능한가</h3>
-        <p class="muted">무엇이 왜 들어갔는지 제조사가 대답하지 못하면 소개하지 않습니다.</p></div>
-      <div class="card"><div class="card-num">3</div><h3>꾸준히 쓸 수 있는 가격인가</h3>
-        <p class="muted">두피는 한 번 써서 바뀌지 않습니다. 3개월 이상 이어갈 수 있어야 의미가 있습니다.</p></div>
-    </div>
-    <p class="mt24"><b>지금 이 기준을 통과한 브랜드는 아래와 같습니다.<br>두피는 머드마스타, 모발은 메르윈.</b> 역할이 다르니 헷갈리지 않으셔도 됩니다.</p>
-  </div>
-</section>
-
-<!-- ================= 브랜드 탭 ================= -->
-<div id="brands"></div>
-<div class="tabs-wrap">
-  <div class="tabs" id="tabs"></div>
-</div>
-<div id="brandContent"></div>
-
-<!-- ================= 주문조회 ================= -->
-<section id="lookup">
-  <div class="wrap">
-    <div class="eyebrow">ORDER</div>
-    <h2>주문조회</h2>
-    <p class="lead">주문하실 때 적으신 <b>이름과 연락처</b>를 넣어주세요. 최근 주문부터 보여드립니다.</p>
-    <form id="lookupForm" class="lookup-form">
-      <div class="field"><label for="lkName">주문자명</label><input type="text" id="lkName" autocomplete="name" required></div>
-      <div class="field"><label for="lkPhone">연락처</label><input type="tel" id="lkPhone" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" required></div>
-      <div class="field" style="flex:none;min-width:0;align-self:flex-end">
-        <button type="submit" class="btn btn-primary" id="lkBtn" style="height:44px">조회하기</button></div>
-    </form>
-    <p class="small mt12" id="lkMsg"></p>
-    <div id="lkResult"></div>
-  </div>
-</section>
-
-<!-- ================= C1 관심고객 ================= -->
-<section class="soft" id="apply">
-  <div class="wrap">
-    <div class="eyebrow">ALERT</div>
-    <h2>지금 결정이 어려우시면</h2>
-    <p class="lead">연락처를 남겨주시면 재입고·할인 소식과 두피 관리 정보를 보내드립니다.</p>
-    <form id="leadForm" data-endpoint="" class="mt24">
-      <div class="row2">
-        <div class="field"><label>이름 <em>*</em></label><input type="text" name="name" required></div>
-        <div class="field"><label>연락처 <em>*</em></label><input type="tel" name="phone" placeholder="010-0000-0000" required></div>
-      </div>
-      <div class="field"><label>두피·모발 고민</label><input type="text" name="concern" id="leadConcern" placeholder="예) 각질이 많고 오후에 기름져요"></div>
-      <div class="field"><label>관심 브랜드</label>
-        <div id="leadBrands"></div>
-      </div>
-      <div class="field"><label>구매 예정 시점</label>
-        <select name="timing">
-          <option value="">선택해주세요</option>
-          <option>1주 이내</option><option>1개월 이내</option>
-          <option>3개월 이내</option><option>아직 모르겠음</option>
-        </select>
-      </div>
-      <div class="field"><label>문의 내용</label><textarea name="message"></textarea></div>
-      <label class="agree"><input type="checkbox" name="privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. (이름·연락처 / 상담 및 안내 목적 / 목적 달성 후 파기) <a href="#" data-doc="privacy">전문 보기</a></span></label>
-      <label class="agree"><input type="checkbox" name="marketing"><span>[선택] 마케팅 정보 수신에 동의합니다.</span></label>
-      <button type="submit" class="btn btn-primary btn-block mt16">알림 신청하기</button>
-      <p class="small center mt12" id="leadMsg"></p>
-    </form>
-  </div>
-</section>
-
-<!-- ================= C2 공통 FAQ ================= -->
-<section id="faq">
-  <div class="wrap">
-    <div class="eyebrow">FAQ</div>
-    <h2>자주 묻는 질문</h2>
-    <div class="mt24">
-      <details><summary>배송은 얼마나 걸리나요?</summary><div class="a">입금 확인 후 영업일 기준 1~3일 이내 발송됩니다. 주말·공휴일은 제외됩니다.</div></details>
-      <details><summary>입금 확인은 어떻게 되나요? 기한이 있나요?</summary><div class="a">주문 시 안내된 계좌로 입금해 주시면 순차적으로 확인 후 발송해 드립니다. <b>주문일로부터 2일 이내</b>에 입금해 주세요. 그때까지 확인되지 않으면 주문이 취소될 수 있습니다.<br><br>입금자명은 주문서에 표시된 이름으로 보내주셔야 확인이 빠릅니다. 가족 명의 등 다른 이름으로 보내실 예정이라면 주문서의 <b>입금자명 칸을 직접 고쳐서</b> 제출해 주세요.</div></details>
-      <details><summary>배송비는 얼마인가요?</summary><div class="a">배송비는 <b>무료</b>입니다. (도서·산간 지역은 추가 비용이 발생할 수 있습니다)</div></details>
-      <details><summary>주문번호를 잊어버렸어요.</summary><div class="a">상단 <b>주문조회</b>에서 주문하실 때 적으신 이름과 연락처를 넣으시면 바로 확인하실 수 있습니다.</div></details>
-      <details><summary>머드마스타랑 메르윈을 같이 주문할 수 있나요?</summary><div class="a">네, 가능합니다. 각 탭에서 원하시는 상품을 <b>담기</b> 해주시면 장바구니에 함께 담기고, 한 번에 주문·배송됩니다.</div></details>
-      <details><summary>교환·반품은 어떻게 하나요?</summary><div class="a">단순 변심에 의한 교환·반품은 수령일로부터 7일 이내 가능하며 왕복 배송비는 고객 부담입니다. 제품 하자의 경우 배송비를 부담하지 않으셔도 됩니다. 다만 <b>개봉하여 사용한 화장품은 교환·반품이 어렵습니다.</b></div></details>
-      <details><summary>현금영수증·세금계산서를 받을 수 있나요?</summary><div class="a">주문서에서 현금영수증 발급을 선택하시고 번호를 입력해 주세요. 세금계산서는 별도 문의 부탁드립니다.</div></details>
-      <details><summary>주문 후 취소·변경이 되나요?</summary><div class="a">발송 전이라면 가능합니다. 고객센터로 주문번호와 함께 연락 주세요.</div></details>
-      <details><summary>배송 조회는 어디서 하나요?</summary><div class="a">상단 <b>주문조회</b>에서 입금·배송 상태와 운송장 번호를 확인하실 수 있습니다. 발송 완료 시 문자로도 안내해 드립니다.</div></details>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="logo" style="margin-bottom:12px">만다윤<span>·</span> 두피 모발 관리</div>
-    <div>
-      상호 <b data-biz="name">[ ]</b> &nbsp;|&nbsp; 대표자 <b data-biz="ceo">[ ]</b><br>
-      사업자등록번호 <b data-biz="regno">[ ]</b><br>
-      통신판매업 신고번호 <b data-biz="mailorder">[ ]</b><br>
-      주소 <b data-biz="addr">[ ]</b><br>
-      고객센터 <b data-biz="tel">[ ]</b> &nbsp;|&nbsp; 이메일 <b data-biz="email">[ ]</b><br>
-      운영시간 <b data-biz="hours">[ ]</b>
-    </div>
-    <div class="fl"><a href="#" id="privacyLink">개인정보처리방침</a><a href="#" id="termsLink">이용약관</a></div>
-    <div class="mt12">© <span id="year"></span> 만다윤. All rights reserved.</div>
-  </div>
-</footer>
-
-<div class="mcta" id="mcta"><a href="#brands" class="btn btn-primary" id="mctaBtn">제품 보러가기</a></div>
-<div class="toast" id="toast"></div>
-
-<div class="pc-layer" id="pcLayer">
-  <div class="pc-box">
-    <div class="pc-head">주소 검색<button type="button" id="pcClose" aria-label="닫기">×</button></div>
-    <div class="pc-embed" id="pcEmbed"></div>
-  </div>
-</div>
-
-<div class="pc-layer" id="docLayer">
-  <div class="pc-box doc-box">
-    <div class="pc-head"><span id="docTitle"></span><button type="button" id="docClose" aria-label="닫기">×</button></div>
-    <div class="doc-body" id="docBody"></div>
-  </div>
-</div>
-
-<script>
-/* =========================================================
-   1. 설정 — 여기만 수정하면 됩니다
-   ========================================================= */
-
-/* 사업자 정보 (푸터) — [ ] 표시된 항목만 채우면 됩니다 */
-const BIZ = {
-  name:'만다윤',
-  ceo:'윤금연',
-  regno:'292-30-62185',
-  mailorder:'제2026-호평평내-0261호',
-  addr:'경기도 남양주시 호평로 9, 2403동 1702호',
-  tel:'010-9441-6582',
-  email:'manda07072@gmail.com',
-  hours:'10:00 - 17:00'
-};
-const SUBSCRIBERS = '';   // 예: '1.2만' — 비워두면 해당 칸이 숨겨집니다
-
-/* 결제 설정 — PG 전환 시 method만 'pg'로 변경 */
-const PAYMENT_CONFIG = {
-  method:'bank',
-  bank:'국민은행', account:'437201-04-293375', holder:'윤금연',
-  depositDeadlineDays:2,        // 입금 기한(일). 0으로 두면 기한 안내를 표시하지 않습니다
-  pg:{ provider:null, clientKey:null, successUrl:null, failUrl:null }
-};
-
-/* 배송비 — ⚠️ 현재 '무료배송'으로 설정되어 있습니다. 실제 정책에 맞게 반드시 확인하세요.
-   유료라면 fee에 금액을, 일정 금액 이상 무료라면 freeOver에 기준 금액을 넣으세요.
-   예) 3,000원 / 50,000원 이상 무료  →  { fee:3000, freeOver:50000 } */
-const SHIPPING = { fee:0, freeOver:0 };
-
-/* 주문/관심고객 데이터를 받을 Apps Script 웹앱 URL */
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxdPZsv_EjD8_stTyryboPq3Q7DTsoWn-ESy0RuTKuCfYjVriAmAhz3sj7XiKV7DC6z/exec';
-
-/* 브랜드 데이터 — 브랜드 추가 시 이 배열에만 객체를 추가하세요 */
-const BRANDS = [
-{
-  id:'mudmasta', name:'머드마스타', role:'두피', orderPrefix:'MDM',
-  color:'#8B6F5E', colorLight:'#F5F1EE',
-  tagline:'두피부터 비우고 시작합니다',
-  tags:['두피 딥클렌징','클레이 베이스','건성/지성 구분'],
-  videoUrl:'',
-  comment:[
-    '감고 하루만 지나면 정수리가 눌리고, 두피에서 냄새가 신경 쓰이는 분들에게 권합니다.',
-    '두피 관리는 매일 쓰는 것과 가끔 깊게 비우는 것, 두 가지가 같이 가야 해요. 그래서 샴푸와 팩을 나눠 놨습니다.',
-    '중요한 건 건성이냐 지성이냐를 먼저 아는 겁니다. 반대로 고르면 안 쓰느니만 못해요. 위에서 체크부터 해보세요.',
-    '다만 두피에 트러블이 올라온 상태라면 진정이 먼저입니다. 그때는 쓰지 마세요.'
-  ],
-  scalpTypeFilter:{
-    enabled:true, default:'dry',
-    options:[
-      {id:'dry', label:'건성', hint:'당김 · 푸석함'},
-      {id:'oily',label:'지성', hint:'반나절 유분감'}
-    ],
-    combinedNotice:'복합형이라 건성용으로 안내드렸어요. 지성용도 볼 수 있습니다.'
-  },
-  products:[
-    {sku:'MDM-SHP-DRY',name:'머드마스타 샴푸 건성',scalpType:'dry',
-     role:'매일 쓰는 기본',freq:'데일리',
-     options:[{label:'300ml',price:35000},{label:'1000ml',price:80000}]},
-    {sku:'MDM-SHP-OIL',name:'머드마스타 샴푸 지성',scalpType:'oily',
-     role:'매일 쓰는 기본',freq:'데일리',
-     options:[{label:'300ml',price:35000},{label:'1000ml',price:83000}]},
-    {sku:'MDM-PCK-DRY',name:'머드마스타 팩 건성',scalpType:'dry',
-     role:'주 1~2회 깊게 비우는 단계',freq:'주 1~2회',
-     options:[{label:'300g',price:45000},{label:'1000g',price:120000}]},
-    {sku:'MDM-PCK-OIL',name:'머드마스타 팩 지성',scalpType:'oily',
-     role:'주 1~2회 깊게 비우는 단계',freq:'주 1~2회',
-     options:[{label:'300g',price:45000},{label:'1000g',price:120000}]},
-    {sku:'MDM-GEL',name:'머드마스타 핑크클레이 젤',scalpType:'all',
-     role:'모공 속 노폐물을 흡착하고 시원하게 마무리',freq:'답답할 때',
-     options:[{label:'150ml',price:36000}]},
-    {sku:'MDM-BUNDLE-DRY',name:'샴푸 + 팩 (건성)',scalpType:'dry',bundle:true,
-     role:'매일 샴푸 + 주 1~2회 팩',freq:'같이 쓰는 조합',
-     options:[{label:'300ml + 300g',price:80000}]},
-    {sku:'MDM-BUNDLE-OIL',name:'샴푸 + 팩 (지성)',scalpType:'oily',bundle:true,
-     role:'매일 샴푸 + 주 1~2회 팩',freq:'같이 쓰는 조합',
-     options:[{label:'300ml + 300g',price:80000}]}
-  ],
-  highlights:[
-    {n:'핑크 클레이',l:'피지·노폐물 흡착',d:'천연 클레이가 모공 속 피지와 각질을 끌어내 두피를 정돈해 줍니다.'},
-    {n:'씨-실트',l:'해양 미네랄 보습',d:'미네랄·산소·황이 풍부한 심해 퇴적물로 피부 보습과 결 정돈을 돕습니다.'},
-    {n:'헤마틴',l:'모발 볼륨감',d:'모발에 힘과 윤기를 더해 볼륨감 있는 연출을 돕습니다.'},
-    {n:'하이드롤라이즈드실크',l:'탄력 · 정전기 관리',d:'실크 단백질이 모발에 보습을 주어 건조로 인한 정전기를 줄여줍니다.'},
-    {n:'씨트릭애씨드',l:'두피 정돈',d:'과일에서 추출한 천연 성분으로 사용 후 산뜻하게 마무리해 줍니다.'},
-    {n:'7가지 허브 추출물',l:'진정 · 산뜻함',d:'두피 보습과 산뜻한 마무리를 돕습니다.'},
-    {n:'편백나무 오일',l:'편안한 향',d:'은은한 편백 향으로 사용하는 동안 기분을 정돈해 줍니다.'}
-  ],
-  routine:{
-    week:[['월','S'],['화','S'],['수','S'],['목','P'],['금','S'],['토','S'],['일','P']],
-    legend:'S = 샴푸(매일) · P = 팩(주 1~2회)',
-    items:[['샴푸','매일'],['팩','주 1~2회'],['핑크클레이 젤','두피가 답답하게 느껴질 때']],
-    caution:['두피에 상처나 트러블이 있을 때는 사용을 피해주세요.',
-             '건성용과 지성용을 번갈아 쓰지 마세요. 한 가지로 꾸준히 쓰셔야 합니다.']
-  },
-  faq:[
-    {q:'매일 써도 되나요?',a:'샴푸는 매일, 팩은 주 1~2회를 권합니다. 팩을 자주 쓰면 오히려 두피가 건조해집니다.'},
-    {q:'쓰던 샴푸는 그대로 써도 되나요?',a:'머드마스타 샴푸로 바꿔서 쓰시는 걸 권합니다. 팩만 쓰실 경우에는 기존 샴푸를 그대로 쓰셔도 됩니다.'},
-    {q:'건성인지 지성인지 모르겠어요.',a:'위쪽 두피 타입 테스트를 해보세요. 5문항이고 1분이면 끝납니다. 그래도 애매하시면 건성용으로 시작하시는 걸 권합니다.'},
-    {q:'염색이나 펌 직후에 써도 되나요?',a:'[ 확인 후 입력 ]'},
-    {q:'언제쯤 달라지나요?',a:'개인차가 있습니다. 두피는 최소 4주 이상 꾸준히 보셔야 변화를 느끼실 수 있습니다.'}
-  ],
-  crossLink:{to:'merwin',text:'두피는 정리됐는데 머리카락이 푸석하다면'}
-},
-{
-  id:'merwin', name:'메르윈', role:'모발', orderPrefix:'MRW',
-  color:'#4A4A52', colorLight:'#F1F1F3',
-  tagline:'살롱에서 하던 4단계를 집에서',
-  tags:['모발 트리트먼트','살롱 시술용','4종 세트'],
-  videoUrl:'',
-  comment:[
-    '펌이나 염색을 자주 하시고, 끝이 부스스하고 힘이 없어진 분들에게 권합니다.',
-    '시술할 때마다 모발에서 빠져나가는 게 있는데, 그게 한 가지가 아니에요. 단백질도, 수분도, 큐티클도 같이 빠집니다.',
-    '그래서 하나만 채우면 티가 안 납니다. 메르윈은 그 네 가지를 순서대로 채우는 구성이고, 저는 살롱에서 쓰던 걸 그대로 씁니다.',
-    '다만 두피 쪽이 먼저 고민이라면 이건 나중입니다. 이건 모발용이에요.'
-  ],
-  setComposition:[
-    {c:'K',n:'케라틴',f:'단백질',for:'힘이 없고 잘 끊어진다'},
-    {c:'L',n:'LPP',f:'탄력 · 윤기',for:'처지고 윤기가 없다'},
-    {c:'G',n:'G-워터',f:'수분',for:'건조하고 푸석하다'},
-    {c:'C',n:'CMC',f:'큐티클',for:'엉키고 결이 거칠다'}
-  ],
-  usesPerSet:{min:7,max:15,perUseMin:12000,perUseMax:25700},
-  products:[
-    {sku:'MRW-SET',name:'메르윈 리턴 클리닉 세트',scalpType:'all',
-     role:'K + L + G + C 4종 구성',freq:'시술 후 · 주기적',
-     options:[{label:'200ml(g)',price:180000}]}
-  ],
-  detail:[
-    {t:'메르윈 K (케라틴) — 힘 없고 끊어지는 모발에',items:[
-      {n:'가수분해 케라틴 · 아미노산',l:'모발과 동일한 13종 아미노산',d:'모발에 힘과 탄력을 더하고, 하이드록시 키토산이 유사 큐티클을 형성해 내부 단백질과 천연보습인자가 빠져나가지 않도록 큐티클을 감싸줍니다.'},
-      {n:'시스틴 케라틴',l:'침투력 · 무취',d:'모발 단백질의 80%를 차지하는 시스테인 단백질을 백금 성분으로 안정화했습니다. 모발과 유사해 침투력이 우수하고 케라틴 특유의 냄새가 없습니다.'}]},
-    {t:'메르윈 L (LPP) — 탄력과 윤기가 필요할 때',items:[
-      {n:'트리플 PPT',l:'탄력 · 윤기',d:'실크 + 콜라겐 + 흑진주를 가수분해한 단백질이 손상된 모발 사이에 침투해 탄력과 윤기를 더해줍니다.'},
-      {n:'트리플 오일',l:'촉촉한 마무리',d:'아보카도 + 올리브 + 아르간 3종 식물 오일이 수분 증발을 막아 촉촉한 모발을 유지시켜 줍니다. 소량으로도 충분히 사용됩니다.'}]},
-    {t:'메르윈 G (G-워터) — 건조하고 푸석한 모발에',items:[
-      {n:'라멜라 액정구조',l:'균일한 침투',d:'유수분 배열이 규칙적으로 정렬되어 유효 성분이 모발 전체에 고르게 침투하도록 돕습니다.'},
-      {n:'히알루론산',l:'높은 보습력',d:'수분 보유력이 뛰어나 건조하고 손상된 모발을 보호하고, 세척 후에도 모발에 남아 촉촉함을 유지해 줍니다.'},
-      {n:'글루코실 트레할로스',l:'수분 유지 · 큐티클 정돈',d:'옥수수 유래 수분 유지 성분입니다. 분자가 작아 침투성이 높고, 들뜬 큐티클 사이로 침투해 결을 정돈합니다.'},
-      {n:'아미노산',l:'탄력 · 볼륨',d:'11종의 아미노산을 포함하며, 체내에서 합성되지 않는 중성 아미노산이 들어 있어 모발을 더 탄력 있게 만들어 줍니다.'}]},
-    {t:'메르윈 C (CMC) — 엉키고 거친 결에',items:[
-      {n:'나노 CMC',l:'세포막 복합체',d:'건조한 모발에 CMC를 보충해 보수력을 높이고 촉촉한 윤기를 더합니다. 큐티클 사이를 메워 들뜸과 엉킴을 줄이고, 모발 내부의 수분 통로를 만들어 건조함을 막아줍니다.'}]}
-  ],
-  routine:{
-    order:'K → L → G → C',
-    caution:['두피에는 바르지 마세요. 모발용입니다.',
-             '순서를 지켜주세요. 하나만 쓰면 효과가 반감됩니다.']
-  },
-  faq:[
-    {q:'한 세트로 몇 번 쓸 수 있나요?',pinned:true,
-     a:'머리 기장에 따라 <b>7~15회</b>입니다. 단발에 가까우면 15회 정도, 허리까지 오는 긴 머리면 7회 정도 쓰십니다. 회당 1만 2천 원대부터인 셈이에요.'},
-    {q:'4종을 다 써야 하나요?',a:'네, 순서대로 쓰는 구성입니다. 하나만 쓰면 효과가 반감됩니다.'},
-    {q:'4종을 섞어서 발라도 되나요?',a:'[ 확인 후 입력 ]'},
-    {q:'살롱용인데 집에서 써도 되나요?',a:'네. 사용법은 영상에서 자세히 보여드립니다.'},
-    {q:'머드마스타랑 같이 써도 되나요?',a:'네. 머드마스타는 두피, 메르윈은 모발이라 역할이 겹치지 않습니다.'},
-    {q:'낱개로도 파나요?',a:'현재는 세트로만 판매합니다.'}
-  ],
-  crossLink:{to:'mudmasta',text:'모발은 채웠는데 두피가 개운하지 않다면'}
-}
-];
-
-/* A3-1 간단 체크 */
-const CHECK1 = [
-  {t:'감고 하루만 지나도 두피가 개운하지 않다', g:'scalp'},
-  {t:'두피가 가렵거나 각질이 보인다', g:'scalp'},
-  {t:'펌이나 염색을 3개월에 한 번 이상 한다', g:'hair'},
-  {t:'머리 끝이 갈라지고 힘이 없다', g:'hair'}
-];
-
-/* A3-2 두피 타입 테스트 — 만다윤 검수본 */
-const TEST = [
-  {q:'머리를 감고 난 뒤 두피 느낌은 어떤가요?', a:[
-    {t:'금방 당기거나 건조한 느낌이 든다', dry:2, oily:0},
-    {t:'처음에는 산뜻하지만 반나절 안에 유분감이 느껴진다', dry:0, oily:2},
-    {t:'특별히 불편한 느낌이 없다', dry:0, oily:0}]},
-  {q:'머리를 감은 다음 날 아침, 모근 상태는 어떤가요?', a:[
-    {t:'유분감은 적지만 두피나 모발이 푸석하게 느껴진다', dry:2, oily:0},
-    {t:'모근이 뭉치거나 머리가 쉽게 가라앉는다', dry:0, oily:2},
-    {t:'어느 쪽에도 가깝지 않다', dry:0, oily:0}]},
-  {q:'눈에 보이는 각질은 주로 어떤 모습인가요?', a:[
-    {t:'작고 하얀 가루처럼 떨어진다', dry:1, oily:0},
-    {t:'유분감과 함께 들러붙거나 뭉쳐 보인다', dry:0, oily:1},
-    {t:'각질이 거의 없거나 구분하기 어렵다', dry:0, oily:0}]},
-  {q:'오후가 되었을 때 두피 상태는 어떤가요?', a:[
-    {t:'건조하거나 당기는 느낌이 더 신경 쓰인다', dry:1, oily:0},
-    {t:'번들거림·답답함·유분감이 더 신경 쓰인다', dry:0, oily:1},
-    {t:'두 가지가 모두 느껴지거나 큰 변화가 없다', dry:0, oily:0}]},
-  {q:'어느 환경에서 두피 불편함이 더 심해지나요?', a:[
-    {t:'겨울철이나 건조한 실내', dry:1, oily:0},
-    {t:'여름철이나 덥고 습한 환경', dry:0, oily:1},
-    {t:'계절과 상관없이 비슷하다', dry:0, oily:0}]}
-];
-
-/* =========================================================
-   2. 상태 & 유틸
-   ========================================================= */
-const S = {
-  brand:null, scalpType:null, isCombined:false,
-  checked:[], testStep:0, testAns:[], concern:'',
-  cart:[],            // 담은 상품 (브랜드 탭을 바꿔도 유지됩니다)
-  keep:{}             // 이름·연락처·주소 등 재입력 방지용
-};
-const $  = (s,r)=>(r||document).querySelector(s);
-const $$ = (s,r)=>[...(r||document).querySelectorAll(s)];
-const won = n=>n.toLocaleString('ko-KR')+'원';
-const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const brandOf = id=>BRANDS.find(b=>b.id===id)||BRANDS[0];
-const params = new URLSearchParams(location.search);
-
-function track(ev,data){
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(Object.assign({event:ev},data||{}));
-  if(typeof gtag==='function') gtag('event',ev,data||{});
-}
-/* 안전한 스크롤 — 요소가 없거나 구형 환경이어도 뒤 코드가 중단되지 않게 */
-function go(sel,opt){
-  const el = typeof sel==='string' ? $(sel) : sel;
-  if(el && typeof el.scrollIntoView==='function') el.scrollIntoView(opt);
-}
-function setAccent(b){
-  document.documentElement.style.setProperty('--accent', b?b.color:'var(--mdy)');
-  document.documentElement.style.setProperty('--accent-light', b?b.colorLight:'#EDF1EE');
-}
-function source(){
-  const s = params.get('utm_source');
-  if(s) return s;
-  if(document.referrer.includes('youtube')) return '유튜브';
-  return document.referrer ? '기타' : '직접유입';
-}
-
-/* =========================================================
-   3. A3-1 간단 체크
-   ========================================================= */
-function renderCheck1(){
-  $('#checkList').innerHTML = CHECK1.map((c,i)=>
-    `<label class="check-item" data-i="${i}">
-       <input type="checkbox" data-g="${c.g}"><span>${esc(c.t)}</span>
-     </label>`).join('');
-  $$('#checkList .check-item').forEach(el=>{
-    const cb = $('input',el);
-    cb.addEventListener('change',()=>{
-      el.classList.toggle('on',cb.checked);
-      $('#checkSubmit').disabled = !$$('#checkList input:checked').length;
-    });
-  });
-}
-function submitCheck1(){
-  const sel = $$('#checkList input:checked');
-  const scalp = sel.filter(i=>i.dataset.g==='scalp').length;
-  const hair  = sel.filter(i=>i.dataset.g==='hair').length;
-  S.checked = sel.map(i=>i.closest('.check-item').textContent.trim());
-  S.concern = S.checked.join(' / ');
-  $('#leadConcern').value = S.concern;
-  track('check_complete',{scalp_count:scalp,hair_count:hair});
-
-  let html='';
-  if(scalp>0 && hair>0){
-    html = card('둘 다 필요합니다','두피와 모발을 같이 봐야 하는 상태예요. <b>두피부터</b> 잡는 게 순서입니다.',
-      [['두피 타입 테스트 하기','test','btn-primary'],['메르윈 먼저 보기','merwin','btn-outline']]);
-  }else if(scalp>0){
-    html = card('두피 환경부터 정리할 단계입니다','건성이냐 지성이냐에 따라 써야 할 게 달라집니다. 1분이면 확인됩니다.',
-      [['두피 타입 테스트 하기','test','btn-primary']]);
-  }else if(hair>0){
-    html = card('두피보다 모발 손상이 먼저입니다','시술로 빠져나간 성분을 채워줄 때입니다.',
-      [['메르윈 보러가기','merwin','btn-primary']]);
-  }else{
-    html = card('지금은 나쁘지 않아요','유지가 중요합니다. 관리를 시작하실 때 알려드릴까요?',
-      [['알림 신청하기','apply','btn-outline']]);
-  }
-  $('#check1Result').innerHTML = html;
-  bindResultActions();
-  go('#check1Result',{block:'center'});
-}
-function card(title,body,actions){
-  return `<div class="result"><h3>${title}</h3><p class="mt8">${body}</p>
-    <div class="result-actions">${actions.map(a=>
-      `<button class="btn ${a[2]}" data-go="${a[1]}">${a[0]}</button>`).join('')}</div></div>`;
-}
-function bindResultActions(){
-  $$('[data-go]').forEach(b=>{
-    if(b.dataset.bound) return; b.dataset.bound='1';
-    b.addEventListener('click',()=>{
-      const g=b.dataset.go;
-      if(g==='test') startTest();
-      else if(g==='apply') go('#apply');
-      else if(g==='retest'){ $('#testResult').innerHTML=''; startTest(); }
-      else if(g==='dry'||g==='oily'){ selectBrand('mudmasta',g,S.isCombined); }
-      else selectBrand(g);
-    });
-  });
-}
-
-/* =========================================================
-   4. A3-2 두피 타입 테스트
-   ========================================================= */
-function startTest(){
-  S.testStep=0; S.testAns=[];
-  $('#step1').classList.add('hidden');
-  $('#testWrap').classList.remove('hidden');
-  $('#testResult').innerHTML='';
-  renderTest();
-  go('#check');
-  track('test_start');
-}
-function renderTest(){
-  const q = TEST[S.testStep];
-  $('#testCount').textContent = (S.testStep+1)+' / '+TEST.length;
-  $('#testBar').style.width = ((S.testStep+1)/TEST.length*100)+'%';
-  $('#testQ').textContent = 'Q'+(S.testStep+1)+'. '+q.q;
-  $('#testOpts').innerHTML = q.a.map((o,i)=>
-    `<label class="opt${S.testAns[S.testStep]===i?' on':''}" data-i="${i}">
-       <input type="radio" name="q${S.testStep}" ${S.testAns[S.testStep]===i?'checked':''}>
-       <span>${esc(o.t)}</span></label>`).join('');
-  /* label을 클릭하면 내부 radio에도 click이 합성되어 label 핸들러가 2번 발화합니다.
-     그러면 문항이 2칸씩 넘어가므로, click이 아니라 input의 change에 바인딩합니다. */
-  let locked = false;
-  $$('#testOpts .opt').forEach(el=>{
-    $('input',el).addEventListener('change',()=>{
-      if(locked) return; locked = true;
-      S.testAns[S.testStep] = +el.dataset.i;
-      $$('#testOpts .opt').forEach(x=>x.classList.remove('on'));
-      el.classList.add('on');
-      setTimeout(()=>{
-        if(S.testStep < TEST.length-1){ S.testStep++; renderTest(); }
-        else finishTest();
-      },180);
-    });
-  });
-  $('#testPrev').style.visibility = S.testStep? 'visible':'hidden';
-}
-function finishTest(){
-  let dry=0, oily=0, allC=true;
-  S.testAns.forEach((ai,qi)=>{
-    const o = TEST[qi].a[ai];
-    dry+=o.dry; oily+=o.oily;
-    if(o.dry||o.oily) allC=false;
-  });
-  const diff = dry-oily;
-  let type, html;
-
-  if(diff>=2){
-    type='dry'; S.isCombined=false;
-    html = card('건성에 가깝습니다',
-      '두피가 건조한 편이에요. <b>건성용</b>으로 시작하시는 걸 권합니다.',
-      [['건성용 보러가기','dry','btn-primary']]);
-  }else if(diff<=-2){
-    type='oily'; S.isCombined=false;
-    html = card('지성에 가깝습니다',
-      '피지가 쌓이는 편이에요. <b>지성용</b>을 권합니다.',
-      [['지성용 보러가기','oily','btn-primary']]);
-  }else if(allC){
-    type='dry'; S.isCombined=true;
-    html = card('지금은 뚜렷한 불편이 없으신 것 같습니다',
-      '두피 상태가 나쁘지 않다는 뜻이에요. 관리를 시작하신다면 <b>건성용</b>으로 무난하게 시작하시면 됩니다.',
-      [['건성용 보기','dry','btn-primary'],['알림 신청','apply','btn-outline']]);
-  }else{
-    type='dry'; S.isCombined=true;
-    html = card('복합형에 가까우십니다',
-      '두피가 한쪽으로 뚜렷하게 기울지 않은 상태예요. 나쁜 건 아닙니다.<br><br>'+
-      '굳이 고르셔야 한다면 <b>건성용</b>을 권합니다. 30대 이후로는 대부분 두피가 건조해지는 쪽으로 가거든요. '+
-      '다만 여름에 유분감이 많이 느껴지신다면 지성용도 괜찮습니다.',
-      [['건성용 보기','dry','btn-primary'],['지성용 보기','oily','btn-outline']]);
-  }
-  S.scalpType = type;
-  const label = S.isCombined ? '복합형' : (type==='dry'?'건성':'지성');
-  S.concern = (S.concern? S.concern+' / ':'') + '두피타입:'+label;
-  $('#leadConcern').value = S.concern;
-
-  $('#testResult').innerHTML = html +
-    `<p class="small center mt12">이건 참고용이에요. 확신이 안 서면 문의 주세요.</p>
-     <div class="center"><button class="link-btn" data-go="retest">다시 해보기</button></div>`;
-  bindResultActions();
-  go('#testResult',{block:'center'});
-  track('test_complete',{scalp_type:type,combined:S.isCombined,dry_score:dry,oily_score:oily});
-}
-
-/* =========================================================
-   5. 브랜드 탭
-   ========================================================= */
-function renderTabs(){
-  $('#tabs').innerHTML = BRANDS.map(b=>
-    `<button class="tab" data-b="${b.id}">${esc(b.name)}<small>${esc(b.role)}</small></button>`).join('');
-  $$('#tabs .tab').forEach(t=>t.addEventListener('click',()=>{
-    track('brand_tab_click',{from_brand:S.brand,to_brand:t.dataset.b});
-    selectBrand(t.dataset.b,null,false,true);
-  }));
-}
-function selectBrand(id,type,combined,fromTab){
-  const b = brandOf(id);
-  S.brand = b.id;
-  if(type) S.scalpType = type;
-  if(combined!==undefined && combined!==null) S.isCombined = combined;
-  if(b.scalpTypeFilter && !S.scalpType) S.scalpType = b.scalpTypeFilter.default;
-
-  setAccent(b);
-  $$('#tabs .tab').forEach(t=>t.classList.toggle('on',t.dataset.b===b.id));
-  renderBrand(b);
-
-  /* file:// 로 열면 replaceState가 SecurityError를 냅니다.
-     주소창 갱신은 부가 기능이므로 실패해도 나머지가 멈추면 안 됩니다. */
-  try{
-    const q = new URLSearchParams(location.search);
-    q.set('b',b.id);
-    if(b.scalpTypeFilter) q.set('type',S.scalpType); else q.delete('type');
-    history.replaceState(null,'','?'+q.toString());
-  }catch(e){ /* 로컬 파일 환경 — 무시 */ }
-
-  updateMobileCta();
-  if(!fromTab) setTimeout(()=>go('#brands'),60);
-  track('product_view',{brand:b.id,scalp_type:S.scalpType||''});
-}
-
-/* =========================================================
-   6. 브랜드 영역 렌더링
-   ========================================================= */
-function visibleProducts(b){
-  if(!b.scalpTypeFilter) return b.products;
-  return b.products.filter(p=>p.scalpType==='all'||p.scalpType===S.scalpType);
-}
-function renderBrand(b){
-  let h = `<section id="brandTop"><div class="wrap">`;
-
-  /* B1 인트로 */
-  h += `<div class="brand-head">
-      <div class="brand-mark">${esc(b.name.slice(0,2))}</div>
-      <div><h2 style="margin-bottom:2px">${esc(b.name)}</h2>
-      <p class="small">${esc(b.tagline)}</p></div></div>
-    <div class="mt16">${b.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`;
-
-  /* B2 만다윤 코멘트 */
-  h += `<div class="quote">${b.comment.map(c=>`<p>${esc(c)}</p>`).join('')}
-      <div class="who"><i></i>만다윤 · 30년차 미용전문가</div></div>`;
-
-  /* 타입 토글 */
-  if(b.scalpTypeFilter){
-    const f=b.scalpTypeFilter;
-    h += `<div class="type-box"><h3>내 두피는?</h3>
-      <div class="type-btns">${f.options.map(o=>
-        `<button class="type-btn${S.scalpType===o.id?' on':''}" data-type="${o.id}">
-           <b>${esc(o.label)}</b><small>${esc(o.hint)}</small></button>`).join('')}</div>
-      ${S.isCombined?`<div class="notice">${esc(f.combinedNotice)}</div>`:''}
-      <div class="center mt12"><button class="link-btn" data-go="test">잘 모르겠어요 · 두피 타입 테스트 (5문항)</button></div>
-    </div>`;
-  }
-
-  /* 메르윈 세트 구성 */
-  if(b.setComposition){
-    h += `<div class="mt32"><h3>4단계로 채웁니다</h3>
-      <p class="small">네 가지가 다 들어 있습니다. 내 모발이 어디에 해당하는지 고민하지 않으셔도 됩니다.</p>
-      <div class="card mt16" style="padding:6px 18px">
-      ${b.setComposition.map((s,i)=>
-        `<div class="setstep"><i>${i+1}</i><div>
-           <b>${esc(s.c)} · ${esc(s.n)}</b>
-           <small>${esc(s.f)} 보충 — ${esc(s.for)}</small></div></div>`).join('')}
-      </div></div>`;
-  }
-
-  /* B3 제품 */
-  h += `<div class="mt32"><h3>제품</h3></div>`;
-  visibleProducts(b).forEach(p=>{
-    h += `<div class="${p.bundle?'bundle':'prod'}">
-      <div class="prod-top">
-        <div><div class="prod-name">${esc(p.name)}</div>
-        <div class="prod-role">${esc(p.role)}</div></div>
-        <span class="freq">${esc(p.freq)}</span>
-      </div>
-      ${p.options.map((o,oi)=>`<div class="price-row">
-        <span class="opt-label">${esc(o.label)}</span>
-        <b class="opt-price">${won(o.price)}</b>
-        <button class="btn-add" data-add="${p.sku}" data-oi="${oi}">담기</button>
-      </div>`).join('')}
-      ${p.bundle?`<p class="small mt8">매일은 샴푸로, 주 1~2회는 팩으로. 같이 쓰는 게 순서입니다.</p>`:''}
-    </div>`;
-  });
-
-  /* 메르윈 가격 근거 */
-  if(b.usesPerSet){
-    const u=b.usesPerSet;
-    h += `<div class="pricebox">
-      <div class="big">한 세트로 ${u.min}~${u.max}회</div>
-      <div class="per">회당 약 ${won(u.perUseMin)} ~ ${won(u.perUseMax)}</div>
-      <p class="small mt12">머리 기장에 따라 편차가 큽니다. 단발에 가까우면 ${u.max}회 정도,<br>허리까지 오는 긴 머리면 ${u.min}회 정도 쓰십니다.</p>
-    </div>`;
-  }
-
-  /* 성분 */
-  if(b.highlights){
-    h += `<div class="mt32"><h3>어떤 성분이 들어있나요</h3>
-      <div class="mt12">${b.highlights.map(x=>
-        `<details><summary>${esc(x.n)} · ${esc(x.l)}</summary><div class="a">${esc(x.d)}</div></details>`).join('')}
-      </div></div>`;
-  }
-  if(b.detail){
-    h += `<div class="mt32"><h3>4종 각각 뭐가 들었나요</h3>
-      <div class="mt12">${b.detail.map(d=>
-        `<details><summary>${esc(d.t)}</summary><div class="a">${d.items.map(i=>
-          `<p style="margin-bottom:10px"><b>${esc(i.n)}</b> · ${esc(i.l)}<br>${esc(i.d)}</p>`).join('')}</div></details>`).join('')}
-      </div></div>`;
-  }
-
-  /* B4 루틴 */
-  h += `<div class="mt32"><h3>어떻게 쓰나요</h3>`;
-  if(b.routine.week){
-    h += `<div class="week">${b.routine.week.map(d=>
-      `<div>${d[0]}<b>${d[1]}</b></div>`).join('')}</div>
-      <p class="small mt8">${esc(b.routine.legend)}</p>
-      <div class="card mt16" style="padding:6px 18px">
-      ${b.routine.items.map(i=>
-        `<div class="price-row" style="border-top:1px solid var(--line)"><span>${esc(i[0])}</span><b class="small">${esc(i[1])}</b></div>`).join('')}
-      </div>`;
-  }else{
-    h += `<div class="card mt12 center"><b style="font-size:19px;letter-spacing:.04em">${esc(b.routine.order)}</b>
-      <p class="small mt8">순서대로 4단계</p></div>`;
-  }
-  h += b.videoUrl
-    ? `<a class="btn btn-outline btn-block mt12" href="${esc(b.videoUrl)}" target="_blank" rel="noopener" data-video="${b.id}">사용법 영상 보기</a>`
-    : `<p class="small mt12">자세한 사용법은 영상에서 직접 보여드립니다. <b>[ 영상 링크 입력 필요 ]</b></p>`;
-  h += `<div class="caution">${b.routine.caution.map(c=>`<p>⚠ ${esc(c)}</p>`).join('')}</div></div>`;
-
-  /* B5 FAQ */
-  h += `<div class="mt32"><h3>${esc(b.name)} 자주 묻는 질문</h3><div class="mt12">
-    ${b.faq.map(f=>`<details${f.pinned?' open class="pinned"':''}>
-      <summary>${esc(f.q)}</summary><div class="a">${f.a}</div></details>`).join('')}
-    </div></div>`;
-
-  /* B6 주문 */
-  h += renderOrder(b);
-
-  /* B7 크로스링크 */
-  const to = brandOf(b.crossLink.to);
-  h += `<div class="card mt32 center"><p>${esc(b.crossLink.text)}</p>
-    <button class="btn btn-outline mt12" data-cross="${to.id}">${esc(to.name)} 보러가기</button></div>`;
-
-  h += `</div></section>`;
-  $('#brandContent').innerHTML = h;
-  bindBrand(b);
-}
-
-/* =========================================================
-   7. 주문 폼
-   ========================================================= */
-function renderOrder(b){
-  const ps = visibleProducts(b);
-  return `<div class="mt40" id="order"><h2>주문하기</h2>
-  <p class="lead">${PAYMENT_CONFIG.method==='bank'?'계좌이체로 주문하실 수 있습니다. 여러 개를 담아 한 번에 주문하실 수 있어요.':'카드·간편결제로 주문하실 수 있습니다.'}</p>
-
-  <h3 class="mt24">담은 상품</h3>
-  <div class="cart" id="cart"></div>
-
-  <div class="adder">
-    <h3>상품 더 담기</h3>
-    <div class="field"><label>상품</label>
-      <select id="oProduct">${ps.map(p=>`<option value="${p.sku}">${esc(p.name)}</option>`).join('')}</select></div>
-    <div class="field"><label>용량</label><select id="oOption"></select></div>
-    <div class="field"><label>수량</label>
-      <div class="qty"><button type="button" data-q="-">−</button>
-      <input type="text" id="oQty" value="1" readonly>
-      <button type="button" data-q="+">+</button></div></div>
-    <button type="button" class="btn btn-outline btn-block mt12" id="oAdd">＋ 담기</button>
-  </div>
-
-  <form id="orderForm" data-endpoint="${esc(ENDPOINT)}" class="mt24" novalidate>
-    <div class="row2">
-      <div class="field"><label for="oName">주문자명 <em>*</em></label><input type="text" id="oName" autocomplete="name" required></div>
-      <div class="field"><label for="oPhone">연락처 <em>*</em></label><input type="tel" id="oPhone" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" required></div>
-    </div>
-
-    <div class="field"><label for="oZip">우편번호 <em>*</em></label>
-      <div class="addr-row">
-        <input type="text" id="oZip" inputmode="numeric" autocomplete="postal-code" placeholder="주소 검색을 눌러주세요" readonly required>
-        <button type="button" class="btn btn-outline" id="oZipBtn">주소 검색</button>
-      </div>
-    </div>
-    <div class="field"><label for="oAddr1">기본 주소 <em>*</em></label>
-      <input type="text" id="oAddr1" autocomplete="address-line1" required placeholder="주소 검색을 누르면 자동으로 입력됩니다">
-      <p class="small mt8" id="oAddrHint">검색이 안 되면 이 칸에 직접 입력하셔도 됩니다.</p></div>
-    <div class="field"><label for="oAddr2">상세 주소 <em>*</em></label><input type="text" id="oAddr2" autocomplete="address-line2" placeholder="동·호수 등 나머지 주소를 적어주세요" required></div>
-
-    ${PAYMENT_CONFIG.method==='bank'?`
-    <div class="field"><label for="oDepositor">입금자명</label>
-      <input type="text" id="oDepositor" placeholder="주문자명과 연락처를 입력하면 자동으로 만들어집니다">
-      <p class="small mt8">가족 명의 등 <b>다른 이름으로 입금하실 거면 여기를 고쳐주세요.</b></p></div>`:''}
-    <div class="field"><label for="oReceipt">현금영수증</label>
-      <select id="oReceipt"><option value="신청안함">신청 안 함</option>
-        <option value="소득공제">소득공제 (휴대폰번호)</option>
-        <option value="지출증빙">지출증빙 (사업자번호)</option></select></div>
-    <div class="field hidden" id="oReceiptNoWrap"><label for="oReceiptNo">발급 번호</label><input type="text" id="oReceiptNo" inputmode="numeric" placeholder="- 없이 숫자만"></div>
-
-    <details class="mt16"><summary>배송 · 교환 · 반품 · 입금 안내</summary><div class="a">
-      · 입금 확인 후 영업일 기준 1~3일 이내 발송됩니다.<br>
-      · 단순 변심 교환·반품은 수령일로부터 7일 이내 가능하며 왕복 배송비는 고객 부담입니다.<br>
-      · <b>개봉하여 사용한 화장품은 교환·반품이 어렵습니다.</b><br>
-      · 제품 하자·오배송의 경우 배송비를 부담하지 않으셔도 됩니다.
-    </div></details>
-    <details><summary>개인정보 수집·이용 안내</summary><div class="a">
-      · 수집 항목: 이름, 연락처, 주소, 입금자명, (선택) 현금영수증 번호<br>
-      · 수집 목적: 주문 처리, 배송, 고객 응대<br>
-      · 보유 기간: 전자상거래법에 따라 거래 기록 5년 보관 후 파기<br>
-      · 동의를 거부하실 수 있으나, 이 경우 주문이 불가합니다.<br>
-      · 자세한 내용은 <a href="#" data-doc="privacy"><b>개인정보처리방침</b></a>을 확인해 주세요.
-    </div></details>
-
-    <label class="agree"><input type="checkbox" id="oAgree1" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="#" data-doc="privacy">전문 보기</a></span></label>
-    <label class="agree"><input type="checkbox" id="oAgree2" required><span>[필수] 배송·교환·반품 안내를 확인했습니다.</span></label>
-
-    ${b.scalpTypeFilter?`<div class="confirm-line" id="oConfirm"></div>`:''}
-    <button type="submit" class="btn btn-primary btn-block mt16" id="oSubmit">주문하기</button>
-    <p class="small center mt12" id="oMsg"></p>
-  </form>
-  <div id="orderDone"></div></div>`;
-}
-
-/* ---------- 장바구니 ---------- */
-function cartTotal(){ return S.cart.reduce((a,c)=>a+c.price*c.qty,0); }   // 상품 금액
-function cartQty(){   return S.cart.reduce((a,c)=>a+c.qty,0); }
-function cartSummary(){ return S.cart.map(c=>`${c.name} ${c.option} × ${c.qty}`).join(' / '); }
-function shipFee(){
-  if(!S.cart.length) return 0;
-  if(!SHIPPING.fee) return 0;
-  if(SHIPPING.freeOver && cartTotal() >= SHIPPING.freeOver) return 0;
-  return SHIPPING.fee;
-}
-function grandTotal(){ return cartTotal() + shipFee(); }
-
-function addToCart(item){
-  const k = S.cart.find(c=>c.sku===item.sku && c.option===item.option);
-  if(k) k.qty = Math.min(k.qty+item.qty, 99);
-  else S.cart.push(item);
-  renderCart(); updateMobileCta();
-  toast(`${item.name} ${item.option} 담았습니다`);
-  track('add_to_cart',{brand:item.brandId,sku:item.sku,option:item.option,qty:item.qty});
-}
-function renderCart(){
-  const el = $('#cart'); if(!el) return;
-  if(!S.cart.length){
-    el.innerHTML = `<div class="cart-empty">담은 상품이 없습니다.<br>위에서 상품을 담아주세요.</div>`;
-  }else{
-    const multi = new Set(S.cart.map(c=>c.brandId)).size > 1;
-    el.innerHTML = S.cart.map((c,i)=>`
-      <div class="cart-item">
-        <div class="cart-info">
-          <div class="cart-nm">${esc(c.name)}
-            <small>${esc(c.option)}${multi?' · '+esc(c.brandName):''}</small></div>
-          <div class="cart-pr">${won(c.price)} × ${c.qty} = <b>${won(c.price*c.qty)}</b></div>
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Problem</div>
+          <h2 class="section-title">유행하는 홈케어를 따라 해도 계속 제자리걸음인 이유</h2>
+          <p class="section-desc">
+            두피와 모발 고민이 반복되는 이유는 단순히 “관리를 덜 해서”가 아닐 수 있습니다. 샴푸의 기준부터 다시 잡아야 할 때입니다.
+          </p>
         </div>
-        <div class="cart-ctl">
-          <button type="button" data-act="dec" data-i="${i}" aria-label="수량 줄이기">−</button>
-          <b>${c.qty}</b>
-          <button type="button" data-act="inc" data-i="${i}" aria-label="수량 늘리기">＋</button>
-          <button type="button" class="cart-del" data-act="del" data-i="${i}">삭제</button>
+
+        <div class="pain-grid">
+          <article class="pain-card">
+            <div class="pain-num">1</div>
+            <h3>두피가 자주 가렵고 정수리냄새로 고민이신분</h3>
+            <p>세정력만 강한 샴푸를 사용하면 두피가 .</p>
+          </article>
+          <article class="pain-card">
+            <div class="pain-num">2</div>
+            <h3>모발이 가늘어지고 힘이 없는분</h3>
+            <p>필요한 유분까지 과하게 씻겨 나가면 두피 밸런스가 무너질 수 있습니다.</p>
+          </article>
+          <article class="pain-card">
+            <div class="pain-num">3</div>
+            <h3>두피를 챙기면 모발이 뻣뻣한 분</h3>
+            <p>두피는 개운한데 모발이 뻣뻣하거나, 모발은 부드러운데 두피가 답답한 경험이 있으셨을 겁니다.</p>
+          </article>
+          <article class="pain-card">
+            <div class="pain-num">4</div>
+            <h3>아직도 내 샴푸를 찾지 못한 분</h3>
+            <p>여러 제품을 써봐도 정착하지 못하고 계속 바꾸고 있다면, 이제 기준을 바꿔야 합니다.</p>
+          </article>
         </div>
-      </div>`).join('')
-      + `<div class="cart-line"><span>상품 금액 <span class="small">(${cartQty()}개)</span></span><span>${won(cartTotal())}</span></div>`
-      + `<div class="cart-line"><span>배송비</span><span>${shipFee()?won(shipFee()):'무료'}</span></div>`
-      + (SHIPPING.fee && SHIPPING.freeOver && cartTotal()<SHIPPING.freeOver
-          ? `<div class="cart-line small" style="color:var(--accent)">${won(SHIPPING.freeOver-cartTotal())} 더 담으면 배송비가 무료입니다</div>` : '')
-      + `<div class="cart-sum"><span>결제금액</span><b>${won(grandTotal())}</b></div>`;
-  }
-}
-function toast(msg){
-  const t=$('#toast'); if(!t) return;
-  t.textContent=msg; t.classList.add('on');
-  clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('on'),1800);
-}
+      </div>
+    </section>
 
-function bindBrand(b){
-  /* 타입 토글 */
-  $$('[data-type]').forEach(t=>t.addEventListener('click',()=>{
-    S.scalpType=t.dataset.type; S.isCombined=false;
-    track('scalp_type_select',{type:S.scalpType,source:'manual'});
-    selectBrand(b.id,S.scalpType,false,true);
-  }));
-  /* 제품 카드 담기 — 용량 줄마다 버튼이 따로 있습니다 */
-  $$('[data-add]').forEach(btn=>btn.addEventListener('click',()=>{
-    const p = b.products.find(x=>x.sku===btn.dataset.add); if(!p) return;
-    const o = p.options[+btn.dataset.oi]; if(!o) return;
-    addToCart({sku:p.sku,name:p.name,option:o.label,price:o.price,
-      qty:1,brandId:b.id,brandName:b.name,scalpType:p.scalpType});
-    if(p.bundle) track('bundle_click',{type:S.scalpType});
-    /* 주문 영역의 셀렉트도 방금 담은 것에 맞춰둡니다 */
-    const P=$('#oProduct'), O=$('#oOption');
-    if(P){ P.value=p.sku; syncOptions(); if(O) O.value=o.label; }
-    /* 눌렀다는 걸 버튼 자체로도 알려줍니다 */
-    const t=btn.textContent; btn.textContent='담김 ✓'; btn.disabled=true;
-    setTimeout(()=>{ btn.textContent=t; btn.disabled=false; },900);
-  }));
-  /* 크로스링크 */
-  $$('[data-cross]').forEach(btn=>btn.addEventListener('click',()=>{
-    track('cross_link_click',{from_brand:b.id,to_brand:btn.dataset.cross});
-    selectBrand(btn.dataset.cross);
-  }));
-  /* 영상 */
-  $$('[data-video]').forEach(a=>a.addEventListener('click',()=>track('video_click',{brand:b.id})));
-  bindResultActions();
-  bindOrder(b);
-}
+    <section class="section-tight" id="story">
+      <div class="container story-wrap">
+        <div class="quote-card">
+          <p>이제 다른 샴푸는 못 쓰겠어요.</p>
+          <span>살롱 고객님의 실제 반응에서 시작된 확신</span>
+        </div>
+        <div class="story-copy">
+          <div class="section-kicker">Salon Episode</div>
+          <h2 class="section-title">살롱에서 반복해서 확인한 하나의 분명한 반응</h2>
+          <p>
+            살롱 고객님 중 한 분이 여행지에서 호텔 샴푸를 사용하신 뒤, 머릿결이 너무 뻣뻣해져 고생하신 적이 있었습니다.
+          </p>
+          <p>
+            그런데 집에 돌아와 다시 이 샴푸를 사용하자마자 모발이 부드럽게 정돈되는 느낌을 경험하셨고, 이후 “이제 다른 샴푸는 못 쓰겠어요.”라고 말씀해주셨습니다.
+          </p>
+          <p>
+            이런 반응은 한 번의 우연이 아니었습니다. 수많은 단골 고객님들의 실제 경험, 그리고 미용사로서 성분과 사용감을 까다롭게 살펴본 끝에 제가 7년째 정착한 샴푸. 바로 <strong>머드마스타 샴푸</strong>입니다.
+          </p>
+        </div>
+      </div>
+    </section>
 
-function bindOrder(b){
-  const P=$('#oProduct'), O=$('#oOption'), Q=$('#oQty');
-  if(!P) return;
-  const prodOf = sku => b.products.find(p=>p.sku===sku);
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Why Mud Master</div>
+          <h2 class="section-title">왜 머드마스타 샴푸인가요?</h2>
+          <p class="section-desc">
+            두피는 개운하게, 모발은 부드럽게. 매일 감는 샴푸 하나로 루틴의 시작을 바꿔보세요.
+          </p>
+        </div>
 
-  /* ----- 옵션 셀렉트 ----- */
-  window.syncOptions = function(){
-    const p = prodOf(P.value); if(!p) return;
-    O.innerHTML = p.options.map(o=>`<option value="${esc(o.label)}" data-p="${o.price}">${esc(o.label)} · ${won(o.price)}</option>`).join('');
-    confirmLine();
-  };
-  function confirmLine(){
-    const c = $('#oConfirm'); if(!c || !b.scalpTypeFilter) return;
-    const lb = S.scalpType==='dry'?'건성':'지성';
-    const typed = S.cart.some(x=>x.scalpType && x.scalpType!=='all');
-    c.innerHTML = typed
-      ? `담으신 상품에 <b>${lb}용</b>이 포함되어 있습니다. 타입이 맞는지 한 번만 더 확인해 주세요.`
-      : `주문 내용을 다시 한 번 확인해 주세요.`;
-  }
-  /* 입금자명은 자동으로 만들어주되, 사용자가 고치면 그 값을 존중합니다.
-     (가족 명의 계좌로 입금하는 경우가 흔합니다) */
-  function depositor(){
-    const d=$('#oDepositor'); if(!d) return '';
-    if(d.dataset.edited==='1') return d.value.trim();
-    const n=$('#oName')?.value.trim()||'', p=($('#oPhone')?.value||'').replace(/\D/g,'');
-    d.value = (n && p.length>=4) ? n+p.slice(-4) : '';
-    return d.value;
-  }
-  P.addEventListener('change',()=>{ syncOptions(); track('order_start',{brand:b.id}); });
-  $$('[data-q]').forEach(btn=>btn.addEventListener('click',()=>{
-    let v=+Q.value||1;
-    Q.value = btn.dataset.q==='+' ? Math.min(v+1,99) : Math.max(v-1,1);
-  }));
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">머드팩</div>
+              <h3>자석처럼 노폐물을 끌어당기는 천연 머드 클렌징</h3>
+            </div>
+            <p>
+              두피를 손톱으로 빡빡 문지르지 마세요. 강한 마찰은 오히려 두피를 예민하게 만들 수 있습니다. 머드마스타 샴푸는 천연 머드 성분이 모공 속 미세먼지, 피지, 묵은 각질을 부드럽게 흡착해 지문 롤링만으로도 개운한 클렌징을 도와줍니다.
+            </p>
+          </article>
 
-  /* ----- 담기 ----- */
-  $('#oAdd').addEventListener('click',()=>{
-    const p = prodOf(P.value); if(!p) return;
-    const opt = O.selectedOptions[0]; if(!opt) return;
-    addToCart({
-      sku:p.sku, name:p.name, option:opt.value, price:+opt.dataset.p,
-      qty:+Q.value||1, brandId:b.id, brandName:b.name, scalpType:p.scalpType
-    });
-    Q.value=1; confirmLine();
-  });
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">허브</div>
+              <h3>낮 동안 지친 두피를 위한 식물성 진정 케어</h3>
+            </div>
+            <p>
+              자외선, 외부 자극, 잦은 스타일링으로 두피는 생각보다 쉽게 지칩니다. 병풀, 황금, 녹차, 로즈마리잎 추출물 등 자연 유래 식물성 성분이 예민하게 느껴지는 두피를 부드럽게 케어해줍니다.
+            </p>
+          </article>
 
-  /* ----- 장바구니 수량 조절 / 삭제 (이벤트 위임) ----- */
-  $('#cart').addEventListener('click',e=>{
-    const btn = e.target.closest('button[data-act]'); if(!btn) return;
-    const i = +btn.dataset.i, act = btn.dataset.act;
-    if(!S.cart[i]) return;
-    if(act==='inc') S.cart[i].qty = Math.min(S.cart[i].qty+1,99);
-    else if(act==='dec') S.cart[i].qty = Math.max(S.cart[i].qty-1,1);
-    else if(act==='del') S.cart.splice(i,1);
-    renderCart(); updateMobileCta(); confirmLine();
-  });
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">보습</div>
+              <h3>샴푸만으로도 느껴지는 부드러운 마무리감</h3>
+            </div>
+            <p>
+              좋은 샴푸는 두피만 개운하게 하는 데서 끝나지 않습니다. 보습과 세정의 밸런스를 고려한 배합으로 샴푸 후에도 모발이 과하게 뻣뻣해지지 않고, 한 올 한 올 부드럽게 마무리되는 사용감을 선사합니다.
+            </p>
+          </article>
 
-  /* ----- 주소 검색 ----- */
-  $('#oZipBtn').addEventListener('click',openPostcode);
-  $('#oZip').addEventListener('click',openPostcode);
-  /* 기본주소는 직접 입력이 가능해야 하므로 클릭으로 검색창을 열지 않습니다 */
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon">청량감</div>
+              <h3>감는 순간 기분까지 상쾌해지는 시트러스 향</h3>
+            </div>
+            <p>
+              상큼한 오렌지와 레몬의 시트러스 계열 향에 은은한 멘톨감이 더해져 샴푸하는 내내 산뜻하고 개운한 기분을 느낄 수 있습니다. 매일 반복되는 샴푸 시간이 하루의 피로를 씻어내는 작은 힐링 루틴이 됩니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  /* ----- 입력 유지 (탭을 옮겨도 다시 안 쓰게) ----- */
-  ['oName','oPhone'].forEach(id=>$('#'+id).addEventListener('input',depositor));
-  const dep=$('#oDepositor');
-  if(dep) dep.addEventListener('input',()=>{ dep.dataset.edited='1'; S.keep.oDepositor=dep.value; });
+    <section class="section-tight" id="routine">
+      <div class="container">
+        <div class="routine">
+          <div class="routine-content">
+            <div>
+              <div class="section-kicker" style="color:#f0d29e;">How to Use</div>
+              <h2>여러 번 펌핑하지 마세요.</h2>
+              <p>
+                머드마스타 샴푸는 물처럼 흐르는 묽은 제형이 아닙니다. 쫀쫀하고 밀도 있는 고점도 제형이라 많은 양을 사용할 필요가 없습니다. 단 2번의 펌핑이면 충분합니다.
+              </p>
+            </div>
+            <div class="steps">
+              <div class="step-card">
+                <strong>STEP 1. 애벌 샴푸 — 1펌핑</strong>
+                <span>첫 번째 샴푸로 두피 겉면의 가벼운 노폐물과 유분기를 먼저 걷어냅니다.</span>
+              </div>
+              <div class="step-card">
+                <strong>STEP 2. 본 샴푸 — 1펌핑</strong>
+                <span>두 번째 샴푸에서 더욱 풍성하고 밀도 있는 거품이 올라오며, 두피와 모발을 더욱 개운하게 케어할 수 있습니다.</span>
+              </div>
+              <div class="step-card">
+                <strong>적은 양으로도 충분한 사용감</strong>
+                <span>제품은 아끼고, 살롱 케어 루틴은 더 효과적으로 이어갈 수 있습니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  $('#oReceipt').addEventListener('change',e=>{
-    $('#oReceiptNoWrap').classList.toggle('hidden', e.target.value==='신청안함');
-  });
+    <section class="section" id="final">
+      <div class="container">
+        <div class="final-cta">
+          <h2>두피가 편안해야,<br />모든 헤어 관리가 빛납니다.</h2>
+          <p>
+            좋은 트리트먼트, 비싼 에센스, 열심히 하는 홈케어도 두피가 불편하면 만족스러운 사용감을 느끼기 어렵습니다. 매일 반복되던 건조함, 가려움, 답답함, 뻣뻣함. 이제 샴푸부터 바꿔보세요.
+          </p>
+          <a class="button button-primary" href="#order">지금 주문하기</a>
+          <p class="field-hint" style="margin-top:12px;">입금 확인 후 순차 발송됩니다. 아직 고민 중이라면 <a href="#apply" style="text-decoration:underline;">알림 신청</a>만 해두셔도 좋습니다.</p>
+        </div>
+      </div>
+    </section>
 
-  const KEEP=['oName','oPhone','oZip','oAddr1','oAddr2','oDepositor','oReceipt','oReceiptNo'];
-  KEEP.forEach(id=>{
-    const el=$('#'+id); if(!el) return;
-    if(S.keep[id]!==undefined && S.keep[id]!=='') el.value=S.keep[id];
-    ['input','change'].forEach(ev=>el.addEventListener(ev,()=>{ S.keep[id]=el.value; }));
-  });
-  ['oAgree1','oAgree2'].forEach(id=>{
-    const el=$('#'+id); if(!el) return;
-    if(S.keep[id]) el.checked=true;
-    el.addEventListener('change',()=>{ S.keep[id]=el.checked; });
-  });
-  if(S.keep.oDepositor) dep && (dep.dataset.edited='1');
-  $('#oReceiptNoWrap').classList.toggle('hidden', $('#oReceipt').value==='신청안함');
+    <section class="order-section" id="order">
+      <div class="container order-grid">
+        <div class="order-copy">
+          <div class="section-kicker">Order</div>
+          <h2>머드마스타 샴푸<br />주문하기</h2>
+          <p>
+            주문서를 작성하신 후 안내된 계좌로 입금해주시면, 입금 확인 후 순차 발송됩니다.
+          </p>
+          <div class="order-flow" aria-label="주문 절차">
+            <div>주문서 작성</div>
+            <div>안내된 계좌로 입금 (입금자명 확인 필수)</div>
+            <div>입금 확인 후 영업일 기준 1~3일 내 발송</div>
+            <div>문자/카톡으로 운송장 번호 안내</div>
+          </div>
+        </div>
 
-  depositor(); syncOptions(); renderCart();
+        <div>
+          <div class="form-card" id="orderCard">
+            <!-- 주문서 구글시트 연동 방법
+              1) Google Apps Script 웹앱 URL을 만든 뒤
+              2) 아래 form 태그의 data-endpoint="" 안에 URL을 넣으세요.
+              3) 전송되는 필드는 주문관리 시트 컬럼과 1:1 매핑됩니다.
+                 (orderedAt, orderNo, channel, productName, option, qty, amount,
+                  buyerName, phone, postcode, address, addressDetail, depositorName, cashReceipt, cashReceiptNo)
+              4) 현재는 데모 모드라 제출 시 완료 화면만 표시됩니다.
+            -->
+            <form id="orderForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
+              <div class="option-picker">
+                <div class="field">
+                  <label for="orderProduct">제품 선택</label>
+                  <select id="orderProduct" name="product"></select>
+                </div>
 
-  /* ----- 제출 ----- */
-  $('#orderForm').addEventListener('submit',async e=>{
-    e.preventDefault();
-    const msg=$('#oMsg');
-    const fail=(text,sel)=>{
-      msg.style.color='#C0392B'; msg.textContent=text;
-      const el=$(sel); if(el){ go(el,{block:'center'}); if(!el.readOnly) el.focus(); }
-    };
-    if(!S.cart.length){
-      msg.style.color='#C0392B'; msg.textContent='주문할 상품을 먼저 담아주세요.';
-      go('#cart',{block:'center'}); return;
-    }
-    /* ⚠️ 읽기전용(readonly) 입력칸은 브라우저 기본 검증에서 제외됩니다.
-       우편번호를 비운 채로도 제출이 통과되므로 여기서 직접 확인합니다. */
-    const need=[
-      ['#oName','주문자명을 입력해주세요.'],
-      ['#oPhone','연락처를 입력해주세요.'],
-      ['#oZip','주소 검색으로 우편번호를 입력해주세요.'],
-      ['#oAddr1','기본 주소를 입력해주세요.'],
-      ['#oAddr2','상세 주소를 입력해주세요.']
-    ];
-    for(const [sel,text] of need){
-      if(!$(sel) || !$(sel).value.trim()){ fail(text,sel); return; }
-      /* 연락처는 비어 있는지 확인한 직후에 형식까지 봅니다 (뒤로 미루면 안내 순서가 뒤엉킵니다) */
-      if(sel==='#oPhone' && $(sel).value.replace(/\D/g,'').length < 10){
-        fail('연락처를 정확히 입력해주세요.','#oPhone'); return;
-      }
-    }
-    if($('#oReceipt').value!=='신청안함' && !$('#oReceiptNo').value.trim()){
-      fail('현금영수증 발급 번호를 입력해주세요.','#oReceiptNo'); return;
-    }
-    if(!$('#oAgree1').checked || !$('#oAgree2').checked){
-      fail('필수 동의 항목에 체크해주세요.','#oAgree1'); return;
-    }
-    const btn=$('#oSubmit');
-    const now = new Date();
-    const brands = [...new Set(S.cart.map(c=>c.brandName))];
-    const prefix = brands.length===1
-      ? (BRANDS.find(x=>x.name===brands[0])||b).orderPrefix : 'MDY';
-    const p2=n=>String(n).padStart(2,'0');
-    const orderNo = prefix+'-'
-      + now.getFullYear()+p2(now.getMonth()+1)+p2(now.getDate())+'-'
-      + p2(now.getHours())+p2(now.getMinutes())+p2(now.getSeconds());
+                <div class="field-row">
+                  <div class="field">
+                    <label for="orderVolume">용량 선택</label>
+                    <select id="orderVolume" name="volume"></select>
+                  </div>
+                  <div class="field">
+                    <label for="orderQty">수량</label>
+                    <select id="orderQty">
+                      <option value="1">1개</option>
+                      <option value="2">2개</option>
+                      <option value="3">3개</option>
+                      <option value="4">4개</option>
+                      <option value="5">5개</option>
+                    </select>
+                  </div>
+                </div>
 
-    const zip=$('#oZip').value.trim(), a1=$('#oAddr1').value.trim(), a2=$('#oAddr2').value.trim();
-    const goods = cartTotal(), ship = shipFee(), amount = grandTotal();
+                <div class="option-price-row">
+                  <span>단품 가격 <strong id="optionUnitPrice">0원</strong></span>
+                  <button type="button" class="add-option-btn" id="addOptionBtn">＋ 옵션 담기</button>
+                </div>
+              </div>
 
-    /* 기존 Apps Script(주문관리 시트)와 동일한 필드명으로 전송 */
-    const payload = {
-      type:'order',
-      orderedAt: now.toISOString(),
-      orderNo: orderNo,
-      channel: source(),
-      brand: brands.join(', '),
-      scalpType: S.scalpType==='dry'?'건성':S.scalpType==='oily'?'지성':'',
-      productName: cartSummary(),
-      option: cartSummary(),
-      items: JSON.stringify(S.cart.map(c=>({
-        sku:c.sku, brand:c.brandName, name:c.name, volume:c.option, price:c.price, qty:c.qty
-      }))),
-      qty: cartQty(),
-      goodsAmount: goods,
-      shippingFee: ship,
-      amount: amount,          // 상품금액 + 배송비
-      buyerName: $('#oName').value.trim(),
-      phone: $('#oPhone').value.trim(),
-      postcode: zip,
-      address: [zip?'['+zip+']':'', a1, a2].filter(Boolean).join(' '),
-      addressDetail: a2,
-      depositorName: depositor(),
-      cashReceipt: $('#oReceipt').value,
-      cashReceiptNo: $('#oReceiptNo').value.trim(),
-      paymentStatus: '미입금',
-      shippingStatus: '배송전',
-      page: '만다윤 랜딩페이지'
+              <div class="cart-box">
+                <div class="cart-empty" id="cartEmpty">담긴 옵션이 없습니다. 제품·용량·수량을 고르고 “＋ 옵션 담기”를 눌러주세요. 여러 옵션을 한 번에 담아 주문할 수 있습니다.</div>
+                <div id="cartList"></div>
+              </div>
+
+              <div class="price-summary">
+                <span>총 결제금액</span>
+                <div style="text-align:right;">
+                  <strong id="orderAmountText">0원</strong>
+                  <div id="orderCalcText" style="font-size:12.5px; font-weight:700; opacity:.75; margin-top:2px;"></div>
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="buyerName">주문자명</label>
+                  <input id="buyerName" name="buyerName" type="text" autocomplete="name" placeholder="이름" required />
+                </div>
+                <div class="field">
+                  <label for="buyerPhone">연락처</label>
+                  <input id="buyerPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" pattern="01[016789]-\d{3,4}-\d{4}" title="휴대폰 번호를 확인해주세요. 예: 010-1234-5678" placeholder="010-0000-0000" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="postcode">배송지 주소</label>
+                <div class="addr-row">
+                  <input id="postcode" name="postcode" type="text" placeholder="우편번호" readonly />
+                  <button type="button" class="addr-search-btn" id="addrSearchBtn">우편번호 검색</button>
+                </div>
+                <input id="buyerAddress" name="address" type="text" placeholder="우편번호 검색을 누르면 자동 입력됩니다" readonly style="margin-top:8px;" />
+                <input id="buyerAddressDetail" name="addressDetail" type="text" placeholder="상세주소 (동/호수 등)" style="margin-top:8px;" />
+              </div>
+
+              <div class="field">
+                <label for="depositorName">입금자명</label>
+                <input id="depositorName" name="depositorName" type="text" placeholder="예: 홍길동4860" required />
+                <p class="field-hint">입금 확인을 위해 <strong>이름 + 휴대폰 뒷자리 4자리</strong>로 입금해주세요. 이름과 연락처를 입력하면 자동으로 채워집니다.</p>
+              </div>
+
+              <div class="field">
+                <label for="cashReceipt">현금영수증 신청</label>
+                <select id="cashReceipt" name="cashReceipt">
+                  <option value="미신청">신청 안 함</option>
+                  <option value="신청(소득공제)">개인 소득공제용</option>
+                  <option value="신청(지출증빙)">사업자 지출증빙용</option>
+                </select>
+              </div>
+
+              <div class="field" id="cashReceiptNoField" style="display:none;">
+                <label for="cashReceiptNo">현금영수증 발급 번호</label>
+                <input id="cashReceiptNo" name="cashReceiptNo" type="text" placeholder="휴대폰 번호 또는 사업자등록번호" />
+              </div>
+
+              <details class="notice-box">
+                <summary>배송 / 교환 / 반품 / 입금 안내</summary>
+                <div class="notice-body">
+                  <strong>배송 안내</strong>
+                  입금 확인 후 영업일 기준 1~3일 내 발송됩니다. 택배사 사정에 따라 배송 기간은 달라질 수 있습니다.
+                  <strong>교환/반품 안내</strong>
+                  상품 수령 후 7일 이내 교환/반품 신청이 가능합니다. 단, 사용 흔적이 있거나 포장이 훼손된 경우 교환/반품이 제한될 수 있습니다. 단순 변심 반품의 왕복 배송비는 고객 부담입니다.
+                  <strong>입금 안내</strong>
+                  주문 후 24시간 내 미입금 시 주문이 취소될 수 있습니다. 입금자명이 다를 경우 고객센터로 연락 부탁드립니다.
+                </div>
+              </details>
+
+              <details class="notice-box">
+                <summary>개인정보 수집·이용 안내</summary>
+                <div class="notice-body">
+                  <strong>수집 항목</strong>
+                  이름, 연락처, 주소, 입금자명, 현금영수증 발급 정보
+                  <strong>수집 목적</strong>
+                  주문 확인, 결제 확인, 상품 배송, 고객 응대, 현금영수증 발급
+                  <strong>보유 기간</strong>
+                  전자상거래 관련 법령에 따른 보관 기간 또는 목적 달성 후 파기
+                  <br />동의를 거부할 수 있으나, 동의하지 않을 경우 주문 접수가 어렵습니다.
+                </div>
+              </details>
+
+              <label class="checkbox" for="orderPrivacy">
+                <input id="orderPrivacy" name="privacyAgree" type="checkbox" required />
+                <span>(필수) 개인정보 수집·이용에 동의합니다.</span>
+              </label>
+
+              <label class="checkbox" for="orderPolicy">
+                <input id="orderPolicy" name="policyAgree" type="checkbox" required />
+                <span>(필수) 배송/교환/반품 및 입금 안내를 확인했습니다.</span>
+              </label>
+
+              <button class="submit-btn" type="submit">주문 접수하기</button>
+              <p class="form-helper">제출 후 입금 계좌가 안내됩니다. 입금 확인 후 순차 발송됩니다.</p>
+            </form>
+          </div>
+
+          <div class="order-complete" id="orderComplete" role="status" aria-live="polite">
+            <h3>주문이 접수되었습니다</h3>
+            <p class="complete-sub">아래 계좌로 입금해주시면 확인 후 순차 발송됩니다.</p>
+            <div class="deposit-card">
+              <div class="deposit-row"><span>주문번호</span><strong id="cOrderNo">-</strong></div>
+              <div class="deposit-row"><span>상품</span><strong id="cProduct">-</strong></div>
+              <div class="deposit-row"><span>입금금액</span><strong class="big" id="cAmount">-</strong></div>
+              <div class="deposit-row"><span>입금계좌</span><strong id="cAccount">-</strong></div>
+              <div class="depositor-highlight">
+                입금자명: <span id="cDepositor">-</span>
+              </div>
+            </div>
+            <button class="copy-btn" type="button" id="copyAccountBtn">계좌번호 복사하기</button>
+            <p class="complete-note">
+              입금자명은 반드시 위와 같이 입력해주세요.<br />
+              24시간 내 미입금 시 주문은 자동 취소될 수 있습니다.<br />
+              입금자명이 다를 경우 카카오톡 또는 문자로 연락 부탁드립니다.<br />
+              입금 확인/배송 상태는 <a href="#track" style="text-decoration:underline;">주문 조회</a>에서 확인하실 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="track">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Order Check</div>
+          <h2 class="section-title">주문 조회</h2>
+          <p class="section-desc">
+            주문 시 입력한 이름과 휴대폰 번호 뒷 4자리를 입력하면 입금 확인·배송 상태를 확인할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="form-card" style="max-width: 560px;">
+          <form id="trackForm">
+            <div class="field-row">
+              <div class="field">
+                <label for="trackName">주문자명</label>
+                <input id="trackName" type="text" autocomplete="name" placeholder="주문 시 입력한 이름" required />
+              </div>
+              <div class="field">
+                <label for="trackLast4">휴대폰 뒷 4자리</label>
+                <input id="trackLast4" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" title="휴대폰 번호 뒷 4자리 숫자를 입력해주세요." placeholder="예: 4860" required />
+              </div>
+            </div>
+            <button class="submit-btn" type="submit">주문 조회하기</button>
+            <p class="form-helper">주문 직후에는 시트 반영까지 잠시 시간이 걸릴 수 있습니다.</p>
+          </form>
+          <div class="lookup-result" id="trackResult" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" id="apply">
+      <div class="container form-grid">
+        <div class="form-copy">
+          <div class="section-kicker">Apply</div>
+          <h2>아직 고민 중이라면,<br />알림만 받아보세요</h2>
+          <p>
+            지금 주문이 망설여진다면 연락처만 남겨주세요. 할인/이벤트 소식, 만다윤 추천 사용 루틴, 두피 고민 상담을 안내드립니다.
+          </p>
+          <div class="mini-list">
+            <div>할인 · 공동구매 · 이벤트 알림</div>
+            <div>만다윤 추천 사용 루틴</div>
+            <div>두피 고민별 상담/문의 연결</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <!-- 구글시트 연동 방법
+            1) Google Apps Script 웹앱 URL을 만든 뒤
+            2) 아래 form 태그의 data-endpoint="" 안에 URL을 넣으세요.
+            3) 현재는 데모 모드라 제출 시 화면에 성공 메시지만 표시됩니다.
+          -->
+          <form id="leadForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
+            <div class="field">
+              <label for="name">이름</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="이름을 입력해주세요" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">연락처</label>
+              <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" pattern="01[016789]-\d{3,4}-\d{4}" title="휴대폰 번호를 확인해주세요. 예: 010-1234-5678" placeholder="010-0000-0000" required />
+            </div>
+
+            <div class="field">
+              <label for="concern">가장 큰 두피/모발 고민</label>
+              <select id="concern" name="concern" required>
+                <option value="">선택해주세요</option>
+                <option value="가려움/예민함">가려움/예민함</option>
+                <option value="건조함/당김">건조함/당김</option>
+                <option value="유분/냄새">유분/냄새</option>
+                <option value="모발 뻣뻣함">모발 뻣뻣함</option>
+                <option value="샴푸 정착 실패">어떤 샴푸를 써야 할지 모르겠음</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="purchaseTiming">구매 예정 시점</label>
+              <select id="purchaseTiming" name="purchaseTiming">
+                <option value="">선택해주세요</option>
+                <option value="지금">지금 바로</option>
+                <option value="이번 주">이번 주 안에</option>
+                <option value="나중에">나중에 (알림만 받기)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" placeholder="궁금한 점이나 현재 사용 중인 샴푸, 두피 고민을 적어주세요."></textarea>
+            </div>
+
+            <label class="checkbox" for="privacy">
+              <input id="privacy" name="privacy" type="checkbox" required />
+              <span>(필수) 제품 안내, 상담을 위한 개인정보 수집·이용에 동의합니다.</span>
+            </label>
+
+            <label class="checkbox" for="marketing">
+              <input id="marketing" name="marketingAgree" type="checkbox" />
+              <span>(선택) 할인/이벤트 등 마케팅 정보 수신에 동의합니다.</span>
+            </label>
+
+            <button class="submit-btn" type="submit">만다윤 추천 샴푸 안내받기</button>
+            <p class="form-helper">제출 후 담당자가 순차적으로 안내드립니다.</p>
+            <div id="successMessage" class="success-message" role="status">
+              신청이 완료되었습니다. 남겨주신 연락처로 안내드리겠습니다.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">자주 묻는 질문</h2>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-card">
+            <strong>Q. 샴푸만 바꿔도 두피 케어가 되나요?</strong>
+            <p>두피 케어의 시작은 매일 반복하는 샴푸 루틴입니다. 머드마스타 샴푸는 세정감, 사용감, 마무리감을 함께 고려한 제품입니다.</p>
+          </div>
+          <div class="faq-card">
+            <strong>Q. 린스를 꼭 같이 써야 하나요?</strong>
+            <p>모발 상태에 따라 다르지만, 샴푸 후에도 과하게 뻣뻣하지 않은 부드러운 마무리감을 느낄 수 있도록 설계된 제품입니다.</p>
+          </div>
+          <div class="faq-card">
+            <strong>Q. 얼마나 사용하면 되나요?</strong>
+            <p>고점도 제형이라 많은 양을 사용할 필요가 없습니다. 애벌 샴푸 1펌핑, 본 샴푸 1펌핑의 2단계 루틴을 권장합니다.</p>
+          </div>
+          <div class="faq-card">
+            <strong>Q. 어떤 향인가요?</strong>
+            <p>오렌지와 레몬의 시트러스 계열 향에 은은한 멘톨감이 더해져 산뜻하고 개운한 사용감을 줍니다.</p>
+          </div>
+        </div>
+
+        <div class="legal-note">
+          ※ 본 페이지의 표현은 제품의 사용감과 일반적인 두피·모발 케어 루틴에 대한 설명입니다. 개인의 두피 및 모발 상태에 따라 사용감에는 차이가 있을 수 있습니다.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <strong>만다윤 Hair Care</strong><br />
+          30년 미용 경력의 전문가가 제안하는 두피 케어 루틴
+        </div>
+        <div>
+          © Mandayun. All rights reserved.
+        </div>
+      </div>
+      <!-- 아래 사업자 정보는 실제 정보로 반드시 교체하세요. (전자상거래법상 필수 표시 항목) -->
+      <div class="biz-info">
+        <strong>판매자 정보</strong>
+        <span>상호명: 만다윤 &nbsp;|&nbsp; 대표자: 윤금연 &nbsp;|&nbsp; 사업자등록번호: 292-30-02185</span>
+        <span>통신판매업 신고번호: 제2026-호평평내-0261호</span>
+        <span>주소: 경기도 남양주시 호평로9 2403-1702</span>
+        <span>고객센터: 010-9441-6582 &nbsp;|&nbsp; 이메일: manda07072@gmail.com 운영시간: 평일 10:00~17:00</span>
+        <span style="margin-top:6px;">배송: 입금 확인 후 영업일 기준 1~3일 내 발송 &nbsp;|&nbsp; 교환/반품: 상품 수령 후 7일 이내 (단순 변심 시 왕복 배송비 고객 부담)</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 우편번호 검색 레이어 -->
+  <div class="postcode-layer" id="postcodeLayer" role="dialog" aria-modal="true" aria-label="우편번호 검색">
+    <div class="postcode-box">
+      <div class="postcode-head">
+        <span>우편번호 검색</span>
+        <button type="button" id="postcodeClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="postcode-embed" id="postcodeEmbed"></div>
+    </div>
+  </div>
+
+  <div class="floating-cta" aria-label="하단 고정 주문 버튼">
+    <a href="#order">지금 주문하기 · 입금 확인 후 발송</a>
+  </div>
+
+  <!-- 카카오(다음) 우편번호 서비스 — 무료, API 키 불필요 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    /* =====================================================
+       주문 설정 — 실제 값으로 반드시 수정하세요.
+       - options의 price는 예시 가격입니다.
+       - bank / account / holder는 실제 입금 계좌로 교체하세요.
+       ===================================================== */
+    const ORDER_CONFIG = {
+      productName: '머드마스터',
+      // 제품별로 용량(용량/가격) 옵션을 묶어서 관리합니다.
+      // 새 제품/용량을 추가하려면 아래 products 배열만 수정하세요.
+      products: [
+        { name: '두피샴푸 건성', variants: [
+          { volume: '300ml', price: 35000 },
+          { volume: '1000ml', price: 80000 }
+        ] },
+        { name: '두피샴푸 지성', variants: [
+          { volume: '300ml', price: 35000 },
+          { volume: '1000ml', price: 83000 }
+        ] },
+        { name: '두피팩 건성', variants: [
+          { volume: '300g', price: 45000 },
+          { volume: '1000g', price: 120000 }
+        ] },
+        { name: '두피팩 지성', variants: [
+          { volume: '300g', price: 45000 },
+          { volume: '1000g', price: 120000 }
+        ] },
+        { name: '핑크클레이 젤', variants: [
+          { volume: '150ml', price: 36000 }
+        ] },
+        { name: '메르윈 리턴 클리닉 세트', variants: [
+          { volume: '200ml(g)', price: 180000 }
+        ] }
+      ],
+      bank: '국민은행',
+      account: '437201-04-293375',
+      holder: '예금주 윤금연'
     };
 
-    btn.disabled=true; btn.textContent='주문 접수 중입니다...'; msg.textContent='';
-    track('order_submit',{brand:payload.brand,scalp_type:payload.scalpType,
-      value:amount,items:S.cart.length});
+    const won = n => n.toLocaleString('ko-KR') + '원';
+    const channel = new URLSearchParams(location.search).get('utm_source') || '랜딩페이지';
 
-    try{
-      const ep = $('#orderForm').dataset.endpoint.trim();
-      if(ep){
-        await fetch(ep,{method:'POST',mode:'no-cors',
-          headers:{'Content-Type':'text/plain;charset=utf-8'},
-          body:JSON.stringify(payload)});
-      }else{
-        console.log('데모 제출 데이터(order):',payload);
-      }
-      showDone(payload);
-    }catch(err){
-      btn.disabled=false; btn.textContent='주문하기';
-      msg.style.color='#C0392B';
-      msg.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-    }
-  });
-}
+    /* ---------- 히어로 이미지 슬라이더 ---------- */
+    const SLIDE_INTERVAL = 4000; // 슬라이드 전환 시간(밀리초). 4000 = 4초
 
-/* ---------- 다음(카카오) 우편번호 서비스 ----------
-   주의: 이 서비스는 http/https 에서만 동작합니다.
-   파일을 더블클릭해서 여는 file:// 환경에서는 검색창은 뜨지만
-   선택 결과가 페이지로 전달되지 않습니다(브라우저 보안 정책).
-   그래서 아래처럼 환경을 먼저 확인하고, 안 되면 직접 입력으로 넘깁니다. */
-function manualAddress(msg){
-  const zip=$('#oZip'), a1=$('#oAddr1'), h=$('#oAddrHint');
-  if(zip){ zip.readOnly=false; zip.placeholder='우편번호를 입력해주세요'; }
-  if(a1){ a1.placeholder='주소를 직접 입력해주세요'; }
-  if(h && msg){ h.textContent=msg; h.style.color='#C0392B'; }
-  if(a1) a1.focus();
-}
-function openPostcode(){
-  if(location.protocol==='file:'){
-    manualAddress('로컬 파일로 열면 주소 검색이 동작하지 않습니다. 직접 입력해주세요. (서버에 올리면 정상 동작합니다)');
-    return;
-  }
-  if(typeof daum==='undefined' || !daum.Postcode){
-    manualAddress('주소 검색을 불러오지 못했습니다. 직접 입력해주세요.');
-    return;
-  }
-  const layer=$('#pcLayer'), embed=$('#pcEmbed');
-  layer.classList.add('show');
-  document.body.style.overflow='hidden';
-  embed.innerHTML='';
+    (function () {
+      const slider = document.getElementById('heroSlider');
+      if (!slider) return;
+      const slides = Array.from(slider.querySelectorAll('.slide'));
+      const dotsWrap = document.getElementById('sliderDots');
+      if (slides.length <= 1) { if (dotsWrap) dotsWrap.style.display = 'none'; return; }
 
-  /* 검색창을 열었는데 아무 반응 없이 오래 머무는 경우를 대비한 안내 */
-  clearTimeout(openPostcode._t);
-  openPostcode._t = setTimeout(()=>{
-    if(layer.classList.contains('show') && !$('#pcEmbed').firstChild){
-      closePostcode();
-      manualAddress('주소 검색을 표시하지 못했습니다. 직접 입력해주세요.');
-    }
-  },4000);
+      let current = 0;
+      let timer = null;
 
-  new daum.Postcode({
-    width:'100%', height:'100%',
-    oncomplete:function(data){
-      /* 주의 1) jibunAddress는 도로명 전용 주소에서 빈 문자열로 옵니다.
-         주의 2) userSelectedType이 없는 응답도 있습니다.
-         → 반드시 폴백을 둬야 기본주소가 비지 않습니다. */
-      const road  = data.roadAddress  || data.autoRoadAddress  || '';
-      const jibun = data.jibunAddress || data.autoJibunAddress || '';
-      const useJibun = data.userSelectedType === 'J';
-      let addr = (useJibun ? (jibun || road) : (road || jibun)) || data.address || '';
+      const dots = slides.map((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', (i + 1) + '번째 슬라이드 보기');
+        b.addEventListener('click', () => { show(i); restart(); });
+        dotsWrap.appendChild(b);
+        return b;
+      });
 
-      if(addr && !useJibun){
-        let extra='';
-        if(data.bname && /[동로가]$/.test(data.bname)) extra += data.bname;
-        if(data.buildingName && data.apartment==='Y') extra += (extra?', ':'')+data.buildingName;
-        if(extra) addr += ' ('+extra+')';
+      function show(i) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (i + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
       }
 
-      /* 주의 3) 주문 영역은 브랜드 탭에 따라 다시 그려지므로,
-         검색창을 열 때 잡아둔 참조가 낡았을 수 있습니다. 여기서 다시 찾습니다. */
-      const zipEl=$('#oZip'), a1El=$('#oAddr1'), a2El=$('#oAddr2');
-      const setVal=(el,v)=>{
-        if(!el) return;
-        el.readOnly=false; el.value=v;
-        el.dispatchEvent(new Event('input',{bubbles:true}));
-        el.dispatchEvent(new Event('change',{bubbles:true}));
-      };
-      setVal(zipEl, data.zonecode||'');
-      setVal(a1El, addr);
-      if(zipEl) zipEl.readOnly=true;          // 우편번호는 다시 잠금
-      S.keep.oZip = zipEl?zipEl.value:'';
-      S.keep.oAddr1 = a1El?a1El.value:'';
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(() => show(current + 1), SLIDE_INTERVAL);
+      }
 
-      closePostcode();
+      dots[0].classList.add('active');
+      restart();
 
-      /* 반영 여부를 실제로 확인하고, 실패했으면 직접 입력으로 전환 */
-      setTimeout(()=>{
-        const cur=$('#oAddr1');
-        if(!cur || !cur.value){ manualAddress('주소가 입력되지 않았습니다. 직접 입력해주세요.'); }
-        else{
-          const h=$('#oAddrHint');
-          if(h){ h.textContent='검색이 안 되면 이 칸에 직접 입력하셔도 됩니다.'; h.style.color=''; }
-          if(a2El) a2El.focus();
+      // 마우스를 올리는 동안은 자동 전환 일시정지
+      slider.addEventListener('mouseenter', () => clearInterval(timer));
+      slider.addEventListener('mouseleave', restart);
+    })();
+
+    /* ---------- 관심고객(알림) 폼 ---------- */
+    const leadForm = document.getElementById('leadForm');
+    const successMessage = document.getElementById('successMessage');
+
+    leadForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const endpoint = leadForm.dataset.endpoint.trim();
+      const button = leadForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+      const payload = Object.fromEntries(new FormData(leadForm).entries());
+      payload.type = 'lead';
+      payload.channel = channel;
+      payload.createdAt = new Date().toISOString();
+      payload.page = '만다윤 머드마스타 샴푸 랜딩페이지';
+
+      button.disabled = true;
+      button.textContent = '제출 중입니다...';
+
+      try {
+        if (endpoint) {
+          await fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          console.log('데모 제출 데이터(lead):', payload);
         }
-      },0);
-      track('address_search',{zonecode:data.zonecode||''});
-    }
-  }).embed(embed);
-}
-function closePostcode(){
-  const layer=$('#pcLayer');
-  if(!layer) return;
-  clearTimeout(openPostcode._t);
-  layer.classList.remove('show');
-  $('#pcEmbed').innerHTML='';
-  document.body.style.overflow='';
-}
-
-function showDone(d){
-  const pc = PAYMENT_CONFIG;
-  $('#orderForm').classList.add('hidden');
-  $('#cart').classList.add('hidden');
-  $$('.adder').forEach(el=>el.classList.add('hidden'));
-
-  let deadline='';
-  if(pc.method==='bank' && pc.depositDeadlineDays>0){
-    const t=new Date(); t.setDate(t.getDate()+pc.depositDeadlineDays);
-    deadline = `${t.getMonth()+1}월 ${t.getDate()}일`;
-  }
-  const dep = esc(d.depositorName||d.buyerName);
-
-  $('#orderDone').innerHTML = `<div class="done">
-    <h3>주문이 접수되었습니다</h3>
-    <p class="no mt8">주문번호 ${esc(d.orderNo)}</p>
-    <dl>
-      <div><dt>상품</dt><dd style="text-align:right;max-width:65%">${esc(d.productName)}</dd></div>
-      <div><dt>총 수량</dt><dd>${d.qty}개</dd></div>
-      <div><dt>상품 금액</dt><dd>${won(d.goodsAmount)}</dd></div>
-      <div><dt>배송비</dt><dd>${d.shippingFee?won(d.shippingFee):'무료'}</dd></div>
-      <div style="border-top:1px solid var(--line);margin-top:4px;padding-top:8px">
-        <dt><b>입금하실 금액</b></dt><dd style="font-size:18px;color:var(--accent)">${won(d.amount)}</dd></div>
-      ${pc.method==='bank'?`
-      <div><dt>입금 은행</dt><dd>${esc(pc.bank)}</dd></div>
-      <div><dt>계좌번호</dt><dd>${esc(pc.account)}</dd></div>
-      <div><dt>예금주</dt><dd>${esc(pc.holder)}</dd></div>
-      <div><dt>입금자명</dt><dd>${dep}</dd></div>`:''}
-    </dl>
-    ${pc.method==='bank'?`
-    <button class="btn btn-primary btn-block mt16" id="copyAcct">계좌번호 복사하기</button>
-    <div class="confirm-line" style="text-align:left">
-      <b>입금자명은 «${dep}»으로 보내주세요.</b><br>
-      다른 이름으로 보내시면 확인이 늦어집니다.
-      ${deadline?`<br>입금 기한은 <b>${deadline}</b>까지입니다. 그때까지 확인되지 않으면 주문이 취소될 수 있습니다.`:''}
-    </div>`:''}
-    <p class="small mt12">이 화면을 닫으셔도 괜찮습니다. 위쪽 <b>주문조회</b>에서 이름과 연락처로 다시 확인하실 수 있습니다.</p>
-    <div class="result-actions" style="margin-top:14px">
-      <button class="btn btn-primary" id="doneLookup">주문조회로 가기</button>
-      <button class="btn btn-outline" id="doneMore">다른 제품 더 보기</button>
-      <button class="btn btn-outline" id="doneTop">맨 위로</button>
-    </div>
-  </div>`;
-  S.cart = []; updateMobileCta();
-  go('#orderDone',{block:'center'});
-
-  const c=$('#copyAcct');
-  if(c) c.addEventListener('click',()=>{
-    const ok=()=>{ c.textContent='복사되었습니다'; setTimeout(()=>c.textContent='계좌번호 복사하기',1600); };
-    if(navigator.clipboard) navigator.clipboard.writeText(pc.account).then(ok).catch(ok);
-    else ok();
-  });
-  const more=$('#doneMore');
-  if(more) more.addEventListener('click',()=>{ S.keep={}; selectBrand(S.brand,null,null,false); });
-  const top=$('#doneTop');
-  if(top) top.addEventListener('click',()=>go('#top'));
-  const lk=$('#doneLookup');
-  if(lk) lk.addEventListener('click',()=>{
-    /* 방금 주문한 정보로 조회칸을 미리 채워둡니다 */
-    if($('#lkName'))  $('#lkName').value  = d.buyerName || '';
-    if($('#lkPhone')) $('#lkPhone').value = d.phone || '';
-    go('#lookup');
-  });
-}
-
-/* =========================================================
-   7-2. 주문조회
-   ---------------------------------------------------------
-   Apps Script 웹앱은 브라우저에서 fetch로 응답을 읽으려 하면
-   CORS에 막히는 경우가 많습니다. 그래서 <script> 태그로 불러오는
-   JSONP 방식을 씁니다. (Code.gs 의 doGet 이 callback 을 지원합니다)
-   ========================================================= */
-function jsonp(url, params, timeout){
-  return new Promise(function(resolve,reject){
-    if(!url){ reject(new Error('endpoint')); return; }
-    var cb = 'mdyCb' + Date.now() + Math.floor(Math.random()*1000);
-    var s = document.createElement('script');
-    var q = new URLSearchParams(Object.assign({callback:cb}, params||{}));
-    var timer = setTimeout(function(){ done(); reject(new Error('timeout')); }, timeout||12000);
-    function done(){ clearTimeout(timer); try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
-                     if(s.parentNode) s.parentNode.removeChild(s); }
-    window[cb] = function(data){ done(); resolve(data); };
-    s.onerror = function(){ done(); reject(new Error('network')); };
-    s.src = url + (url.indexOf('?')>=0?'&':'?') + q.toString();
-    document.body.appendChild(s);
-  });
-}
-
-function badgeClass(v){
-  if(v==='입금완료'||v==='발송완료'||v==='발급완료') return 'b-ok';
-  if(v==='미입금'||v==='입금자명불일치'||v==='반품요청'||v==='취소'||v==='배송보류') return 'b-wait';
-  return 'b-neutral';
-}
-
-function initLookup(){
-  var f=$('#lookupForm'); if(!f) return;
-  f.addEventListener('submit',async function(e){
-    e.preventDefault();
-    var msg=$('#lkMsg'), box=$('#lkResult'), btn=$('#lkBtn');
-    var name=$('#lkName').value.trim();
-    var phone=$('#lkPhone').value.replace(/\D/g,'');
-    box.innerHTML='';
-    if(!name){ msg.style.color='#C0392B'; msg.textContent='주문자명을 입력해주세요.'; $('#lkName').focus(); return; }
-    if(phone.length<10){ msg.style.color='#C0392B'; msg.textContent='연락처를 정확히 입력해주세요.'; $('#lkPhone').focus(); return; }
-
-    btn.disabled=true; btn.textContent='조회 중...';
-    msg.style.color='var(--text-sub)'; msg.textContent='주문을 찾고 있습니다...';
-    track('order_lookup',{});
-
-    try{
-      var res = await jsonp(ENDPOINT, {action:'lookup', name:name, phone:phone});
-      if(!res || res.result!=='ok') throw new Error('server');
-      renderLookup(res.orders||[]);
-      msg.textContent = (res.orders&&res.orders.length)
-        ? '최근 주문 ' + res.orders.length + '건입니다.'
-        : '';
-      if(!res.orders || !res.orders.length){
-        msg.style.color='#C0392B';
-        msg.innerHTML='해당하는 주문을 찾지 못했습니다. 주문하실 때 적으신 이름·연락처가 맞는지 확인해 주세요.<br>계속 안 되면 고객센터(<b>'+esc(BIZ.tel)+'</b>)로 연락 주세요.';
+        leadForm.reset();
+        successMessage.style.display = 'block';
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (error) {
+        alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        console.error(error);
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
       }
-    }catch(err){
-      msg.style.color='#C0392B';
-      msg.innerHTML='지금은 조회가 어렵습니다. 잠시 후 다시 시도해 주세요.<br>급하시면 고객센터(<b>'+esc(BIZ.tel)+'</b>)로 연락 주세요.';
-    }finally{
-      btn.disabled=false; btn.textContent='조회하기';
-    }
-  });
-}
-
-function renderLookup(orders){
-  var box=$('#lkResult');
-  if(!orders.length){ box.innerHTML=''; return; }
-  box.innerHTML = orders.map(function(o){
-    var pay=o.paymentStatus||'미입금', ship=o.shippingStatus||'배송전';
-    return '<div class="order-card">'
-      + '<div class="order-top"><div>'
-      +   '<div class="order-no">'+esc(o.orderNo||'')+'</div>'
-      +   '<div class="order-date">'+esc(o.orderedAt||'')+'</div>'
-      + '</div><div class="badges">'
-      +   '<span class="badge2 '+badgeClass(pay)+'">'+esc(pay)+'</span>'
-      +   '<span class="badge2 '+badgeClass(ship)+'">'+esc(ship)+'</span>'
-      + '</div></div>'
-      + '<dl style="margin-top:6px">'
-      +   row('상품', esc(o.productName||''))
-      +   row('결제금액', won(Number(o.amount)||0))
-      +   row('받는 주소', esc(o.address||''))
-      +   (o.courier ? row('택배사', esc(o.courier)) : '')
-      +   (o.trackingNo
-            ? '<div class="order-row"><dt>운송장번호</dt><dd><div class="track"><span>'+esc(o.trackingNo)+'</span>'
-              + '<button type="button" data-copy="'+esc(o.trackingNo)+'">복사</button></div></dd></div>'
-            : '')
-      + '</dl>'
-      + (pay==='미입금'
-          ? '<div class="confirm-line" style="text-align:left">아직 입금이 확인되지 않았습니다.<br>'
-            + '<b>'+esc(PAYMENT_CONFIG.bank)+' '+esc(PAYMENT_CONFIG.account)+'</b> ('+esc(PAYMENT_CONFIG.holder)+')<br>'
-            + '입금자명 <b>'+esc(o.depositorName||'')+'</b></div>'
-          : '')
-      + '</div>';
-  }).join('');
-  $$('#lkResult [data-copy]').forEach(function(b){
-    b.addEventListener('click',function(){
-      var t=b.dataset.copy;
-      var ok=function(){ b.textContent='복사됨'; setTimeout(function(){ b.textContent='복사'; },1400); };
-      if(navigator.clipboard) navigator.clipboard.writeText(t).then(ok).catch(ok); else ok();
     });
-  });
-}
-function row(k,v){ return '<div class="order-row"><dt>'+k+'</dt><dd>'+v+'</dd></div>'; }
 
-/* =========================================================
-   7-3. 개인정보처리방침 · 이용약관
-   ---------------------------------------------------------
-   ⚠️ 아래는 만다윤의 실제 운영 내용에 맞춰 작성한 초안입니다.
-      법률 자문을 받은 문서가 아니므로 오픈 전 한 번 검토받으시길 권합니다.
-      운영이 바뀌면(택배사 추가, PG 도입 등) 반드시 함께 고치세요.
-   ========================================================= */
-const EFFECTIVE_DATE = '2026년 7월 30일';   // 시행일 — 내용을 고치면 이 날짜도 바꾸세요
+    /* ---------- 주문 폼 ---------- */
+    const orderForm = document.getElementById('orderForm');
+    const orderCard = document.getElementById('orderCard');
+    const orderComplete = document.getElementById('orderComplete');
+    const productSelect = document.getElementById('orderProduct');
+    const volumeSelect = document.getElementById('orderVolume');
+    const qtySelect = document.getElementById('orderQty');
+    const unitPriceText = document.getElementById('optionUnitPrice');
+    const addOptionBtn = document.getElementById('addOptionBtn');
+    const cartListEl = document.getElementById('cartList');
+    const cartEmptyEl = document.getElementById('cartEmpty');
+    const amountText = document.getElementById('orderAmountText');
+    const calcText = document.getElementById('orderCalcText');
+    const nameInput = document.getElementById('buyerName');
+    const phoneInput = document.getElementById('buyerPhone');
+    const depositorInput = document.getElementById('depositorName');
+    const cashReceiptSelect = document.getElementById('cashReceipt');
+    const cashReceiptNoField = document.getElementById('cashReceiptNoField');
+    const cashReceiptNoInput = document.getElementById('cashReceiptNo');
 
-const LEGAL = {
-privacy: {
-  title:'개인정보처리방침',
-  html:`
-<p>만다윤(이하 "회사")은 개인정보보호법 등 관련 법령을 준수하며, 이용자의 개인정보를 소중히 다루고 있습니다.</p>
+    // 장바구니: 여러 옵션을 담아 한 번에 주문할 수 있습니다.
+    // 각 항목 { key, name, volume, price, qty }
+    let cart = [];
 
-<h4>1. 수집하는 개인정보 항목과 수집 방법</h4>
-<table>
-  <tr><th>구분</th><th>필수 항목</th><th>선택 항목</th></tr>
-  <tr><td>상품 주문</td><td>이름, 연락처, 우편번호, 주소, 입금자명</td><td>현금영수증 발급번호</td></tr>
-  <tr><td>알림 신청</td><td>이름, 연락처</td><td>두피·모발 고민, 관심 브랜드, 구매 예정 시점, 문의 내용, 마케팅 수신 동의</td></tr>
-  <tr><td>자동 수집</td><td colspan="2">접속 경로(유입 채널), 접속 일시, 브라우저 정보</td></tr>
-</table>
-<p>수집 방법: 홈페이지의 주문서 및 알림 신청 양식을 통한 이용자의 직접 입력, 서비스 이용 과정에서의 자동 생성</p>
+    // 제품 드롭다운 채우기
+    ORDER_CONFIG.products.forEach((p, i) => {
+      const o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = p.name;
+      productSelect.appendChild(o);
+    });
 
-<h4>2. 개인정보의 처리 목적</h4>
-<ul>
-  <li>주문 접수, 입금 확인, 상품 배송, 배송 조회 안내</li>
-  <li>교환·반품·환불 등 고객 응대 및 분쟁 처리</li>
-  <li>현금영수증 발급 (선택하신 경우에 한함)</li>
-  <li>재입고·신제품·할인 정보 안내 (마케팅 수신에 동의하신 경우에 한함)</li>
-</ul>
-<p>회사는 위 목적 이외의 용도로 개인정보를 이용하지 않으며, 목적이 변경될 경우 사전에 동의를 받습니다.</p>
+    function currentProduct() {
+      return ORDER_CONFIG.products[Number(productSelect.value) || 0];
+    }
 
-<h4>3. 개인정보의 보유 및 이용 기간</h4>
-<p>원칙적으로 처리 목적이 달성되면 지체 없이 파기합니다. 다만 아래 법령에 따라 일정 기간 보관합니다.</p>
-<table>
-  <tr><th>보관 항목</th><th>기간</th><th>근거</th></tr>
-  <tr><td>계약 또는 청약철회 등에 관한 기록</td><td>5년</td><td>전자상거래법</td></tr>
-  <tr><td>대금 결제 및 재화 공급에 관한 기록</td><td>5년</td><td>전자상거래법</td></tr>
-  <tr><td>소비자 불만 또는 분쟁 처리에 관한 기록</td><td>3년</td><td>전자상거래법</td></tr>
-  <tr><td>표시·광고에 관한 기록</td><td>6개월</td><td>전자상거래법</td></tr>
-  <tr><td>알림 신청 정보</td><td>동의 철회 시 또는 신청일로부터 2년</td><td>동의</td></tr>
-</table>
+    function currentVariant() {
+      const p = currentProduct();
+      return p.variants[Number(volumeSelect.value) || 0];
+    }
 
-<h4>4. 개인정보의 제3자 제공</h4>
-<p>회사는 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 법령에 따라 수사기관 등이 적법한 절차로 요구하는 경우에는 예외로 합니다.</p>
+    // 선택된 제품에 맞춰 용량 드롭다운 다시 채우기
+    function fillVolumes() {
+      const p = currentProduct();
+      volumeSelect.innerHTML = '';
+      p.variants.forEach((v, i) => {
+        const o = document.createElement('option');
+        o.value = String(i);
+        o.textContent = `${v.volume} — ${won(v.price)}`;
+        volumeSelect.appendChild(o);
+      });
+      renderUnitPrice();
+    }
 
-<h4>5. 개인정보 처리의 위탁</h4>
-<p>회사는 원활한 서비스 제공을 위해 아래와 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
-<table>
-  <tr><th>수탁자</th><th>위탁 업무</th></tr>
-  <tr><td>CJ대한통운, 한진택배, 롯데택배, 우체국택배, 로젠택배</td><td>주문 상품의 배송</td></tr>
-  <tr><td>Google LLC</td><td>주문·문의 정보의 저장 및 관리 (Google Sheets, Google Apps Script)</td></tr>
-</table>
-<p>회사는 위탁 계약 시 개인정보가 안전하게 관리되도록 필요한 사항을 규정하고 관리·감독합니다.</p>
+    function renderUnitPrice() {
+      unitPriceText.textContent = won(currentVariant().price);
+    }
 
-<h4>6. 개인정보의 국외 이전</h4>
-<p>회사는 주문 정보 보관을 위해 Google LLC의 서비스를 이용하며, 이 과정에서 개인정보가 국외에 저장될 수 있습니다.</p>
-<table>
-  <tr><th>이전받는 자</th><td>Google LLC</td></tr>
-  <tr><th>이전 국가</th><td>미국 등 Google이 데이터센터를 운영하는 국가</td></tr>
-  <tr><th>이전 항목</th><td>이름, 연락처, 주소, 주문 내역, 입금자명</td></tr>
-  <tr><th>이전 목적</th><td>주문 정보의 저장 및 관리</td></tr>
-  <tr><th>보유 기간</th><td>위 제3항의 보유 기간과 동일</td></tr>
-</table>
-<p>이용자는 국외 이전을 거부할 수 있으며, 이 경우 온라인 주문이 제한될 수 있습니다. 거부를 원하시면 아래 연락처로 문의해 주세요.</p>
+    function cartTotal() {
+      return cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+    }
 
-<h4>7. 정보주체의 권리와 행사 방법</h4>
-<p>이용자는 언제든지 자신의 개인정보에 대해 열람·정정·삭제·처리정지를 요구할 수 있습니다. 아래 연락처로 서면, 전화, 이메일을 통해 요청하시면 지체 없이 조치합니다.</p>
-<p>다만 법령에서 보관을 의무화한 정보는 삭제가 제한될 수 있습니다.</p>
+    function cartQtyTotal() {
+      return cart.reduce((sum, c) => sum + c.qty, 0);
+    }
 
-<h4>8. 개인정보의 파기 절차 및 방법</h4>
-<ul>
-  <li>파기 절차: 보유 기간이 지나거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다.</li>
-  <li>파기 방법: 전자적 파일은 복구할 수 없는 방법으로 영구 삭제하고, 출력물은 분쇄하거나 소각합니다.</li>
-</ul>
+    function cartSummary() {
+      // 완료 화면/주문서에 표시할 텍스트
+      return cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(', ');
+    }
 
-<h4>9. 자동 수집 장치(쿠키)의 설치·운영 및 거부</h4>
-<p>회사는 서비스 이용 현황 분석을 위해 쿠키를 사용할 수 있습니다. 이용자는 브라우저 설정에서 쿠키 저장을 거부할 수 있으며, 거부하시더라도 주문에는 지장이 없습니다.</p>
-<p>설정 방법: 브라우저의 [설정] → [개인정보 및 보안] → [쿠키 및 사이트 데이터]</p>
+    function renderAmount() {
+      amountText.textContent = won(cartTotal());
+      calcText.textContent = cart.length ? cartSummary() : '';
+    }
 
-<h4>10. 개인정보의 안전성 확보 조치</h4>
-<ul>
-  <li>개인정보 취급자를 최소한으로 제한하고, 접근 권한을 관리합니다.</li>
-  <li>개인정보가 저장된 시스템은 계정 인증을 거쳐야만 접근할 수 있습니다.</li>
-  <li>개인정보 처리 내역을 기록하고 보관합니다.</li>
-</ul>
+    function renderCart() {
+      if (!cart.length) {
+        cartEmptyEl.style.display = 'block';
+        cartListEl.innerHTML = '';
+      } else {
+        cartEmptyEl.style.display = 'none';
+        cartListEl.innerHTML = cart.map((c, i) =>
+          '<div class="cart-item">'
+          + '<div class="cart-item-info">'
+          + '<div class="cart-item-name">' + esc(c.name) + ' · ' + esc(c.volume) + '</div>'
+          + '<div class="cart-item-price">' + won(c.price) + ' × ' + c.qty + ' = ' + won(c.price * c.qty) + '</div>'
+          + '</div>'
+          + '<div class="cart-qty">'
+          + '<button type="button" data-act="dec" data-i="' + i + '" aria-label="수량 감소">−</button>'
+          + '<span>' + c.qty + '</span>'
+          + '<button type="button" data-act="inc" data-i="' + i + '" aria-label="수량 증가">+</button>'
+          + '</div>'
+          + '<button type="button" class="cart-remove" data-act="del" data-i="' + i + '" aria-label="삭제">✕</button>'
+          + '</div>'
+        ).join('');
+      }
+      renderAmount();
+    }
 
-<h4>11. 개인정보 보호책임자</h4>
-<table>
-  <tr><th>성명</th><td>윤금연 (대표)</td></tr>
-  <tr><th>연락처</th><td>010-9441-6582</td></tr>
-  <tr><th>이메일</th><td>manda07072@gmail.com</td></tr>
-</table>
-<p>개인정보와 관련한 문의·불만·피해구제에 관한 사항은 위 연락처로 문의해 주시면 신속히 답변드리겠습니다.</p>
+    // 옵션 담기
+    addOptionBtn.addEventListener('click', () => {
+      const p = currentProduct();
+      const v = currentVariant();
+      const qty = Number(qtySelect.value) || 1;
+      const key = p.name + '|' + v.volume;
+      const existing = cart.find(c => c.key === key);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ key: key, name: p.name, volume: v.volume, price: v.price, qty: qty });
+      }
+      renderCart();
+    });
 
-<h4>12. 권익침해 구제 방법</h4>
-<p>개인정보 침해로 도움이 필요하시면 아래 기관에 문의하실 수 있습니다.</p>
-<ul>
-  <li>개인정보분쟁조정위원회 : 1833-6972 (www.kopico.go.kr)</li>
-  <li>개인정보침해신고센터 : 118 (privacy.kisa.or.kr)</li>
-  <li>대검찰청 사이버수사과 : 1301 (www.spo.go.kr)</li>
-  <li>경찰청 사이버수사국 : 182 (ecrm.police.go.kr)</li>
-</ul>
+    // 장바구니 수량 조절 / 삭제 (이벤트 위임)
+    cartListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-act]');
+      if (!btn) return;
+      const i = Number(btn.dataset.i);
+      const act = btn.dataset.act;
+      if (!cart[i]) return;
+      if (act === 'inc') cart[i].qty += 1;
+      else if (act === 'dec') cart[i].qty = Math.max(1, cart[i].qty - 1);
+      else if (act === 'del') cart.splice(i, 1);
+      renderCart();
+    });
 
-<h4>13. 개인정보처리방침의 변경</h4>
-<p>이 방침의 내용이 추가·삭제·수정될 경우 시행 7일 전부터 홈페이지를 통해 알려드립니다. 다만 이용자 권리에 중요한 변경이 있을 때는 30일 전에 알려드립니다.</p>
+    productSelect.addEventListener('change', fillVolumes);
+    volumeSelect.addEventListener('change', renderUnitPrice);
+    fillVolumes();
+    renderCart();
 
-<div class="meta">시행일: ${EFFECTIVE_DATE}</div>`
-},
+    // 입금자명 자동 생성 (이름 + 휴대폰 뒷자리 4자리) — 직접 수정하면 자동 갱신 중단
+    let depositorEdited = false;
+    depositorInput.addEventListener('input', () => {
+      depositorEdited = depositorInput.value.trim() !== '';
+      if (!depositorEdited) autoDepositor();
+    });
 
-terms: {
-  title:'이용약관',
-  html:`
-<h4>제1조 (목적)</h4>
-<p>이 약관은 만다윤(이하 "회사")이 운영하는 온라인 판매 페이지에서 제공하는 서비스의 이용과 관련하여, 회사와 이용자의 권리·의무 및 책임사항을 정함을 목적으로 합니다.</p>
+    function autoDepositor() {
+      if (depositorEdited) return;
+      const name = nameInput.value.trim();
+      const digits = phoneInput.value.replace(/\D/g, '');
+      const last4 = digits.length >= 4 ? digits.slice(-4) : '';
+      if (name) depositorInput.value = name + last4;
+    }
 
-<h4>제2조 (정의)</h4>
-<ul>
-  <li>"서비스"란 회사가 이 페이지를 통해 제공하는 상품 판매 및 관련 서비스를 말합니다.</li>
-  <li>"이용자"란 이 페이지에 접속하여 서비스를 이용하는 자를 말합니다.</li>
-  <li>"구매자"란 이 페이지를 통해 상품을 주문한 이용자를 말합니다.</li>
-</ul>
+    nameInput.addEventListener('input', autoDepositor);
+    phoneInput.addEventListener('input', autoDepositor);
 
-<h4>제3조 (약관의 명시와 개정)</h4>
-<p>회사는 이 약관을 페이지 하단에 게시합니다. 관련 법령을 위배하지 않는 범위에서 약관을 개정할 수 있으며, 개정 시 적용일자와 개정 사유를 명시하여 적용일 7일 전부터 공지합니다. 이용자에게 불리한 개정의 경우 30일 전부터 공지합니다.</p>
+    // 연락처 입력 시 자동 하이픈
+    function attachPhoneFormat(el) {
+      if (!el) return;
+      el.addEventListener('input', function () {
+        const d = this.value.replace(/\D/g, '').slice(0, 11);
+        let out;
+        if (d.length < 4) out = d;
+        else if (d.length < 8) out = d.slice(0, 3) + '-' + d.slice(3);
+        else out = d.slice(0, 3) + '-' + d.slice(3, 7) + '-' + d.slice(7);
+        this.value = out;
+      });
+    }
+    attachPhoneFormat(phoneInput);
+    attachPhoneFormat(document.getElementById('phone'));
 
-<h4>제4조 (서비스의 제공)</h4>
-<p>회사는 상품 정보 제공, 주문 접수, 배송 및 이에 부수하는 업무를 제공합니다. 상품의 품절, 사양 변경 등이 있을 경우 회사는 해당 사실을 공지하거나 구매자에게 개별 통지합니다.</p>
+    /* ---------- 우편번호 검색 (카카오/다음 우편번호 서비스) ---------- */
+    const postcodeInput = document.getElementById('postcode');
+    const addressInput = document.getElementById('buyerAddress');
+    const addressDetailInput = document.getElementById('buyerAddressDetail');
 
-<h4>제5조 (구매 신청 및 계약의 성립)</h4>
-<p>이용자는 주문서에 필요한 정보를 입력하고 약관 및 개인정보 수집·이용에 동의함으로써 구매를 신청합니다.</p>
-<p>매매계약은 <b>회사가 구매자의 입금을 확인한 시점</b>에 성립합니다. 회사는 다음의 경우 구매 신청을 승낙하지 않을 수 있습니다.</p>
-<ul>
-  <li>입력 정보에 허위 또는 누락이 있는 경우</li>
-  <li>재고가 부족한 경우</li>
-  <li>기타 회사의 정상적인 업무 수행에 지장을 초래한다고 판단되는 경우</li>
-</ul>
+    function openPostcodeSearch() {
+      if (typeof daum === 'undefined' || !daum.Postcode) {
+        // 스크립트 로드 실패(오프라인 등) 시 직접 입력으로 전환
+        postcodeInput.readOnly = false;
+        addressInput.readOnly = false;
+        addressInput.placeholder = '주소를 직접 입력해주세요';
+        addressInput.focus();
+        return;
+      }
+      openPostcodeLayer();
+    }
 
-<h4>제6조 (결제 방법 및 입금 기한)</h4>
-<p>결제는 <b>계좌이체</b>로 이루어집니다.</p>
-<table>
-  <tr><th>입금 계좌</th><td>국민은행 437201-04-293375</td></tr>
-  <tr><th>예금주</th><td>윤금연</td></tr>
-</table>
-<p>구매자는 주문일로부터 <b>2일 이내</b>에 입금해야 하며, 기한 내 입금이 확인되지 않으면 주문이 취소될 수 있습니다.</p>
-<p>입금 확인을 위해 주문서에 표시된 입금자명으로 입금해 주셔야 합니다. 다른 이름으로 입금하실 경우 주문서의 입금자명 항목을 수정해 주시기 바랍니다.</p>
+    const postcodeLayer = document.getElementById('postcodeLayer');
+    const postcodeEmbed = document.getElementById('postcodeEmbed');
 
-<h4>제7조 (배송)</h4>
-<ul>
-  <li>배송비: <b>무료</b> (도서·산간 지역은 추가 비용이 발생할 수 있습니다)</li>
-  <li>배송 기간: 입금 확인 후 영업일 기준 1~3일 이내 발송 (주말·공휴일 제외)</li>
-  <li>택배사 사정, 천재지변, 주문 폭주 등으로 배송이 지연될 수 있으며, 이 경우 회사는 구매자에게 안내합니다.</li>
-  <li>구매자가 입력한 주소가 부정확하여 발생한 배송 지연·오배송에 대해 회사는 책임지지 않습니다.</li>
-</ul>
+    function closePostcodeLayer() {
+      postcodeLayer.classList.remove('show');
+      postcodeEmbed.innerHTML = '';
+      document.body.style.overflow = '';
+    }
 
-<h4>제8조 (청약철회)</h4>
-<p>구매자는 상품을 수령한 날로부터 <b>7일 이내</b>에 청약철회를 할 수 있습니다. 청약철회를 원하시면 고객센터로 연락해 주세요.</p>
-<p>단순 변심에 의한 청약철회의 경우 반품 배송비는 구매자가 부담합니다. 상품의 하자 또는 오배송의 경우에는 회사가 부담합니다.</p>
+    function openPostcodeLayer() {
+      postcodeLayer.classList.add('show');
+      document.body.style.overflow = 'hidden'; // 뒤 배경 스크롤 잠금
+      postcodeEmbed.innerHTML = '';
+      new daum.Postcode({
+        width: '100%',
+        height: '100%',
+        oncomplete: function (data) {
+          // 도로명/지번 중 사용자가 선택한 주소 사용
+          let addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+          let extra = '';
+          if (data.userSelectedType === 'R') {
+            if (data.bname && /[동로가]$/.test(data.bname)) extra += data.bname;
+            if (data.buildingName && data.apartment === 'Y') extra += (extra ? ', ' : '') + data.buildingName;
+            if (extra) addr += ' (' + extra + ')';
+          }
+          postcodeInput.value = data.zonecode;
+          addressInput.value = addr;
+          closePostcodeLayer();
+          addressDetailInput.focus(); // 바로 상세주소 입력으로 이동
+        }
+      }).embed(postcodeEmbed);
+    }
 
-<h4>제9조 (청약철회의 제한)</h4>
-<p>다음의 경우에는 청약철회가 제한됩니다.</p>
-<ul>
-  <li><b>구매자가 개봉하여 사용하였거나, 사용에 준하는 정도로 상태가 변한 화장품</b></li>
-  <li>구매자의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우</li>
-  <li>구매자의 사용 또는 일부 소비로 상품의 가치가 현저히 감소한 경우</li>
-  <li>시간이 지나 다시 판매하기 곤란할 정도로 상품의 가치가 감소한 경우</li>
-</ul>
-<p>회사는 위 사유에 해당하는 상품에 대해 청약철회가 제한된다는 사실을 상품 페이지 및 주문 과정에서 안내하고 있습니다.</p>
+    document.getElementById('postcodeClose').addEventListener('click', closePostcodeLayer);
+    postcodeLayer.addEventListener('click', function (e) {
+      if (e.target === postcodeLayer) closePostcodeLayer();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && postcodeLayer.classList.contains('show')) closePostcodeLayer();
+    });
 
-<h4>제10조 (환불)</h4>
-<p>회사는 청약철회 요청을 받고 반품 상품을 회수한 날로부터 <b>3영업일 이내</b>에 결제 대금을 환불합니다. 환불은 구매자가 입금한 계좌로 이루어지며, 계좌 정보가 확인되지 않는 경우 환불이 지연될 수 있습니다.</p>
+    document.getElementById('addrSearchBtn').addEventListener('click', openPostcodeSearch);
+    postcodeInput.addEventListener('click', openPostcodeSearch);
+    addressInput.addEventListener('click', openPostcodeSearch);
 
-<h4>제11조 (개인정보 보호)</h4>
-<p>회사는 이용자의 개인정보를 관련 법령에 따라 보호하며, 자세한 내용은 별도의 개인정보처리방침에 따릅니다.</p>
+    // 현금영수증 선택 시 번호 입력칸 표시
+    cashReceiptSelect.addEventListener('change', () => {
+      const need = cashReceiptSelect.value !== '미신청';
+      cashReceiptNoField.style.display = need ? 'block' : 'none';
+      cashReceiptNoInput.required = need;
+      if (!need) cashReceiptNoInput.value = '';
+    });
 
-<h4>제12조 (회사의 의무)</h4>
-<p>회사는 관련 법령과 이 약관을 준수하며, 상품을 안전하게 배송하고 이용자의 불만을 신속히 처리하기 위해 노력합니다.</p>
+    // 주문번호 생성: MDY-YYYYMMDD-순번
+    // 클라이언트에서는 시간 기반 3자리를 사용합니다.
+    // Apps Script에서 시트 기준 일련번호로 재발급하도록 구성하면 더 정확합니다.
+    function makeOrderNo(d) {
+      const ymd = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+      const seq = String((d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) % 1000).padStart(3, '0');
+      return `MDY-${ymd}-${seq}`;
+    }
 
-<h4>제13조 (이용자의 의무)</h4>
-<p>이용자는 주문 시 정확한 정보를 입력해야 하며, 타인의 정보를 도용해서는 안 됩니다. 허위 정보 입력으로 발생한 불이익은 이용자가 부담합니다.</p>
+    orderForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
 
-<h4>제14조 (면책)</h4>
-<p>회사는 천재지변, 통신 장애 등 회사의 통제를 벗어난 사유로 서비스를 제공할 수 없는 경우 그 책임이 면제됩니다.</p>
-<p>이 페이지에서 제공하는 두피·모발 관리 정보 및 두피 타입 테스트 결과는 <b>일반적인 참고 정보</b>이며 의학적 진단이나 치료를 대신하지 않습니다. 피부 이상이 있으신 경우 전문의와 상담하시기 바랍니다.</p>
+      if (!addressInput.value.trim()) {
+        alert('우편번호 검색 버튼을 눌러 배송지 주소를 선택해주세요.');
+        openPostcodeSearch();
+        return;
+      }
 
-<h4>제15조 (분쟁 해결 및 관할)</h4>
-<p>회사와 이용자 사이에 분쟁이 발생한 경우 상호 협의하여 해결하는 것을 원칙으로 합니다. 협의가 이루어지지 않을 경우 소비자기본법에 따른 분쟁조정기구의 조정을 신청할 수 있으며, 소송이 제기되는 경우 민사소송법상의 관할 법원에 제기합니다.</p>
+      const endpoint = orderForm.dataset.endpoint.trim();
+      const button = orderForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
 
-<div class="meta">시행일: ${EFFECTIVE_DATE}<br>
-상호 만다윤 · 대표 윤금연 · 사업자등록번호 292-30-62185<br>
-통신판매업 신고번호 제2026-호평평내-0261호<br>
-경기도 남양주시 호평로 9, 2403동 1702호<br>
-고객센터 010-9441-6582 (평일 10:00-17:00) · manda07072@gmail.com</div>`
-}
-};
+      if (!cart.length) {
+        alert('주문할 옵션을 담아주세요. 제품·용량을 고르고 "＋ 옵션 담기"를 눌러주세요.');
+        return;
+      }
 
-function openDoc(key){
-  const doc = LEGAL[key]; if(!doc) return;
-  $('#docTitle').textContent = doc.title;
-  $('#docBody').innerHTML = doc.html;
-  $('#docBody').scrollTop = 0;
-  $('#docLayer').classList.add('show');
-  document.body.style.overflow='hidden';
-  track('doc_open',{doc:key});
-}
-function closeDoc(){
-  $('#docLayer').classList.remove('show');
-  document.body.style.overflow='';
-}
+      const now = new Date();
+      const orderNo = makeOrderNo(now);
+      const optionSummary = cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(' / ');
+      const qty = cartQtyTotal();
+      const amount = cartTotal();
+      const fullAddress = [
+        postcodeInput.value.trim() ? '[' + postcodeInput.value.trim() + ']' : '',
+        addressInput.value.trim(),
+        addressDetailInput.value.trim()
+      ].filter(Boolean).join(' ');
 
-/* =========================================================
-   8. 관심고객 폼
-   ========================================================= */
-function initLead(){
-  $('#leadBrands').innerHTML = BRANDS.map(b=>
-    `<label class="agree"><input type="checkbox" name="ib" value="${esc(b.name)}"><span>${esc(b.name)} · ${esc(b.role)}</span></label>`).join('')
-    + `<label class="agree"><input type="checkbox" name="ib" value="아직 모르겠음"><span>아직 모르겠음</span></label>`;
+      // 주문관리 시트 컬럼과 매핑되는 payload
+      const payload = {
+        type: 'order',
+        orderedAt: now.toISOString(),          // 주문일시
+        orderNo: orderNo,                      // 주문번호
+        channel: channel,                      // 유입경로
+        productName: ORDER_CONFIG.productName, // 상품명
+        option: optionSummary,                 // 옵션 (담은 전체 항목 요약)
+        items: JSON.stringify(cart.map(c => ({ name: c.name, volume: c.volume, price: c.price, qty: c.qty }))), // 옵션 상세(JSON)
+        qty: qty,                              // 총 수량
+        amount: amount,                        // 결제금액
+        buyerName: nameInput.value.trim(),     // 주문자명
+        phone: phoneInput.value.trim(),        // 연락처
+        postcode: postcodeInput.value.trim(),  // 우편번호
+        address: fullAddress,                  // 주소 (우편번호+기본+상세 합본)
+        addressDetail: addressDetailInput.value.trim(), // 상세주소
+        depositorName: depositorInput.value.trim(), // 입금자명
+        cashReceipt: cashReceiptSelect.value,  // 현금영수증
+        cashReceiptNo: cashReceiptNoInput.value.trim(), // 현금영수증 번호
+        paymentStatus: '미입금',               // 입금상태 초기값
+        shippingStatus: '배송전'               // 배송상태 초기값
+      };
 
-  $('#leadForm').addEventListener('submit',async e=>{
-    e.preventDefault();
-    const f=e.target, msg=$('#leadMsg'), btn=$('button[type=submit]',f);
-    /* 주의: form.name 은 폼 자신의 name 속성이라 필드를 가리지 못합니다.
-       반드시 f.elements 로 접근해야 합니다. */
-    const el=f.elements;
-    const payload={
-      type:'lead', channel:source(), createdAt:new Date().toISOString(),
-      page:'만다윤 랜딩페이지',
-      name:el.name.value.trim(), phone:el.phone.value.trim(),
-      concern:el.concern.value.trim(),
-      interestBrands:[...f.querySelectorAll('[name=ib]:checked')].map(i=>i.value).join(', '),
-      timing:el.timing.value, message:el.message.value.trim(),
-      marketing:el.marketing.checked?'동의':'미동의'
-    };
-    btn.disabled=true; btn.textContent='처리 중...';
-    track('lead_submit',{interest_brand:payload.interestBrands});
-    try{
-      const ep=f.dataset.endpoint.trim();
-      if(ep) await fetch(ep,{method:'POST',mode:'no-cors',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify(payload)});
-      else console.log('데모 제출 데이터(lead):',payload);
-      f.reset(); msg.style.color='var(--accent)';
-      msg.textContent='신청이 완료되었습니다. 소식이 있을 때 연락드릴게요.';
-    }catch(err){
-      msg.style.color='#C0392B'; msg.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-    }finally{ btn.disabled=false; btn.textContent='알림 신청하기'; }
-  });
-}
+      button.disabled = true;
+      button.textContent = '주문 접수 중입니다...';
 
-/* =========================================================
-   9. 모바일 CTA
-   ========================================================= */
-function updateMobileCta(){
-  const btn=$('#mctaBtn'), order=$('#order'); if(!btn) return;
-  const n = cartQty();
-  if(!order){ btn.innerHTML='제품 보러가기'; btn.href='#brands'; return; }
-  const b=brandOf(S.brand);
-  const r=order.getBoundingClientRect();
-  const inOrder = r.top < innerHeight*0.9 && r.bottom > 0;
-  $('#mcta').classList.toggle('hidden', inOrder);
-  const past = $('#brandTop') && $('#brandTop').getBoundingClientRect().top < innerHeight*0.5;
-  if(n){
-    btn.innerHTML = `담은 상품 ${won(cartTotal())} <span class="badge">${n}</span> · 주문하기`;
-    btn.href = '#order';
-  }else{
-    btn.innerHTML = past ? b.name+' 주문하기' : '제품 보러가기';
-    btn.href = past ? '#order' : '#brands';
-  }
-}
+      try {
+        if (endpoint) {
+          await fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          console.log('데모 제출 데이터(order):', payload);
+        }
 
-/* =========================================================
-   10. 초기화
-   ========================================================= */
-(function init(){
-  $('#year').textContent = new Date().getFullYear();
-  Object.keys(BIZ).forEach(k=>{ const el=$(`[data-biz="${k}"]`); if(el) el.textContent=BIZ[k]; });
-  if(SUBSCRIBERS) $('[data-subscribers]').textContent=SUBSCRIBERS;
-  else $('[data-subscribers]').closest('.stat').style.display='none';
+        // 완료 화면 표시
+        document.getElementById('cOrderNo').textContent = orderNo;
+        document.getElementById('cProduct').textContent = optionSummary;
+        document.getElementById('cAmount').textContent = won(amount);
+        document.getElementById('cAccount').textContent = `${ORDER_CONFIG.bank} ${ORDER_CONFIG.account} (${ORDER_CONFIG.holder})`;
+        document.getElementById('cDepositor').textContent = payload.depositorName || '주문자명+휴대폰 뒷자리';
 
-  renderCheck1();
-  $('#checkSubmit').addEventListener('click',submitCheck1);
-  $('#testPrev').addEventListener('click',()=>{ if(S.testStep){S.testStep--;renderTest();} });
-  $('#testQuit').addEventListener('click',()=>{
-    $('#testWrap').classList.add('hidden'); $('#step1').classList.remove('hidden');
-  });
+        orderCard.style.display = 'none';
+        orderComplete.classList.add('show');
+        orderComplete.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (error) {
+        alert('주문 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        console.error(error);
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    });
 
-  renderTabs();
-  initLead();
-  initLookup();
+    // 주문/알림 폼이 화면에 보이면 하단 고정 버튼 숨김 (모바일 입력창 가림 방지)
+    const floatingCta = document.querySelector('.floating-cta');
+    const ctaHideTargets = [document.getElementById('order'), document.getElementById('track'), document.getElementById('apply')].filter(Boolean);
+    if (floatingCta && 'IntersectionObserver' in window && ctaHideTargets.length) {
+      const visibleSections = new Set();
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) visibleSections.add(e.target);
+          else visibleSections.delete(e.target);
+        });
+        floatingCta.style.display = visibleSections.size ? 'none' : '';
+      }, { threshold: 0.12 });
+      ctaHideTargets.forEach(function (t) { io.observe(t); });
+    }
 
-  /* 우편번호 레이어 닫기 */
-  $('#pcClose').addEventListener('click',closePostcode);
-  $('#pcLayer').addEventListener('click',e=>{ if(e.target===$('#pcLayer')) closePostcode(); });
+    // 계좌번호 복사
+    document.getElementById('copyAccountBtn').addEventListener('click', async function () {
+      const text = ORDER_CONFIG.account; // 은행 앱에 바로 붙여넣을 수 있도록 계좌번호만 복사
+      try {
+        await navigator.clipboard.writeText(text);
+        this.textContent = '복사되었습니다!';
+      } catch (e) {
+        prompt('아래 계좌번호를 복사해주세요.', text);
+      }
+      setTimeout(() => { this.textContent = '계좌번호 복사하기'; }, 2000);
+    });
 
-  /* 약관·처리방침 모달 */
-  $('#privacyLink').addEventListener('click',e=>{ e.preventDefault(); openDoc('privacy'); });
-  $('#termsLink').addEventListener('click',e=>{ e.preventDefault(); openDoc('terms'); });
-  $('#docClose').addEventListener('click',closeDoc);
-  /* 본문 어디서든 data-doc 링크로 모달을 엽니다.
-     라벨 안에 있는 링크라 체크박스가 같이 토글되지 않도록 전파를 막습니다. */
-  document.addEventListener('click',e=>{
-    const a=e.target.closest('[data-doc]'); if(!a) return;
-    e.preventDefault(); e.stopPropagation(); openDoc(a.dataset.doc);
-  });
-  $('#docLayer').addEventListener('click',e=>{ if(e.target===$('#docLayer')) closeDoc(); });
+    /* ---------- 주문 조회 ----------
+       Apps Script에 doGet(조회) 코드가 배포되어 있어야 작동합니다.
+       (함께 제공된 apps-script-order-lookup.gs 참고) */
+    const trackForm = document.getElementById('trackForm');
+    const trackResult = document.getElementById('trackResult');
 
-  addEventListener('keydown',e=>{
-    if(e.key!=='Escape') return;
-    if($('#pcLayer').classList.contains('show')) closePostcode();
-    if($('#docLayer').classList.contains('show')) closeDoc();
-  });
+    function esc(t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
 
-  /* 연락처 자동 하이픈 */
-  document.addEventListener('input',e=>{
-    if(e.target.type!=='tel') return;
-    const d=e.target.value.replace(/\D/g,'').slice(0,11);
-    e.target.value = d.length<4 ? d
-      : d.length<8 ? d.slice(0,3)+'-'+d.slice(3)
-      : d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7);
-  });
+    function fmtDate(v) {
+      const d = new Date(v);
+      if (isNaN(d)) return esc(v);
+      return d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
+    }
 
-  /* URL 파라미터 */
-  const bid = params.get('b');
-  const tp  = params.get('type');
-  if(tp){ S.scalpType=tp; track('scalp_type_select',{type:tp,source:'url'}); }
-  selectBrand(bid && brandOf(bid).id===bid ? bid : BRANDS[0].id, tp, false, true);
-  if(params.get('test')==='1') setTimeout(startTest,300);
+    function badge(text, good) {
+      return '<span class="status-badge ' + (good ? 'badge-ok' : 'badge-wait') + '">' + esc(text) + '</span>';
+    }
 
-  addEventListener('scroll',updateMobileCta,{passive:true});
-  updateMobileCta();
-  track('page_view',{brand:S.brand,utm_source:params.get('utm_source')||''});
-})();
-</script>
+    function renderOrders(orders) {
+      trackResult.innerHTML = orders.map(function (o) {
+        const pay = String(o.paymentStatus || '입금 확인 전');
+        const ship = String(o.shippingStatus || '배송 준비 전');
+        const payGood = /확인|완료/.test(pay);
+        const shipGood = /발송|배송중|완료|출고/.test(ship);
+        return '<div class="order-item">'
+          + '<div class="order-item-top"><div>' + esc(o.productName) + ' · ' + esc(o.option) + ' × ' + esc(o.qty) + '</div><span>' + fmtDate(o.orderedAt) + '</span></div>'
+          + '<div class="order-item-row"><span>주문번호</span><b>' + esc(o.orderNo) + '</b></div>'
+          + '<div class="order-item-row"><span>결제금액</span><b>' + won(Number(o.amount) || 0) + '</b></div>'
+          + '<div class="order-item-badges">'
+          + badge('입금: ' + pay, payGood)
+          + badge('배송: ' + ship, shipGood)
+          + (o.trackingNo ? badge('운송장 ' + o.trackingNo, true) : '')
+          + '</div></div>';
+      }).join('');
+    }
+
+    trackForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const endpoint = orderForm.dataset.endpoint.trim();
+      const name = document.getElementById('trackName').value.trim();
+      const last4 = document.getElementById('trackLast4').value.trim();
+      const button = trackForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+
+      if (!endpoint) {
+        trackResult.innerHTML = '<div class="lookup-msg">조회 서비스 준비 중입니다. 잠시 후 다시 시도해주세요.</div>';
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = '조회 중입니다...';
+      trackResult.innerHTML = '';
+
+      try {
+        const url = endpoint + '?type=lookup&name=' + encodeURIComponent(name) + '&last4=' + encodeURIComponent(last4);
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data && data.ok && data.orders && data.orders.length) {
+          renderOrders(data.orders);
+        } else {
+          trackResult.innerHTML = '<div class="lookup-msg">일치하는 주문 내역이 없습니다. 주문 시 입력한 이름과 휴대폰 뒷 4자리를 다시 확인해주세요.<br />방금 주문하셨다면 잠시 후 다시 조회해주세요.</div>';
+        }
+      } catch (error) {
+        console.error(error);
+        trackResult.innerHTML = '<div class="lookup-msg">조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</div>';
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    });
+  </script>
 </body>
 </html>
