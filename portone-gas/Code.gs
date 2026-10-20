@@ -3,7 +3,11 @@ const PORTONE_CONFIG = {
   spreadsheetProperty: 'ORDER_SPREADSHEET_ID',
   apiSecretProperty: 'PORTONE_API_SECRET',
   sheetNameProperty: 'ORDER_SHEET_NAME',
-  defaultSheetName: '카드결제'
+  defaultSheetName: '주문관리',
+  headerRow: 4,
+  dataStartRow: 5,
+  paymentMethodColumn: 17,
+  paymentIdColumn: 18
 };
 
 const PRODUCT_CATALOG = {
@@ -19,10 +23,7 @@ const PRODUCT_CATALOG = {
   '메르윈 리턴 클리닉 세트|200ml(g)': 180000
 };
 
-const ORDER_HEADERS = [
-  '주문일시', '주문번호', '포트원 결제 ID', '결제상태', '결제금액',
-  '주문상품', '총수량', '주문자명', '연락처', '우편번호', '배송지', '유입경로'
-];
+const CARD_HEADERS = ['결제방식', '포트원 결제 ID'];
 
 function doGet(e) {
   const params = (e && e.parameter) || {};
@@ -47,7 +48,6 @@ function doPost(e) {
   try {
     const body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     if (body.action === 'createPending') return jsonResponse_(createPending_(body));
-
     // 웹훅 내용만으로 결제를 완료 처리하지 않고, PortOne 결제 조회 API로 다시 확인합니다.
     const paymentId = body.paymentId || (body.data && body.data.paymentId);
     if (paymentId) return jsonResponse_(verifyAndSave_(paymentId));
@@ -66,13 +66,21 @@ function createPending_(body) {
   try {
     const sheet = orderSheet_();
     const existing = findOrderRow_(sheet, body.paymentId);
-    if (existing) return { ok: true, status: sheet.getRange(existing, 4).getDisplayValue(), orderNo: sheet.getRange(existing, 2).getDisplayValue() };
-    sheet.appendRow([
-      new Date(), String(body.orderNo || '').slice(0, 40), body.paymentId,
-      '결제대기', order.amount, order.summary, order.quantity,
-      order.buyer.name, order.buyer.phone, order.buyer.postcode,
-      order.buyer.address, String(body.source || '랜딩페이지').slice(0, 100)
-    ]);
+    if (existing) {
+      const status = sheet.getRange(existing, 12).getDisplayValue();
+      return { ok: true, status: status === '입금완료' ? 'PAID' : '결제대기', orderNo: sheet.getRange(existing, 2).getDisplayValue() };
+    }
+    const row = Math.max(PORTONE_CONFIG.dataStartRow, sheet.getLastRow() + 1);
+    const fullAddress = '[' + order.buyer.postcode + '] ' + order.buyer.address;
+    // C:D는 기존 시트의 빈/병합 영역이므로 건드리지 않고 A:B와 E:R만 기록합니다.
+    sheet.getRange(row, 1, 1, 2).setValues([[
+      new Date(), String(body.orderNo || '').slice(0, 40)
+    ]]);
+    sheet.getRange(row, 5, 1, 14).setValues([[
+      order.summary, order.quantity, order.amount, order.buyer.name,
+      order.buyer.phone, fullAddress, '', '미입금', '미신청',
+      '배송전', '', '포트원 카드결제', '카드결제', body.paymentId
+    ]]);
     return { ok: true, status: '결제대기', orderNo: body.orderNo };
   } finally {
     lock.releaseLock();
@@ -112,8 +120,8 @@ function verifyAndSave_(paymentId) {
   const sheet = orderSheet_();
   const row = findOrderRow_(sheet, paymentId);
   if (!row) return { ok: false, status: 'NOT_FOUND', message: '주문 기록이 없습니다. 다시 결제하지 말고 판매자에게 문의해주세요.' };
-  const currentStatus = sheet.getRange(row, 4).getDisplayValue();
-  if (currentStatus === '결제완료') return { ok: true, status: 'PAID', orderNo: sheet.getRange(row, 2).getDisplayValue() };
+  const currentStatus = sheet.getRange(row, 12).getDisplayValue();
+  if (currentStatus === '입금완료') return { ok: true, status: 'PAID', orderNo: sheet.getRange(row, 2).getDisplayValue() };
 
   const secret = PropertiesService.getScriptProperties().getProperty(PORTONE_CONFIG.apiSecretProperty);
   const url = 'https://api.portone.io/payments/' + encodeURIComponent(paymentId);
@@ -124,7 +132,7 @@ function verifyAndSave_(paymentId) {
   });
   if (response.getResponseCode() !== 200) throw new Error('포트원 결제 조회에 실패했습니다.');
   const payment = JSON.parse(response.getContentText());
-  const expectedAmount = Number(sheet.getRange(row, 5).getValue());
+  const expectedAmount = Number(sheet.getRange(row, 7).getValue());
   if (payment.id !== paymentId || payment.storeId !== PORTONE_CONFIG.storeId ||
       payment.status !== 'PAID' || Number(payment.amount && payment.amount.total) !== expectedAmount ||
       !payment.paymentMethod || payment.paymentMethod.type !== 'CARD') {
@@ -136,8 +144,7 @@ function verifyAndSave_(paymentId) {
   try {
     const freshRow = findOrderRow_(sheet, paymentId);
     if (!freshRow) throw new Error('주문 기록을 찾지 못했습니다.');
-    sheet.getRange(freshRow, 4).setValue('결제완료');
-    sheet.getRange(freshRow, 1).setValue(payment.paidAt ? new Date(payment.paidAt) : new Date());
+    sheet.getRange(freshRow, 12).setValue('입금완료');
     return { ok: true, status: 'PAID', orderNo: sheet.getRange(freshRow, 2).getDisplayValue() };
   } finally {
     lock.releaseLock();
@@ -149,7 +156,8 @@ function getOrderStatus_(paymentId) {
   const sheet = orderSheet_();
   const row = findOrderRow_(sheet, paymentId);
   if (!row) return { ok: false, status: 'NOT_FOUND', message: '주문 준비가 완료되지 않았습니다.' };
-  return { ok: true, status: sheet.getRange(row, 4).getDisplayValue(), orderNo: sheet.getRange(row, 2).getDisplayValue() };
+  const storedStatus = sheet.getRange(row, 12).getDisplayValue();
+  return { ok: true, status: storedStatus === '입금완료' ? 'PAID' : '결제대기', orderNo: sheet.getRange(row, 2).getDisplayValue() };
 }
 
 function orderSheet_() {
@@ -158,19 +166,20 @@ function orderSheet_() {
   if (!spreadsheetId) throw new Error('주문관리 시트 ID 설정이 필요합니다.');
   const ss = SpreadsheetApp.openById(spreadsheetId);
   const name = props.getProperty(PORTONE_CONFIG.sheetNameProperty) || PORTONE_CONFIG.defaultSheetName;
-  let sheet = ss.getSheetByName(name);
-  if (!sheet) {
-    sheet = ss.insertSheet(name);
-    sheet.getRange(1, 1, 1, ORDER_HEADERS.length).setValues([ORDER_HEADERS]);
-    sheet.setFrozenRows(1);
-  }
+  const sheet = ss.getSheetByName(name);
+  if (!sheet) throw new Error('기존 주문관리 시트 탭을 찾을 수 없습니다.');
+  const headerRange = sheet.getRange(PORTONE_CONFIG.headerRow, PORTONE_CONFIG.paymentMethodColumn, 1, CARD_HEADERS.length);
+  const headers = headerRange.getDisplayValues()[0];
+  if (headers[0] && headers[0] !== CARD_HEADERS[0]) throw new Error('Q4 결제방식 열에 다른 제목이 있어 확인이 필요합니다.');
+  if (headers[1] && headers[1] !== CARD_HEADERS[1]) throw new Error('R4 포트원 결제 ID 열에 다른 제목이 있어 확인이 필요합니다.');
+  if (!headers[0] || !headers[1]) headerRange.setValues([CARD_HEADERS]);
   return sheet;
 }
 
 function findOrderRow_(sheet, paymentId) {
   const lastRow = sheet.getLastRow();
-  if (lastRow < 2) return 0;
-  const found = sheet.getRange(2, 3, lastRow - 1, 1).createTextFinder(paymentId).matchEntireCell(true).findNext();
+  if (lastRow < PORTONE_CONFIG.dataStartRow) return 0;
+  const found = sheet.getRange(PORTONE_CONFIG.dataStartRow, PORTONE_CONFIG.paymentIdColumn, lastRow - PORTONE_CONFIG.dataStartRow + 1, 1).createTextFinder(paymentId).matchEntireCell(true).findNext();
   return found ? found.getRow() : 0;
 }
 
