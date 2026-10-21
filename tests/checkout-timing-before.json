@@ -1,0 +1,40 @@
+{
+  "mode": "before",
+  "count": 5,
+  "medianMs": 4688,
+  "meanMs": 4331,
+  "minMs": 3327,
+  "maxMs": 5358,
+  "samples": [
+    {
+      "paymentId": "mdy-473ba6c3-2f9e-4423-b5f5-f1135f8d3d11",
+      "prepareMs": 4048,
+      "ackMs": 1310,
+      "totalMs": 5358
+    },
+    {
+      "paymentId": "mdy-f16d44de-4bbe-4e48-b7aa-f99f915c9a56",
+      "prepareMs": 3201,
+      "ackMs": 1513,
+      "totalMs": 4714
+    },
+    {
+      "paymentId": "mdy-33900e15-c787-4636-9b83-8f6553f0dcd3",
+      "prepareMs": 2992,
+      "ackMs": 1695,
+      "totalMs": 4688
+    },
+    {
+      "paymentId": "mdy-43a793be-f322-4e3a-a587-faad8df680fb",
+      "prepareMs": 2277,
+      "ackMs": 1290,
+      "totalMs": 3567
+    },
+    {
+      "paymentId": "mdy-bd4c5610-bdb1-469b-a44b-dffcebec3a0e",
+      "prepareMs": 2310,
+      "ackMs": 1017,
+      "totalMs": 3327
+    }
+  ]
+}

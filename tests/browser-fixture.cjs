@@ -5,7 +5,14 @@ const prelude=`<script>
 window.mockCalls=[];
 const scenario=new URLSearchParams(location.search).get('scenario')||'paid';
 function track(kind){mockCalls.push(kind);document.getElementById('mockCalls')?.replaceChildren(document.createTextNode(mockCalls.join(' → ')));}
-window.fetch=async(url,options)=>{if(String(url).includes('script.google.com')){track('POST');window.lastMockPayload=JSON.parse(options.body);return new Response('');}throw new Error('Unexpected network request');};
+window.fetch=async(url,options)=>{
+ if(String(url).includes('mandayoon-checkout-api.dilec.chatgpt.site')){
+  const action=new URL(url).pathname.slice(1);track(action);window.lastMockPayload=JSON.parse(options.body);
+  await new Promise(resolve=>setTimeout(resolve,scenario==='slow'?6000:50));
+  const result=action==='prepare'?{ok:scenario!=='prepare-error',status:scenario==='prepare-error'?'NOT_FOUND':'결제대기'}:scenario==='unknown'?{ok:false,status:'PENDING',message:'승인 확인 중입니다.'}:scenario==='failed'?{ok:false,status:'FAILED',message:'결제가 완료되지 않았습니다.'}:{ok:true,status:'PAID',orderNo:'UI-TEST-ONLY'};
+  return new Response(JSON.stringify(result),{headers:{'Content-Type':'application/json'}});
+ }
+ if(String(url).includes('script.google.com')){track('POST');window.lastMockPayload=JSON.parse(options.body);return new Response('');}throw new Error('Unexpected network request');};
 const append=document.head.appendChild.bind(document.head);
 document.head.appendChild=function(node){if(node.tagName==='SCRIPT'&&node.src.includes('script.google.com')){
  const q=new URL(node.src).searchParams,a=q.get('action'),cb=q.get('callback');track(a);
