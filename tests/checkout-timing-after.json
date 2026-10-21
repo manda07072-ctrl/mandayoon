@@ -1,0 +1,40 @@
+{
+  "mode": "after",
+  "count": 5,
+  "medianMs": 117,
+  "meanMs": 229,
+  "minMs": 102,
+  "maxMs": 681,
+  "samples": [
+    {
+      "paymentId": "mdy-f7efc3a2-28df-4be1-9036-ce296382aed7",
+      "prepareMs": 681,
+      "ackMs": 0,
+      "totalMs": 681
+    },
+    {
+      "paymentId": "mdy-f1934c9a-c976-4e48-8269-a0a6413f6ab0",
+      "prepareMs": 132,
+      "ackMs": 0,
+      "totalMs": 132
+    },
+    {
+      "paymentId": "mdy-810e2a2d-eb1b-48dd-90fe-bbd50639f59f",
+      "prepareMs": 115,
+      "ackMs": 0,
+      "totalMs": 115
+    },
+    {
+      "paymentId": "mdy-49222a26-1dd9-4d8a-938f-fb5a8a7a4cf4",
+      "prepareMs": 102,
+      "ackMs": 0,
+      "totalMs": 102
+    },
+    {
+      "paymentId": "mdy-e35bfb07-08ff-4c71-b6da-ad67732b44d3",
+      "prepareMs": 117,
+      "ackMs": 0,
+      "totalMs": 117
+    }
+  ]
+}

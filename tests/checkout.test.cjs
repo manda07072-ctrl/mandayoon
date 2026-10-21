@@ -27,15 +27,18 @@ function env(){
   const queue=new Sheet('_카드결제대기',[['준비일시','결제 ID','주문번호','주문정보','상태','확인일시']]);
   const sheets=new Map([[main.name,main],[queue.name,queue]]),cache=new Map();
   const ss={getSheetByName:n=>sheets.get(n),insertSheet:n=>{const s=new Sheet(n);sheets.set(n,s);return s;},setSpreadsheetTimeZone:z=>{ss.zone=z;}};
-  const fixtures=new Map(),calls=[];
+  const fixtures=new Map(),calls=[],bridge={allowed:true};
   const ctx=vm.createContext({console,Date,JSON,Number,String,Boolean,Array,Math,Error,
     PropertiesService:{getScriptProperties:()=>({getProperty:k=>({PORTONE_API_SECRET:'test-only-placeholder',ORDER_SPREADSHEET_ID:'test-sheet',ORDER_SHEET_NAME:'주문관리'})[k]})},
     SpreadsheetApp:{openById:()=>ss,flush(){}},LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},
     CacheService:{getScriptCache:()=>({put:(k,v)=>cache.set(k,v),get:k=>cache.get(k)||null})},
     ScriptApp:{getProjectTriggers:()=>[],newTrigger:()=>({timeBased(){return this;},everyMinutes(){return this;},create(){}})},
-    UrlFetchApp:{fetch:(url,options)=>{assert.equal(options.method,'get');calls.push(url);const id=decodeURIComponent(url.split('/payments/')[1].split('?')[0]);const f=fixtures.get(id)||{code:404};return {getResponseCode:()=>f.code||200,getContentText:()=>JSON.stringify(f.payment)};}}
+    UrlFetchApp:{fetch:(url,options)=>{
+      if(url.includes('/internal/verify-envelope'))return {getResponseCode:()=>bridge.allowed?200:403,getContentText:()=>JSON.stringify({ok:bridge.allowed})};
+      if(url.endsWith('/recover'))return {getResponseCode:()=>200,getContentText:()=>'{}'};
+      assert.equal(options.method,'get');calls.push(url);const id=decodeURIComponent(url.split('/payments/')[1].split('?')[0]);const f=fixtures.get(id)||{code:404};return {getResponseCode:()=>f.code||200,getContentText:()=>JSON.stringify(f.payment)};}}
   });vm.runInContext(code,ctx);
-  return {ctx,main,queue,fixtures,calls,cache,ss};
+  return {ctx,main,queue,fixtures,calls,cache,ss,bridge};
 }
 const id='mdy-11111111-1111-4111-8111-111111111111';
 function order(pid=id){return {paymentId:pid,orderNo:'MDY-20261021-1234abcd',items:[{name:'두피샴푸 건성',volume:'300ml',qty:1}],amount:35000,buyer:{name:'테스트',phone:'01000000000',postcode:'12345',address:'검증 전용 주소'}};}
@@ -50,3 +53,14 @@ test('legacy unpaid rows migrate only after API check and remain recoverable',()
 test('delayed PAID is recovered by reconciliation; unresolved and bank orders remain',()=>{const e=env();e.ctx.createPending_(order());e.queue.data[1][0]=new Date(Date.now()-3600000);e.main.appendRow([new Date(),'BANK-1','','','샴푸',1,35000,'테스트','','','','미입금']);e.fixtures.set(id,{payment:paid()});e.ctx.reconcileCardOrders();assert.equal(e.main.getLastRow(),6);assert.equal(e.main.data[4][11],'미입금');assert.equal(e.main.data[5][11],'입금완료');});
 test('setup uses Korea timezone and minute display without replacing history',()=>{const e=env();e.main.appendRow([12345]);e.ctx.setupCheckout();assert.equal(e.ss.zone,'Asia/Seoul');assert.equal(e.main.data[4][0],12345);assert.equal(e.main.format,'yyyy-mm-dd hh:mm');});
 test('inline JavaScript compiles',()=>{const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(m[1].trim())new vm.Script(m[1]);});
+test('external checkout verifies payment before any sheet write and deduplicates later synchronization',()=>{
+ const e=env();e.fixtures.set(id,{payment:paid()});const payload={...order(),createdAt:new Date().toISOString()};
+ const body={action:'externalVerify',payload:JSON.stringify(payload),timestamp:Date.now(),signature:'fixture'};
+ assert.equal(e.ctx.externalCheckout_(body).status,'PAID');assert.equal(e.main.getLastRow(),4);assert.equal(e.queue.getLastRow(),1);
+ e.ctx.externalCheckout_({...body,action:'externalSync'});e.ctx.externalCheckout_({...body,action:'externalSync'});assert.equal(e.main.getLastRow(),5);assert.equal(e.main.data[4][16],'카드결제');
+});
+test('untrusted external requests and wrong approval amounts never reach the sheet',()=>{
+ const e=env(),payload={...order(),createdAt:new Date().toISOString()},body={action:'externalSync',payload:JSON.stringify(payload)};
+ e.bridge.allowed=false;assert.throws(()=>e.ctx.externalCheckout_(body));assert.equal(e.calls.length,0);
+ e.bridge.allowed=true;e.fixtures.set(id,{payment:{...paid(),amount:{total:1}}});assert.throws(()=>e.ctx.externalCheckout_(body));assert.equal(e.main.getLastRow(),4);
+});

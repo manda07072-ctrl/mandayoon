@@ -2166,6 +2166,7 @@
   <script>
     // Store ID와 채널 키는 공개 식별자입니다. V2 API Secret은 Apps Script 속성에만 저장하세요.
     const CARD_LIVE_CONFIG = {
+      checkoutUrl: 'https://mandayoon-checkout-api.dilec.chatgpt.site',
       storeId: 'store-33be0510-ab4b-4791-8b5f-ebce201873cc',
       channelKey: 'channel-key-c4a0318c-6f6a-423d-853b-e90f9c5ac49d',
       // Apps Script Web App 배포 URL을 넣기 전까지 결제 버튼은 결제를 시작하지 않습니다.
@@ -2543,6 +2544,21 @@
     const verifyPaymentButton = document.getElementById('verifyPaymentButton');
     const cardReturnParams = new URLSearchParams(window.location.search);
     let checkingPaymentId = '';
+    let checkingCheckoutToken = '';
+    let checkingFastCheckout = false;
+    async function checkoutRequest(action, payload) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), action === 'prepare' ? 15000 : 80000);
+      try {
+        const response = await fetch(CARD_LIVE_CONFIG.checkoutUrl + '/' + action, {
+          method: 'POST', signal: controller.signal,
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || '주문 서버에 연결하지 못했습니다.');
+        return result;
+      } finally { clearTimeout(timer); }
+    }
     let checkoutTimer, busyControls = [];
     function setCheckoutBusy(busy, stage = '결제창을 준비하고 있어요') {
       clearInterval(checkoutTimer);
@@ -2601,7 +2617,9 @@
       checkingPaymentId = paymentId;
       setCheckoutBusy(true, '결제 승인과 주문 접수를 확인하고 있어요');
       try {
-        const result = await jsonp('confirm', paymentId);
+        const result = checkingFastCheckout
+          ? await checkoutRequest('confirm', { paymentId, checkoutToken: checkingCheckoutToken })
+          : await jsonp('confirm', paymentId);
         if (result?.ok && result.status === 'PAID') {
           checkoutCompleted = true; paymentNeedsReview = false;
           verifyPaymentButton.hidden = true;
@@ -2633,6 +2651,8 @@
         postcodeInput.value = saved.payload.buyer.postcode; addressInput.value = saved.address; addressDetailInput.value = saved.addressDetail;
         orderForm.querySelector('input[value="card"][name="paymentMethod"]').checked = true;
         checkingPaymentId = saved.payload.paymentId;
+        checkingCheckoutToken = saved.payload.checkoutToken || '';
+        checkingFastCheckout = saved.backend === 'fast-v1';
         renderCart();
       } catch (_) {}
     }
@@ -2644,12 +2664,13 @@
       document.getElementById('order').scrollIntoView({ block: 'start' });
     }
     async function startCardCheckout() {
-      if (!/^https:\/\/script\.google\.com\/macros\/s\//.test(CARD_LIVE_CONFIG.backendUrl)) { cardTestResult.textContent = '카드결제 연결 설정이 필요합니다.'; return; }
+      if (!/^https:\/\//.test(CARD_LIVE_CONFIG.checkoutUrl)) { cardTestResult.textContent = '카드결제 연결 설정이 필요합니다.'; return; }
       if (!window.PortOne || typeof window.PortOne.requestPayment !== 'function') { cardTestResult.textContent = '결제 모듈을 불러오지 못했습니다. 새로고침한 뒤 다시 시도해주세요.'; return; }
       if (!postcodeInput.value.trim() || !addressInput.value.trim() || !addressDetailInput.value.trim()) { cardTestResult.textContent = '우편번호 검색 후 상세주소까지 입력해주세요.'; return; }
       if (window.location.protocol === 'file:') { cardTestResult.textContent = '카드결제는 HTTPS 주소에서 진행해주세요.'; return; }
       const paymentId = `mdy-${crypto.randomUUID()}`;
       const payload = currentOrderPayload(paymentId);
+      payload.checkoutToken = crypto.randomUUID() + crypto.randomUUID();
       const orderName = cart.length === 1 ? `${cart[0].name} ${cart[0].volume}` : `${cart[0].name} 외 ${cart.length - 1}건`;
       const redirectUrl = new URL(window.location.pathname, window.location.origin);
       redirectUrl.searchParams.set('card_payment', '1');
@@ -2658,24 +2679,22 @@
       setCheckoutBusy(true, '주문 정보를 안전하게 준비하고 있어요');
       performance.mark('checkout-start');
       try {
-        // No blocking ping: durable prepare + acknowledgement are the only prerequisites.
-        const controller = new AbortController();
-        const prepareTimeout = setTimeout(() => controller.abort(), 35000);
-        try {
-          await fetch(CARD_LIVE_CONFIG.backendUrl, { method: 'POST', mode: 'no-cors', signal: controller.signal, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-        } finally { clearTimeout(prepareTimeout); }
-        document.getElementById('checkoutStage').textContent = '결제창을 연결하고 있어요';
-        const pending = await jsonp('status', paymentId);
+        // One durable database write and acknowledgement; no Google request before the SDK.
+        const pending = await checkoutRequest('prepare', payload);
         if (!pending?.ok || pending.status !== '결제대기') throw new Error(pending?.message || '주문 정보를 확인하지 못했습니다. 결제는 시작되지 않았습니다.');
+        document.getElementById('checkoutStage').textContent = '결제창을 연결하고 있어요';
         performance.mark('checkout-order-ready');
-        try { sessionStorage.setItem('mandayoonCardAttempt', JSON.stringify({ payload, savedAt: Date.now(), phone: phoneInput.value, address: addressInput.value, addressDetail: addressDetailInput.value })); } catch (_) {}
-        checkingPaymentId = paymentId; paymentRequested = true;
+        const attempt = JSON.stringify({ payload, backend: 'fast-v1', savedAt: Date.now(), phone: phoneInput.value, address: addressInput.value, addressDetail: addressDetailInput.value });
+        try { sessionStorage.setItem('mandayoonCardAttempt', attempt); }
+        catch (_) { throw new Error('결제 결과를 안전하게 확인하려면 브라우저 저장 공간을 허용해주세요.'); }
+        checkingPaymentId = paymentId; checkingCheckoutToken = payload.checkoutToken;
+        checkingFastCheckout = true; paymentRequested = true;
         performance.mark('checkout-sdk-request');
         await window.PortOne.requestPayment({
           storeId: CARD_LIVE_CONFIG.storeId, channelKey: CARD_LIVE_CONFIG.channelKey,
           paymentId, orderName, totalAmount: payload.amount, currency: 'CURRENCY_KRW', payMethod: 'CARD',
           customer: { fullName: payload.buyer.name, phoneNumber: payload.buyer.phone },
-          noticeUrls: [CARD_LIVE_CONFIG.backendUrl], redirectUrl: redirectUrl.toString(), forceRedirect: true
+          noticeUrls: [CARD_LIVE_CONFIG.checkoutUrl + '/webhook'], redirectUrl: redirectUrl.toString(), forceRedirect: true
         });
         // Verify server-side even when the SDK returns an error; approval may be delayed.
         setCheckoutBusy(false);

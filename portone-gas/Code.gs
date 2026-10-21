@@ -3,7 +3,7 @@ const PORTONE_CONFIG = {
   channelKey: 'channel-key-c4a0318c-6f6a-423d-853b-e90f9c5ac49d',
   defaultSheetName: '주문관리', pendingSheetName: '_카드결제대기',
   headerRow: 4, dataStartRow: 5, paymentIdColumn: 18,
-  version: '2026-10-21-checkout-v3'
+  version: '2026-10-21-fast-checkout-v1'
 };
 const PRODUCT_CATALOG = {
   '두피샴푸 건성|300ml': 35000, '두피샴푸 건성|1000ml': 80000,
@@ -28,6 +28,7 @@ function doGet(e) {
 function doPost(e) {
   try {
     const body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    if (body.action === 'externalVerify' || body.action === 'externalSync') return jsonResponse_(externalCheckout_(body));
     if (body.action === 'createPending') return jsonResponse_(createPending_(body));
     const paymentId = body.paymentId || (body.data && body.data.paymentId);
     return jsonResponse_(paymentId ? verifyAndSave_(paymentId) : { ok: false, message: '결제 ID가 없습니다.' });
@@ -214,6 +215,10 @@ function migrateLegacyPending_() {
   } finally { lock.releaseLock(); }
 }
 function reconcileCardOrders() {
+  // Wake durable recovery outside this Apps Script request. No new checkout waits for Google.
+  try { UrlFetchApp.fetch('https://mandayoon-checkout-api.dilec.chatgpt.site/recover', {
+    method: 'post', contentType: 'application/json', payload: '{}', muteHttpExceptions: true
+  }); } catch (error) { /* Retry at the next existing 15-minute trigger. */ }
   // Retain uncertain/in-flight records. Retry paid webhooks that were delayed/lost.
   const queue = pendingSheet_(), last = queue.getLastRow();
   if (last < 2) return;
@@ -245,3 +250,44 @@ function respond_(result, callback) {
 }
 function jsonResponse_(value) { return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON); }
 function safeMessage_(error) { return String(error && error.message || '처리 중 오류가 발생했습니다.').slice(0, 200); }
+
+function externalCheckout_(body) {
+  assertConfigured_();
+  if (typeof body.payload !== 'string' || body.payload.length > 16000) throw new Error('주문 서버 인증에 실패했습니다.');
+  // Authenticate against the fixed trusted server and its immutable durable order.
+  // The server's signing secret never needs to be copied into Apps Script.
+  const envelope = UrlFetchApp.fetch('https://mandayoon-checkout-api.dilec.chatgpt.site/internal/verify-envelope', {
+    method: 'post', contentType: 'application/json', payload: JSON.stringify(body), muteHttpExceptions: true
+  });
+  if (envelope.getResponseCode() !== 200 || JSON.parse(envelope.getContentText()).ok !== true) throw new Error('주문 서버 인증에 실패했습니다.');
+  const payload = JSON.parse(body.payload); validatePaymentId_(payload.paymentId);
+  const order = validateOrder_(payload);
+  if (!/^MDY-\d{8}-[a-f0-9]{8}$/i.test(String(payload.orderNo || '')) || !Number.isFinite(Date.parse(payload.createdAt))) throw new Error('주문 정보가 올바르지 않습니다.');
+  order.orderNo = payload.orderNo; order.createdAt = payload.createdAt;
+  const payment = fetchPayment_(payload.paymentId);
+  if (payment.status !== 'PAID') return { ok: false, status: payment.status };
+  assertPaid_(payment, payload.paymentId, order.amount);
+  if (body.action === 'externalVerify') return { ok: true, status: 'PAID', orderNo: order.orderNo };
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try {
+    const sheet = orderSheet_();
+    const row = findRow_(sheet, payload.paymentId, PORTONE_CONFIG.paymentIdColumn, PORTONE_CONFIG.dataStartRow);
+    if (!row) appendPaidOrder_(sheet, payload.paymentId, order);
+    SpreadsheetApp.flush();
+    return { ok: true, status: 'PAID', orderNo: order.orderNo };
+  } finally { lock.releaseLock(); }
+}
+
+// Removes only the five explicitly identified synthetic timing samples, never customer orders.
+function cleanupCheckoutTimingSamples() {
+  const ids = ['mdy-473ba6c3-2f9e-4423-b5f5-f1135f8d3d11','mdy-f16d44de-4bbe-4e48-b7aa-f99f915c9a56','mdy-33900e15-c787-4636-9b83-8f6553f0dcd3','mdy-43a793be-f322-4e3a-a587-faad8df680fb','mdy-bd4c5610-bdb1-469b-a44b-dffcebec3a0e'];
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try {
+    const sheet = pendingSheet_(); let removed = 0;
+    ids.forEach(id => {
+      const found = pendingRecord_(sheet, id);
+      if (found && found.state === 'OPEN' && found.order.buyer.name === '속도측정 전용' && found.order.buyer.address === '속도 측정용 가상 주소') { sheet.deleteRow(found.row); removed++; }
+    });
+    console.log(JSON.stringify({timingSamplesRemoved:removed}));
+  } finally { lock.releaseLock(); }
+}
