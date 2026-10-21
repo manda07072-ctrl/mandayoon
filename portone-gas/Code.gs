@@ -1,8 +1,9 @@
 const PORTONE_CONFIG = {
   storeId: 'store-33be0510-ab4b-4791-8b5f-ebce201873cc',
+  channelKey: 'channel-key-c4a0318c-6f6a-423d-853b-e90f9c5ac49d',
   defaultSheetName: '주문관리', pendingSheetName: '_카드결제대기',
   headerRow: 4, dataStartRow: 5, paymentIdColumn: 18,
-  version: '2026-10-21-checkout-v2'
+  version: '2026-10-21-checkout-v3'
 };
 const PRODUCT_CATALOG = {
   '두피샴푸 건성|300ml': 35000, '두피샴푸 건성|1000ml': 80000,
@@ -124,6 +125,7 @@ function fetchPayment_(id) {
 }
 function assertPaid_(payment, id, expectedAmount) {
   if (payment.id !== id || payment.storeId !== PORTONE_CONFIG.storeId || payment.status !== 'PAID' ||
+      !payment.channel || payment.channel.key !== PORTONE_CONFIG.channelKey || payment.channel.type !== 'LIVE' ||
       payment.currency !== 'KRW' || Number(payment.amount && payment.amount.total) !== expectedAmount ||
       !payment.method || payment.method.type !== 'PaymentMethodCard') throw new Error('결제 정보가 주문 내용과 일치하지 않습니다. 판매자에게 문의해주세요.');
 }
@@ -135,7 +137,7 @@ function appendPaidOrder_(sheet, id, order) {
   // Preserve C:D and all existing bank-transfer columns/validations.
   sheet.getRange(row, 5, 1, 14).setValues([[
     safeCell_(order.summary), order.quantity, order.amount, safeCell_(order.buyer.name),
-    safeCell_(order.buyer.phone), safeCell_('[' + order.buyer.postcode + '] ' + order.buyer.address),
+    safeCell_(order.buyer.phone), safeCell_((order.buyer.postcode ? '[' + order.buyer.postcode + '] ' : '') + order.buyer.address),
     '', '입금완료', '미신청', '배송전', '', '포트원 카드결제', '카드결제', id
   ]]);
   sheet.getRange(row, 1).setNumberFormat('yyyy-mm-dd hh:mm');
