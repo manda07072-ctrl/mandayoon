@@ -1,213 +1,245 @@
 const PORTONE_CONFIG = {
   storeId: 'store-33be0510-ab4b-4791-8b5f-ebce201873cc',
-  spreadsheetProperty: 'ORDER_SPREADSHEET_ID',
-  apiSecretProperty: 'PORTONE_API_SECRET',
-  sheetNameProperty: 'ORDER_SHEET_NAME',
-  defaultSheetName: '주문관리',
-  headerRow: 4,
-  dataStartRow: 5,
-  paymentMethodColumn: 17,
-  paymentIdColumn: 18
+  defaultSheetName: '주문관리', pendingSheetName: '_카드결제대기',
+  headerRow: 4, dataStartRow: 5, paymentIdColumn: 18,
+  version: '2026-10-21-checkout-v2'
 };
-
 const PRODUCT_CATALOG = {
-  '두피샴푸 건성|300ml': 35000,
-  '두피샴푸 건성|1000ml': 80000,
-  '두피샴푸 지성|300ml': 35000,
-  '두피샴푸 지성|1000ml': 83000,
-  '두피팩 건성|300g': 45000,
-  '두피팩 건성|1000g': 120000,
-  '두피팩 지성|300g': 45000,
-  '두피팩 지성|1000g': 120000,
-  '스케일링 젤|150ml': 36000,
-  '메르윈 리턴 클리닉 세트|200ml(g)': 180000
+  '두피샴푸 건성|300ml': 35000, '두피샴푸 건성|1000ml': 80000,
+  '두피샴푸 지성|300ml': 35000, '두피샴푸 지성|1000ml': 83000,
+  '두피팩 건성|300g': 45000, '두피팩 건성|1000g': 120000,
+  '두피팩 지성|300g': 45000, '두피팩 지성|1000g': 120000,
+  '스케일링 젤|150ml': 36000, '메르윈 리턴 클리닉 세트|200ml(g)': 180000
 };
-
-const CARD_HEADERS = ['결제방식', '포트원 결제 ID'];
 
 function doGet(e) {
-  const params = (e && e.parameter) || {};
+  const p = (e && e.parameter) || {};
   let result;
   try {
-    if (params.action === 'ping') {
-      result = { ok: isConfigured(), message: isConfigured() ? 'ready' : '설정이 필요합니다.' };
-    } else if (params.action === 'status') {
-      result = getOrderStatus_(params.paymentId);
-    } else if (params.action === 'confirm') {
-      result = verifyAndSave_(params.paymentId);
-    } else {
-      result = { ok: false, message: '지원하지 않는 요청입니다.' };
-    }
-  } catch (error) {
-    result = { ok: false, message: safeMessage_(error) };
-  }
-  return respond_(result, params.callback);
+    if (p.action === 'ping') result = { ok: isConfigured(), message: isConfigured() ? 'ready' : '설정이 필요합니다.', version: PORTONE_CONFIG.version };
+    else if (p.action === 'status') result = getOrderStatus_(p.paymentId);
+    else if (p.action === 'confirm') result = verifyAndSave_(p.paymentId);
+    else result = { ok: false, message: '지원하지 않는 요청입니다.' };
+  } catch (error) { result = { ok: false, message: safeMessage_(error) }; }
+  return respond_(result, p.callback);
 }
 
 function doPost(e) {
   try {
     const body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     if (body.action === 'createPending') return jsonResponse_(createPending_(body));
-    // 웹훅 내용만으로 결제를 완료 처리하지 않고, PortOne 결제 조회 API로 다시 확인합니다.
     const paymentId = body.paymentId || (body.data && body.data.paymentId);
-    if (paymentId) return jsonResponse_(verifyAndSave_(paymentId));
-    return jsonResponse_({ ok: false, message: '결제 ID가 없습니다.' });
-  } catch (error) {
-    return jsonResponse_({ ok: false, message: safeMessage_(error) });
-  }
-}
-
-function createPending_(body) {
-  assertConfigured_();
-  validatePaymentId_(body.paymentId);
-  const order = validateOrder_(body);
-  const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
-  try {
-    const sheet = orderSheet_();
-    const existing = findOrderRow_(sheet, body.paymentId);
-    if (existing) {
-      const status = sheet.getRange(existing, 12).getDisplayValue();
-      return { ok: true, status: status === '입금완료' ? 'PAID' : '결제대기', orderNo: sheet.getRange(existing, 2).getDisplayValue() };
-    }
-    const row = Math.max(PORTONE_CONFIG.dataStartRow, sheet.getLastRow() + 1);
-    const fullAddress = '[' + order.buyer.postcode + '] ' + order.buyer.address;
-    // C:D는 기존 시트의 빈/병합 영역이므로 건드리지 않고 A:B와 E:R만 기록합니다.
-    sheet.getRange(row, 1, 1, 2).setValues([[
-      new Date(), String(body.orderNo || '').slice(0, 40)
-    ]]);
-    sheet.getRange(row, 5, 1, 14).setValues([[
-      order.summary, order.quantity, order.amount, order.buyer.name,
-      order.buyer.phone, fullAddress, '', '미입금', '미신청',
-      '배송전', '', '포트원 카드결제', '카드결제', body.paymentId
-    ]]);
-    return { ok: true, status: '결제대기', orderNo: body.orderNo };
-  } finally {
-    lock.releaseLock();
-  }
-}
-
-function validateOrder_(body) {
-  const items = Array.isArray(body.items) ? body.items : [];
-  if (!items.length || items.length > 20) throw new Error('주문 상품을 확인할 수 없습니다.');
-  let amount = 0;
-  let quantity = 0;
-  const descriptions = [];
-  items.forEach(item => {
-    const key = String(item.name || '') + '|' + String(item.volume || '');
-    const unitPrice = PRODUCT_CATALOG[key];
-    const qty = Number(item.qty);
-    if (!unitPrice || !Number.isInteger(qty) || qty < 1 || qty > 20) throw new Error('상품 또는 수량이 올바르지 않습니다.');
-    amount += unitPrice * qty;
-    quantity += qty;
-    descriptions.push(`${item.name} ${item.volume} × ${qty}`);
-  });
-  if (Number(body.amount) !== amount) throw new Error('주문 금액이 상품 가격과 일치하지 않습니다.');
-  const buyer = body.buyer || {};
-  const name = String(buyer.name || '').trim();
-  const phone = String(buyer.phone || '').replace(/\D/g, '');
-  const postcode = String(buyer.postcode || '').trim();
-  const address = String(buyer.address || '').trim();
-  if (!name || name.length > 50 || !/^01[016789]\d{7,8}$/.test(phone) || !postcode || !address || address.length > 300) {
-    throw new Error('주문자 정보나 배송지를 확인해주세요.');
-  }
-  return { amount, quantity, summary: descriptions.join(' / ').slice(0, 500), buyer: { name, phone, postcode, address } };
-}
-
-function verifyAndSave_(paymentId) {
-  assertConfigured_();
-  validatePaymentId_(paymentId);
-  const sheet = orderSheet_();
-  const row = findOrderRow_(sheet, paymentId);
-  if (!row) return { ok: false, status: 'NOT_FOUND', message: '주문 기록이 없습니다. 다시 결제하지 말고 판매자에게 문의해주세요.' };
-  const currentStatus = sheet.getRange(row, 12).getDisplayValue();
-  if (currentStatus === '입금완료') return { ok: true, status: 'PAID', orderNo: sheet.getRange(row, 2).getDisplayValue() };
-
-  const secret = PropertiesService.getScriptProperties().getProperty(PORTONE_CONFIG.apiSecretProperty);
-  const url = 'https://api.portone.io/payments/' + encodeURIComponent(paymentId);
-  const response = UrlFetchApp.fetch(url, {
-    method: 'get',
-    headers: { Authorization: 'PortOne ' + secret },
-    muteHttpExceptions: true
-  });
-  if (response.getResponseCode() !== 200) throw new Error('포트원 결제 조회에 실패했습니다.');
-  const payment = JSON.parse(response.getContentText());
-  const expectedAmount = Number(sheet.getRange(row, 7).getValue());
-  if (payment.id !== paymentId || payment.storeId !== PORTONE_CONFIG.storeId ||
-      payment.status !== 'PAID' || Number(payment.amount && payment.amount.total) !== expectedAmount ||
-      !payment.paymentMethod || payment.paymentMethod.type !== 'CARD') {
-    return { ok: false, status: payment.status || 'UNVERIFIED', message: '결제 승인을 확인하지 못했습니다. 잠시 뒤 다시 확인해주세요.' };
-  }
-
-  const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
-  try {
-    const freshRow = findOrderRow_(sheet, paymentId);
-    if (!freshRow) throw new Error('주문 기록을 찾지 못했습니다.');
-    sheet.getRange(freshRow, 12).setValue('입금완료');
-    return { ok: true, status: 'PAID', orderNo: sheet.getRange(freshRow, 2).getDisplayValue() };
-  } finally {
-    lock.releaseLock();
-  }
-}
-
-function getOrderStatus_(paymentId) {
-  validatePaymentId_(paymentId);
-  const sheet = orderSheet_();
-  const row = findOrderRow_(sheet, paymentId);
-  if (!row) return { ok: false, status: 'NOT_FOUND', message: '주문 준비가 완료되지 않았습니다.' };
-  const storedStatus = sheet.getRange(row, 12).getDisplayValue();
-  return { ok: true, status: storedStatus === '입금완료' ? 'PAID' : '결제대기', orderNo: sheet.getRange(row, 2).getDisplayValue() };
-}
-
-function orderSheet_() {
-  const props = PropertiesService.getScriptProperties();
-  const spreadsheetId = props.getProperty(PORTONE_CONFIG.spreadsheetProperty);
-  if (!spreadsheetId) throw new Error('주문관리 시트 ID 설정이 필요합니다.');
-  const ss = SpreadsheetApp.openById(spreadsheetId);
-  const name = props.getProperty(PORTONE_CONFIG.sheetNameProperty) || PORTONE_CONFIG.defaultSheetName;
-  const sheet = ss.getSheetByName(name);
-  if (!sheet) throw new Error('기존 주문관리 시트 탭을 찾을 수 없습니다.');
-  const headerRange = sheet.getRange(PORTONE_CONFIG.headerRow, PORTONE_CONFIG.paymentMethodColumn, 1, CARD_HEADERS.length);
-  const headers = headerRange.getDisplayValues()[0];
-  if (headers[0] && headers[0] !== CARD_HEADERS[0]) throw new Error('Q4 결제방식 열에 다른 제목이 있어 확인이 필요합니다.');
-  if (headers[1] && headers[1] !== CARD_HEADERS[1]) throw new Error('R4 포트원 결제 ID 열에 다른 제목이 있어 확인이 필요합니다.');
-  if (!headers[0] || !headers[1]) headerRange.setValues([CARD_HEADERS]);
-  return sheet;
-}
-
-function findOrderRow_(sheet, paymentId) {
-  const lastRow = sheet.getLastRow();
-  if (lastRow < PORTONE_CONFIG.dataStartRow) return 0;
-  const found = sheet.getRange(PORTONE_CONFIG.dataStartRow, PORTONE_CONFIG.paymentIdColumn, lastRow - PORTONE_CONFIG.dataStartRow + 1, 1).createTextFinder(paymentId).matchEntireCell(true).findNext();
-  return found ? found.getRow() : 0;
+    return jsonResponse_(paymentId ? verifyAndSave_(paymentId) : { ok: false, message: '결제 ID가 없습니다.' });
+  } catch (error) { return jsonResponse_({ ok: false, message: safeMessage_(error) }); }
 }
 
 function isConfigured() {
-  const props = PropertiesService.getScriptProperties();
-  return Boolean(props.getProperty(PORTONE_CONFIG.apiSecretProperty) && props.getProperty(PORTONE_CONFIG.spreadsheetProperty));
+  const p = PropertiesService.getScriptProperties();
+  return Boolean(p.getProperty('PORTONE_API_SECRET') && p.getProperty('ORDER_SPREADSHEET_ID'));
+}
+function assertConfigured_() { if (!isConfigured()) throw new Error('서버 결제 설정이 완료되지 않았습니다.'); }
+function validatePaymentId_(id) { if (!/^mdy-[a-f0-9-]{36}$/i.test(String(id || ''))) throw new Error('결제 ID 형식이 올바르지 않습니다.'); }
+function spreadsheet_() {
+  return SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('ORDER_SPREADSHEET_ID'));
+}
+function orderSheet_(ss) {
+  const name = PropertiesService.getScriptProperties().getProperty('ORDER_SHEET_NAME') || PORTONE_CONFIG.defaultSheetName;
+  const sheet = (ss || spreadsheet_()).getSheetByName(name);
+  if (!sheet) throw new Error('기존 주문관리 시트 탭을 찾을 수 없습니다.');
+  return sheet;
+}
+function pendingSheet_(ss) {
+  const sheet = (ss || spreadsheet_()).getSheetByName(PORTONE_CONFIG.pendingSheetName);
+  if (!sheet) throw new Error('카드결제 준비 설정이 필요합니다.');
+  return sheet;
+}
+function findRow_(sheet, id, column, start) {
+  const count = sheet.getLastRow() - start + 1;
+  if (count <= 0) return 0;
+  const found = sheet.getRange(start, column, count, 1).createTextFinder(id).matchEntireCell(true).findNext();
+  return found ? found.getRow() : 0;
+}
+function pendingRecord_(sheet, id) {
+  const row = findRow_(sheet, id, 2, 2);
+  return row ? { row, order: JSON.parse(sheet.getRange(row, 4).getValue()), state: sheet.getRange(row, 5).getValue() } : null;
+}
+function cacheStatus_(id, status, orderNo) {
+  // Cache is only an acknowledgement accelerator; the durable record is written first.
+  CacheService.getScriptCache().put('checkout:' + id, JSON.stringify({ ok: true, status, orderNo }), 600);
+}
+function validateOrder_(body) {
+  const items = Array.isArray(body.items) ? body.items : [];
+  if (!items.length || items.length > 20) throw new Error('주문 상품을 확인할 수 없습니다.');
+  let amount = 0, quantity = 0;
+  const descriptions = [];
+  items.forEach(item => {
+    const price = PRODUCT_CATALOG[String(item.name || '') + '|' + String(item.volume || '')];
+    const qty = Number(item.qty);
+    if (!price || !Number.isInteger(qty) || qty < 1 || qty > 20) throw new Error('상품 또는 수량이 올바르지 않습니다.');
+    amount += price * qty; quantity += qty;
+    descriptions.push(`${item.name} ${item.volume} × ${qty}`);
+  });
+  if (Number(body.amount) !== amount) throw new Error('주문 금액이 상품 가격과 일치하지 않습니다.');
+  const b = body.buyer || {};
+  const buyer = { name: String(b.name || '').trim(), phone: String(b.phone || '').replace(/\D/g, ''), postcode: String(b.postcode || '').trim(), address: String(b.address || '').trim() };
+  if (!buyer.name || buyer.name.length > 50 || !/^01[016789]\d{7,8}$/.test(buyer.phone) || !/^\d{5}$/.test(buyer.postcode) || !buyer.address || buyer.address.length > 300) throw new Error('주문자 정보나 배송지를 확인해주세요.');
+  return { amount, quantity, summary: descriptions.join(' / '), buyer };
+}
+function createPending_(body) {
+  assertConfigured_(); validatePaymentId_(body.paymentId);
+  const order = validateOrder_(body);
+  if (!/^MDY-\d{8}-[a-f0-9]{8}$/i.test(String(body.orderNo || ''))) throw new Error('주문번호 형식이 올바르지 않습니다.');
+  order.orderNo = body.orderNo; order.createdAt = new Date().toISOString();
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try {
+    const sheet = pendingSheet_();
+    const previous = pendingRecord_(sheet, body.paymentId);
+    if (previous) {
+      // An existing payment ID must never be overwritten by a second request.
+      if (JSON.stringify(previous.order.buyer) !== JSON.stringify(order.buyer) || previous.order.amount !== order.amount || previous.order.summary !== order.summary) throw new Error('다른 주문에 사용된 결제 ID입니다.');
+      return { ok: true, status: previous.state === 'PAID' ? 'PAID' : '결제대기', orderNo: previous.order.orderNo };
+    }
+    sheet.appendRow([new Date(order.createdAt), body.paymentId, order.orderNo, JSON.stringify(order), 'OPEN', '']);
+    SpreadsheetApp.flush();
+    cacheStatus_(body.paymentId, '결제대기', order.orderNo);
+    return { ok: true, status: '결제대기', orderNo: order.orderNo };
+  } finally { lock.releaseLock(); }
+}
+function getOrderStatus_(id) {
+  assertConfigured_(); validatePaymentId_(id);
+  const cached = CacheService.getScriptCache().get('checkout:' + id);
+  if (cached) return JSON.parse(cached);
+  const pending = pendingRecord_(pendingSheet_(), id);
+  if (pending) return { ok: true, status: pending.state === 'PAID' ? 'PAID' : '결제대기', orderNo: pending.order.orderNo };
+  return { ok: false, status: 'NOT_FOUND', message: '주문 준비가 완료되지 않았습니다. 잠시 후 다시 시도해주세요.' };
+}
+function fetchPayment_(id) {
+  const secret = PropertiesService.getScriptProperties().getProperty('PORTONE_API_SECRET');
+  const response = UrlFetchApp.fetch('https://api.portone.io/payments/' + encodeURIComponent(id) + '?storeId=' + encodeURIComponent(PORTONE_CONFIG.storeId), {
+    method: 'get', headers: { Authorization: 'PortOne ' + secret }, muteHttpExceptions: true
+  });
+  if (response.getResponseCode() === 404) return { status: 'NOT_FOUND' };
+  if (response.getResponseCode() !== 200) throw new Error('포트원 결제 조회에 실패했습니다. 주문 정보는 보관되어 있습니다.');
+  return JSON.parse(response.getContentText());
+}
+function assertPaid_(payment, id, expectedAmount) {
+  if (payment.id !== id || payment.storeId !== PORTONE_CONFIG.storeId || payment.status !== 'PAID' ||
+      payment.currency !== 'KRW' || Number(payment.amount && payment.amount.total) !== expectedAmount ||
+      !payment.method || payment.method.type !== 'PaymentMethodCard') throw new Error('결제 정보가 주문 내용과 일치하지 않습니다. 판매자에게 문의해주세요.');
+}
+function safeCell_(s) { return /^[=+\-@]/.test(String(s)) ? "'" + s : String(s); }
+function appendPaidOrder_(sheet, id, order) {
+  const row = Math.max(PORTONE_CONFIG.dataStartRow, sheet.getLastRow() + 1);
+  if (row > sheet.getMaxRows()) sheet.insertRowsAfter(sheet.getMaxRows(), 50);
+  sheet.getRange(row, 1, 1, 2).setValues([[new Date(order.createdAt), safeCell_(order.orderNo)]]);
+  // Preserve C:D and all existing bank-transfer columns/validations.
+  sheet.getRange(row, 5, 1, 14).setValues([[
+    safeCell_(order.summary), order.quantity, order.amount, safeCell_(order.buyer.name),
+    safeCell_(order.buyer.phone), safeCell_('[' + order.buyer.postcode + '] ' + order.buyer.address),
+    '', '입금완료', '미신청', '배송전', '', '포트원 카드결제', '카드결제', id
+  ]]);
+  sheet.getRange(row, 1).setNumberFormat('yyyy-mm-dd hh:mm');
+}
+function verifyAndSave_(id) {
+  assertConfigured_(); validatePaymentId_(id);
+  const payment = fetchPayment_(id); // Never trust a client callback/webhook as proof of payment.
+  if (payment.status !== 'PAID') return { ok: false, status: payment.status, message: ['FAILED', 'CANCELLED', 'NOT_FOUND'].indexOf(payment.status) >= 0 ? '결제가 완료되지 않았습니다. 주문으로 접수되지 않았습니다.' : '결제 승인 확인 중입니다. 다시 결제하지 말고 잠시 후 확인해주세요.' };
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  try {
+    const ss = spreadsheet_(), sheet = orderSheet_(ss), queue = pendingSheet_(ss);
+    const row = findRow_(sheet, id, PORTONE_CONFIG.paymentIdColumn, PORTONE_CONFIG.dataStartRow);
+    const pending = pendingRecord_(queue, id);
+    if (!pending && !row) return { ok: false, status: 'REVIEW_REQUIRED', message: '결제는 승인되었으나 주문 확인이 필요합니다. 다시 결제하지 말고 판매자에게 문의해주세요.' };
+    const expected = pending ? pending.order.amount : Number(sheet.getRange(row, 7).getValue());
+    assertPaid_(payment, id, expected);
+    let orderNo;
+    if (row) { sheet.getRange(row, 12).setValue('입금완료'); orderNo = sheet.getRange(row, 2).getDisplayValue(); }
+    else { appendPaidOrder_(sheet, id, pending.order); orderNo = pending.order.orderNo; }
+    if (pending) queue.getRange(pending.row, 5, 1, 2).setValues([['PAID', new Date()]]);
+    SpreadsheetApp.flush(); cacheStatus_(id, 'PAID', orderNo);
+    return { ok: true, status: 'PAID', orderNo };
+  } finally { lock.releaseLock(); }
 }
 
-function assertConfigured_() {
-  if (!isConfigured()) throw new Error('서버 결제 설정이 완료되지 않았습니다.');
-}
-
-function validatePaymentId_(paymentId) {
-  if (!/^mdy-[a-f0-9-]{36}$/i.test(String(paymentId || ''))) throw new Error('결제 ID 형식이 올바르지 않습니다.');
-}
-
-function respond_(result, callback) {
-  const json = JSON.stringify(result);
-  if (callback && /^[A-Za-z_$][\w$]{0,80}$/.test(callback)) {
-    return ContentService.createTextOutput(callback + '(' + json + ');').setMimeType(ContentService.MimeType.JAVASCRIPT);
+// Run once after deployment. Does not create, charge, cancel or refund a payment.
+function setupCheckout() {
+  assertConfigured_();
+  const ss = spreadsheet_(), sheet = orderSheet_(ss);
+  ss.setSpreadsheetTimeZone('Asia/Seoul');
+  const headers = sheet.getRange(4, 17, 1, 2).getDisplayValues()[0];
+  if ((headers[0] && headers[0] !== '결제방식') || (headers[1] && headers[1] !== '포트원 결제 ID')) throw new Error('Q:R 기존 제목을 확인해주세요.');
+  sheet.getRange(4, 17, 1, 2).setValues([['결제방식', '포트원 결제 ID']]);
+  sheet.getRange(5, 1, sheet.getMaxRows() - 4, 1).setNumberFormat('yyyy-mm-dd hh:mm');
+  let queue = ss.getSheetByName(PORTONE_CONFIG.pendingSheetName);
+  if (!queue) {
+    queue = ss.insertSheet(PORTONE_CONFIG.pendingSheetName);
+    queue.appendRow(['준비일시', '결제 ID', '주문번호', '주문정보', '상태', '확인일시']);
+    queue.setFrozenRows(1); queue.hideSheet();
   }
+  if (!ScriptApp.getProjectTriggers().some(t => t.getHandlerFunction() === 'reconcileCardOrders')) ScriptApp.newTrigger('reconcileCardOrders').timeBased().everyMinutes(15).create();
+  const result = migrateLegacyPending_();
+  console.log(JSON.stringify({ version: PORTONE_CONFIG.version, migrated: result }));
+}
+function migrateLegacyPending_() {
+  const lock = LockService.getScriptLock(); lock.waitLock(10000);
+  let migrated = 0;
+  try {
+    const ss = spreadsheet_(), sheet = orderSheet_(ss), queue = pendingSheet_(ss);
+    const count = sheet.getLastRow() - 4;
+    if (count <= 0) return 0;
+    const rows = sheet.getRange(5, 1, count, 18).getValues();
+    for (let i = rows.length - 1; i >= 0; i--) {
+      const v = rows[i];
+      if (v[16] !== '카드결제' || v[11] !== '미입금' || !/^mdy-[a-f0-9-]{36}$/i.test(v[17])) continue;
+      let payment;
+      try { payment = fetchPayment_(v[17]); } catch (error) { continue; } // Keep unresolved rows.
+      if (payment.status === 'PAID') {
+        try {
+          assertPaid_(payment, v[17], Number(v[6]));
+          sheet.getRange(i + 5, 12).setValue('입금완료');
+          if (payment.requestedAt) sheet.getRange(i + 5, 1).setValue(new Date(payment.requestedAt)).setNumberFormat('yyyy-mm-dd hh:mm');
+        } catch (error) { continue; }
+      } else if (['READY', 'FAILED', 'NOT_FOUND'].indexOf(payment.status) >= 0) {
+        if (!pendingRecord_(queue, v[17])) {
+          const order = { createdAt: new Date().toISOString(), orderNo: String(v[1]), summary: String(v[4]), quantity: Number(v[5]), amount: Number(v[6]), buyer: { name: String(v[7]), phone: String(v[8]), postcode: '', address: String(v[9]) } };
+          queue.appendRow([new Date(), v[17], v[1], JSON.stringify(order), 'OPEN', '']);
+          SpreadsheetApp.flush();
+        }
+        sheet.deleteRow(i + 5); migrated++;
+      }
+    }
+    return migrated;
+  } finally { lock.releaseLock(); }
+}
+function reconcileCardOrders() {
+  // Retain uncertain/in-flight records. Retry paid webhooks that were delayed/lost.
+  const queue = pendingSheet_(), last = queue.getLastRow();
+  if (last < 2) return;
+  const rows = queue.getRange(2, 1, last - 1, 6).getValues().sort((a, b) => new Date(a[5] || a[0]).getTime() - new Date(b[5] || b[0]).getTime());
+  let checked = 0;
+  for (let i = 0; i < rows.length && checked < 20; i++) {
+    const age = Date.now() - new Date(rows[i][0]).getTime();
+    if (rows[i][4] !== 'OPEN' || age < 5 * 60000) continue;
+    checked++;
+    try {
+      const result = verifyAndSave_(rows[i][1]);
+      if (result.status !== 'PAID') {
+        const row = findRow_(queue, rows[i][1], 2, 2);
+        if (row) queue.getRange(row, 6).setValue(new Date());
+      }
+      // Only terminal failures / never-created payments older than seven days may be removed.
+      if (age > 7 * 86400000 && ['FAILED', 'NOT_FOUND'].indexOf(result.status) >= 0) {
+        const lock = LockService.getScriptLock(); lock.waitLock(10000);
+        try { const row = findRow_(queue, rows[i][1], 2, 2); if (row) queue.deleteRow(row); }
+        finally { lock.releaseLock(); }
+      }
+    } catch (error) { /* Leave the durable order intact for the next reconciliation. */ }
+  }
+  migrateLegacyPending_();
+}
+function respond_(result, callback) {
+  if (callback && /^[A-Za-z_$][\w$]{0,80}$/.test(callback)) return ContentService.createTextOutput(callback + '(' + JSON.stringify(result) + ');').setMimeType(ContentService.MimeType.JAVASCRIPT);
   return jsonResponse_(result);
 }
-
-function jsonResponse_(value) {
-  return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);
-}
-
-function safeMessage_(error) {
-  return String(error && error.message || '처리 중 오류가 발생했습니다.').slice(0, 200);
-}
+function jsonResponse_(value) { return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON); }
+function safeMessage_(error) { return String(error && error.message || '처리 중 오류가 발생했습니다.').slice(0, 200); }

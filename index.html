@@ -789,6 +789,22 @@
       accent-color: var(--brand);
     }
 
+    [hidden] { display: none !important; }
+    .payment-methods { border: 0; padding: 0; margin: 24px 0; min-width: 0; }
+    .payment-methods legend { font-weight: 900; padding: 0; }
+    .payment-methods:disabled { opacity: .6; }
+    .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .payment-option { display: flex; align-items: center; gap: 10px; border: 2px solid var(--line); padding: 14px 12px; border-radius: 14px; cursor: pointer; background: var(--surface-2); }
+    .payment-option:has(input:checked) { border-color: var(--green); background: #edf3e9; }
+    .payment-option:has(input:focus-visible) { outline: 2px solid var(--brand-dark); outline-offset: 3px; }
+    .payment-option input { width: 18px; height: 18px; min-height: 0; padding: 0; margin: 0; border: 0; background: transparent; box-shadow: none; flex-shrink: 0; accent-color: var(--green); }
+    .payment-option span { display: grid; gap: 2px; }
+    .payment-option small { color: var(--muted); font-size: 11px; }
+    .checkout-progress { display: flex; align-items: center; gap: 12px; padding: 16px; margin-top: 14px; background: #edf3e9; border-radius: 12px; }
+    .checkout-progress p { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+    .checkout-spinner { width: 24px; height: 24px; border: 3px solid #ced9c9; border-top-color: var(--green); border-radius: 50%; animation: checkout-spin 1s linear infinite; flex-shrink: 0; }
+    @keyframes checkout-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .checkout-spinner { animation: none; border-top-color: var(--green); } }
     .submit-btn {
       width: 100%;
       min-height: 58px;
@@ -1599,7 +1615,7 @@
             <a class="button button-primary" href="#order">지금 주문하기</a>
             <a class="button button-secondary" href="#why">왜 머드마스타인지 보기</a>
           </div>
-          <p class="field-hint" style="margin-top:10px;">계좌이체 입금 확인 후 순차 발송됩니다.</p>
+          <p class="field-hint" style="margin-top:10px;">카드결제 또는 계좌입금 확인 후 순차 발송됩니다.</p>
 
           <div class="trust-row" aria-label="제품 신뢰 요소">
             <div class="trust-item">
@@ -1782,7 +1798,7 @@
             좋은 트리트먼트, 비싼 에센스, 열심히 하는 홈케어도 두피가 불편하면 만족스러운 사용감을 느끼기 어렵습니다. 매일 반복되던 건조함, 가려움, 답답함, 뻣뻣함. 이제 샴푸부터 바꿔보세요.
           </p>
           <a class="button button-primary" href="#order">지금 주문하기</a>
-          <p class="field-hint" style="margin-top:12px;">입금 확인 후 순차 발송됩니다. 아직 고민 중이라면 <a href="#apply" style="text-decoration:underline;">알림 신청</a>만 해두셔도 좋습니다.</p>
+          <p class="field-hint" style="margin-top:12px;">결제 확인 후 순차 발송됩니다. 아직 고민 중이라면 <a href="#apply" style="text-decoration:underline;">알림 신청</a>만 해두셔도 좋습니다.</p>
         </div>
       </div>
     </section>
@@ -1796,8 +1812,8 @@
             카드 결제 또는 계좌입금으로 주문하실 수 있으며, 결제 확인 후 순차 발송됩니다.
           </p>
           <div class="order-flow" aria-label="주문 절차">
-            <div>상품과 주문자·배송지 정보 입력</div>
-            <div>카드 결제 또는 계좌입금 선택</div>
+            <div>상품·용량·수량을 선택하고 옵션 담기</div>
+            <div>결제 방법 선택 후 주문자·배송지 입력</div>
             <div>결제 확인 후 영업일 기준 1~3일 내 발송</div>
             <div>문자/카톡으로 운송장 번호 안내</div>
           </div>
@@ -1848,12 +1864,14 @@
                 </div>
               </div>
 
-              <div class="card-test-box">
-                <strong>카드 결제</strong>
-                <p>결제 전 주문자 정보와 배송지를 입력해주세요. 결제 승인 여부를 확인한 뒤 주문으로 기록합니다.</p>
-                <button class="submit-btn card-test-btn" type="button" id="cardTestButton">카드 결제하기</button>
-                <p class="form-helper" id="cardTestResult" role="status" aria-live="polite">결제 후 포트원에서 승인 여부를 확인해 주문 상태를 반영합니다.</p>
-              </div>
+              <fieldset class="payment-methods" id="paymentMethods" disabled>
+                <legend>결제 방법</legend>
+                <p class="field-hint" id="paymentHint">옵션을 담으면 결제 방법을 선택할 수 있어요.</p>
+                <div class="payment-options">
+                  <label class="payment-option"><input type="radio" name="paymentMethod" value="card" required /><span><strong>카드결제</strong><small>NHN KCP 안전 결제</small></span></label>
+                  <label class="payment-option"><input type="radio" name="paymentMethod" value="bank" required /><span><strong>계좌입금</strong><small>주문 접수 후 계좌 안내</small></span></label>
+                </div>
+              </fieldset>
 
               <div class="field-row">
                 <div class="field">
@@ -1876,6 +1894,7 @@
                 <input id="buyerAddressDetail" name="addressDetail" type="text" placeholder="상세주소 (동/호수 등)" style="margin-top:8px;" />
               </div>
 
+              <div id="bankFields" hidden>
               <div class="field">
                 <label for="depositorName">입금자명</label>
                 <input id="depositorName" name="depositorName" type="text" placeholder="예: 홍길동4860" required />
@@ -1895,12 +1914,13 @@
                 <label for="cashReceiptNo">현금영수증 발급 번호</label>
                 <input id="cashReceiptNo" name="cashReceiptNo" type="text" placeholder="휴대폰 번호 또는 사업자등록번호" />
               </div>
+              </div>
 
               <details class="notice-box">
-                <summary>배송 / 교환 / 반품 / 입금 안내</summary>
+                <summary>배송 / 교환 / 반품 / 결제 안내</summary>
                 <div class="notice-body">
                   <strong>배송 안내</strong>
-                  입금 확인 후 영업일 기준 1~3일 내 발송됩니다. 택배사 사정에 따라 배송 기간은 달라질 수 있습니다.
+                  결제 확인 후 영업일 기준 1~3일 내 발송됩니다. 택배사 사정에 따라 배송 기간은 달라질 수 있습니다.
                   <strong>교환/반품 안내</strong>
                   상품 수령 후 7일 이내 교환/반품 신청이 가능합니다. 단, 사용 흔적이 있거나 포장이 훼손된 경우 교환/반품이 제한될 수 있습니다. 단순 변심 반품의 왕복 배송비는 고객 부담입니다.
                   <strong>입금 안내</strong>
@@ -1928,11 +1948,17 @@
 
               <label class="checkbox" for="orderPolicy">
                 <input id="orderPolicy" name="policyAgree" type="checkbox" required />
-                <span>(필수) 배송/교환/반품 및 입금 안내를 확인했습니다.</span>
+                <span>(필수) 배송/교환/반품 및 결제 안내를 확인했습니다.</span>
               </label>
 
-              <button class="submit-btn" type="submit">계좌입금으로 주문 접수하기</button>
-              <p class="form-helper">제출 후 입금 계좌가 안내됩니다. 입금 확인 후 순차 발송됩니다.</p>
+              <button class="submit-btn" type="submit" id="checkoutSubmit" disabled>옵션을 먼저 담아주세요</button>
+              <div class="checkout-progress" id="checkoutProgress" role="status" aria-live="polite" hidden>
+                <span class="checkout-spinner" aria-hidden="true"></span>
+                <div><strong id="checkoutStage">결제창을 준비하고 있어요</strong><p id="checkoutWait">잠시만 기다려주세요.</p></div>
+              </div>
+              <p class="form-helper" id="checkoutHint">결제 방법을 선택한 뒤 주문자 정보와 배송지를 입력해주세요.</p>
+              <p class="form-helper" id="cardTestResult" role="status" aria-live="polite"></p>
+              <button type="button" class="addr-search-btn" id="verifyPaymentButton" hidden>결제 상태 다시 확인하기</button>
             </form>
           </div>
 
@@ -2114,7 +2140,7 @@
         <span>통신판매업 신고번호: 제2026-호평평내-0261호</span>
         <span>주소: 경기도 남양주시 호평로9 2403-1702</span>
         <span>고객센터: 010-9441-6582 &nbsp;|&nbsp; 이메일: manda07072@gmail.com 운영시간: 평일 10:00~17:00</span>
-        <span style="margin-top:6px;">배송: 입금 확인 후 영업일 기준 1~3일 내 발송 &nbsp;|&nbsp; 교환/반품: 상품 수령 후 7일 이내 (단순 변심 시 왕복 배송비 고객 부담)</span>
+        <span style="margin-top:6px;">배송: 결제 확인 후 영업일 기준 1~3일 내 발송 &nbsp;|&nbsp; 교환/반품: 상품 수령 후 7일 이내 (단순 변심 시 왕복 배송비 고객 부담)</span>
       </div>
     </div>
   </footer>
@@ -2131,7 +2157,7 @@
   </div>
 
   <div class="floating-cta" aria-label="하단 고정 주문 버튼">
-    <a href="#order">지금 주문하기 · 입금 확인 후 발송</a>
+    <a href="#order">지금 주문하기 · 결제 확인 후 발송</a>
   </div>
 
   <!-- 카카오(다음) 우편번호 서비스 -->
@@ -2279,6 +2305,28 @@
     const cashReceiptSelect = document.getElementById('cashReceipt');
     const cashReceiptNoField = document.getElementById('cashReceiptNoField');
     const cashReceiptNoInput = document.getElementById('cashReceiptNo');
+    const submitButton = document.getElementById('checkoutSubmit');
+    const paymentMethods = document.getElementById('paymentMethods');
+    const bankFields = document.getElementById('bankFields');
+    const checkoutHint = document.getElementById('checkoutHint');
+    let checkoutBusy = false;
+    let checkoutCompleted = false;
+    let paymentNeedsReview = false;
+    function selectedPaymentMethod() { return orderForm.querySelector('input[name="paymentMethod"]:checked')?.value || ''; }
+    function updatePaymentUI() {
+      if (checkoutBusy) return;
+      const method = selectedPaymentMethod();
+      paymentMethods.disabled = !cart.length;
+      document.getElementById('paymentHint').textContent = cart.length ? '원하시는 결제 방법을 선택해주세요.' : '옵션을 담으면 결제 방법을 선택할 수 있어요.';
+      bankFields.hidden = method !== 'bank';
+      bankFields.querySelectorAll('input, select').forEach(el => { el.disabled = method !== 'bank'; });
+      depositorInput.required = method === 'bank';
+      cashReceiptNoInput.required = method === 'bank' && cashReceiptSelect.value !== '미신청';
+      submitButton.disabled = !cart.length || !method || checkoutCompleted || paymentNeedsReview;
+      submitButton.textContent = checkoutCompleted ? '카드 주문 접수 완료' : paymentNeedsReview ? '결제 상태를 먼저 확인해주세요' : !cart.length ? '옵션을 먼저 담아주세요' : !method ? '결제 방법을 선택해주세요' : method === 'card' ? `${won(cartTotal())} 카드 결제하기` : '계좌입금으로 주문 접수하기';
+      checkoutHint.textContent = method === 'bank' ? '주문을 접수하면 입금 계좌를 안내해드립니다.' : method === 'card' ? '결제창에서 승인까지 완료하면 주문이 접수됩니다.' : '결제 방법을 선택한 뒤 주문자 정보와 배송지를 입력해주세요.';
+    }
+    paymentMethods.addEventListener('change', updatePaymentUI);
 
     let cart = [];
 
@@ -2329,6 +2377,7 @@
     function renderAmount() {
       amountText.textContent = won(cartTotal());
       calcText.textContent = cart.length ? cartSummary() : '';
+      updatePaymentUI();
     }
 
     function renderCart() {
@@ -2489,20 +2538,45 @@
       return `MDY-${ymd}-${seq}`;
     }
 
-    /* 실결제: 주문을 먼저 보관하고 서버에서 포트원 승인·금액을 확인합니다. */
-    const cardTestButton = document.getElementById('cardTestButton');
+    /* 카드 주문은 승인 확인 후 주문관리 시트에 기록합니다. */
     const cardTestResult = document.getElementById('cardTestResult');
+    const verifyPaymentButton = document.getElementById('verifyPaymentButton');
     const cardReturnParams = new URLSearchParams(window.location.search);
-
+    let checkingPaymentId = '';
+    let checkoutTimer, busyControls = [];
+    function setCheckoutBusy(busy, stage = '결제창을 준비하고 있어요') {
+      clearInterval(checkoutTimer);
+      checkoutBusy = busy;
+      orderForm.setAttribute('aria-busy', String(busy));
+      document.getElementById('checkoutProgress').hidden = !busy;
+      if (busy) {
+        busyControls = Array.from(orderForm.querySelectorAll('input, select, button')).map(el => [el, el.disabled]);
+        busyControls.forEach(([el]) => { el.disabled = true; });
+        document.getElementById('checkoutStage').textContent = stage;
+        const started = Date.now();
+        const tick = () => {
+          const seconds = Math.floor((Date.now() - started) / 1000);
+          submitButton.textContent = `처리 중 · ${seconds}초`;
+          document.getElementById('checkoutWait').textContent = seconds >= 10 ? `${seconds}초 경과 · 연결이 지연되고 있어요. 창을 닫지 말고 기다려주세요.` : '잠시만 기다려주세요. 중복으로 누르지 않아도 됩니다.';
+        };
+        tick(); checkoutTimer = setInterval(tick, 1000);
+      } else {
+        busyControls.forEach(([el, disabled]) => { el.disabled = disabled; });
+        busyControls = []; updatePaymentUI();
+      }
+    }
     function jsonp(action, paymentId) {
       return new Promise((resolve, reject) => {
         const callbackName = `portOneCallback_${crypto.randomUUID().replace(/-/g, '')}`;
         const script = document.createElement('script');
-        const timer = setTimeout(() => finish(new Error('결제 확인 서버 응답 시간이 초과되었습니다.')), 12000);
+        let settled = false;
+        const timer = setTimeout(() => finish(new Error('결제 확인 서버 응답 시간이 초과되었습니다.')), 35000);
         function finish(error, data) {
-          clearTimeout(timer);
-          delete window[callbackName];
-          script.remove();
+          if (settled) return;
+          settled = true; clearTimeout(timer); script.remove();
+          // A late JSONP response remains harmless after a timeout.
+          window[callbackName] = () => {};
+          setTimeout(() => { delete window[callbackName]; }, 60000);
           if (error) reject(error); else resolve(data);
         }
         window[callbackName] = data => finish(null, data);
@@ -2513,131 +2587,112 @@
         document.head.appendChild(script);
       });
     }
-
     function currentOrderPayload(paymentId) {
       const now = new Date();
-      const orderNo = `MDY-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${crypto.randomUUID().slice(0, 8)}`;
-      const address = [addressInput.value.trim(), addressDetailInput.value.trim()].filter(Boolean).join(' ');
       return {
-        action: 'createPending',
-        paymentId,
-        orderNo,
+        action: 'createPending', paymentId,
+        orderNo: `MDY-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${crypto.randomUUID().slice(0, 8)}`,
         items: cart.map(item => ({ name: item.name, volume: item.volume, qty: item.qty })),
-        buyer: {
-          name: nameInput.value.trim(),
-          phone: phoneInput.value.replace(/\D/g, ''),
-          postcode: postcodeInput.value.trim(),
-          address
-        },
-        amount: cartTotal(),
-        source: channel
+        buyer: { name: nameInput.value.trim(), phone: phoneInput.value.replace(/\D/g, ''), postcode: postcodeInput.value.trim(), address: [addressInput.value.trim(), addressDetailInput.value.trim()].join(' ') },
+        amount: cartTotal(), source: channel
       };
     }
-
     async function confirmReturnedPayment(paymentId) {
-      cardTestResult.textContent = '결제 승인과 주문 정보를 서버에서 확인하고 있습니다...';
+      checkingPaymentId = paymentId;
+      setCheckoutBusy(true, '결제 승인과 주문 접수를 확인하고 있어요');
       try {
         const result = await jsonp('confirm', paymentId);
-        if (result && result.ok && result.status === 'PAID') {
-          cardTestResult.textContent = `결제가 확인되었습니다. 주문번호 ${result.orderNo}로 접수되었습니다.`;
+        if (result?.ok && result.status === 'PAID') {
+          checkoutCompleted = true; paymentNeedsReview = false;
+          verifyPaymentButton.hidden = true;
+          cardTestResult.textContent = `결제와 주문 접수가 완료되었습니다. 주문번호: ${result.orderNo}`;
+          try { sessionStorage.removeItem('mandayoonCardAttempt'); } catch (_) {}
         } else {
-          cardTestResult.textContent = (result && result.message) || '아직 결제를 확인하지 못했습니다. 잠시 뒤 주문관리 시트와 포트원 거래내역을 확인해주세요.';
+          paymentNeedsReview = !['FAILED', 'NOT_FOUND'].includes(result?.status);
+          verifyPaymentButton.hidden = !paymentNeedsReview;
+          cardTestResult.textContent = result?.message || '승인 확인 중입니다. 다시 결제하지 말고 아래에서 결제 상태를 확인해주세요.';
         }
       } catch (error) {
-        cardTestResult.textContent = `${error.message} 결제가 승인되었을 수 있으니 포트원 거래내역을 확인하고, 확인 전에는 다시 결제하지 마세요.`;
-      }
+        paymentNeedsReview = true; verifyPaymentButton.hidden = false;
+        cardTestResult.textContent = `${error.message} 결제가 승인되었을 수 있습니다. 다시 결제하지 말고 결제 상태를 확인해주세요.`;
+      } finally { setCheckoutBusy(false); }
     }
-
+    verifyPaymentButton.addEventListener('click', () => {
+      if (!checkoutBusy && checkingPaymentId) confirmReturnedPayment(checkingPaymentId);
+    });
+    function restoreCardAttempt() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem('mandayoonCardAttempt') || 'null');
+        if (!saved || Date.now() - saved.savedAt > 86400000 || (cardReturnParams.get('paymentId') && cardReturnParams.get('paymentId') !== saved.payload.paymentId)) return;
+        cart = saved.payload.items.flatMap(item => {
+          const product = ORDER_CONFIG.products.find(p => p.name === item.name);
+          const variant = product?.variants.find(v => v.volume === item.volume);
+          return variant ? [{ ...item, key: item.name + '|' + item.volume, price: variant.price }] : [];
+        });
+        nameInput.value = saved.payload.buyer.name; phoneInput.value = saved.phone;
+        postcodeInput.value = saved.payload.buyer.postcode; addressInput.value = saved.address; addressDetailInput.value = saved.addressDetail;
+        orderForm.querySelector('input[value="card"][name="paymentMethod"]').checked = true;
+        checkingPaymentId = saved.payload.paymentId;
+        renderCart();
+      } catch (_) {}
+    }
     if (cardReturnParams.get('card_payment') === '1') {
-      const returnedPaymentId = cardReturnParams.get('paymentId');
-      const returnedCode = cardReturnParams.get('code');
-      if (returnedCode) {
-        cardTestResult.textContent = `결제가 취소되었거나 실패했습니다: ${cardReturnParams.get('message') || returnedCode}`;
-      } else if (returnedPaymentId) {
-        confirmReturnedPayment(returnedPaymentId);
-      }
+      restoreCardAttempt();
+      const paymentId = cardReturnParams.get('paymentId') || checkingPaymentId;
+      if (paymentId) confirmReturnedPayment(paymentId);
+      else cardTestResult.textContent = '결제창이 종료되었습니다. 결제내역을 확인한 뒤 다시 진행해주세요.';
       document.getElementById('order').scrollIntoView({ block: 'start' });
     }
-
-    cardTestButton.addEventListener('click', async function () {
-      if (!cart.length) {
-        cardTestResult.textContent = '먼저 제품·용량·수량을 선택하고 “＋ 옵션 담기”를 눌러주세요.';
-        return;
-      }
-      if (!/^https:\/\/script\.google\.com\/macros\/s\//.test(CARD_LIVE_CONFIG.backendUrl)) {
-        cardTestResult.textContent = '실결제 확인 서버 설정이 아직 끝나지 않았습니다. 설정 전에는 결제가 시작되지 않습니다.';
-        return;
-      }
-      if (!nameInput.value.trim() || !phoneInput.value.trim() || !postcodeInput.value.trim() || !addressInput.value.trim() || !addressDetailInput.value.trim()) {
-        cardTestResult.textContent = '주문자명, 연락처, 배송지(상세주소 포함)를 입력해주세요.';
-        nameInput.focus();
-        return;
-      }
-      if (!document.getElementById('orderPrivacy').checked || !document.getElementById('orderPolicy').checked) {
-        cardTestResult.textContent = '개인정보 수집·이용 및 배송/교환 안내에 동의해주세요.';
-        return;
-      }
-      if (!window.PortOne || typeof window.PortOne.requestPayment !== 'function') {
-        cardTestResult.textContent = '결제 모듈을 불러오지 못했습니다. 인터넷 연결을 확인하고 페이지를 새로고침해 주세요.';
-        return;
-      }
-
+    async function startCardCheckout() {
+      if (!/^https:\/\/script\.google\.com\/macros\/s\//.test(CARD_LIVE_CONFIG.backendUrl)) { cardTestResult.textContent = '카드결제 연결 설정이 필요합니다.'; return; }
+      if (!window.PortOne || typeof window.PortOne.requestPayment !== 'function') { cardTestResult.textContent = '결제 모듈을 불러오지 못했습니다. 새로고침한 뒤 다시 시도해주세요.'; return; }
+      if (!postcodeInput.value.trim() || !addressInput.value.trim() || !addressDetailInput.value.trim()) { cardTestResult.textContent = '우편번호 검색 후 상세주소까지 입력해주세요.'; return; }
+      if (window.location.protocol === 'file:') { cardTestResult.textContent = '카드결제는 HTTPS 주소에서 진행해주세요.'; return; }
       const paymentId = `mdy-${crypto.randomUUID()}`;
-      const orderName = cart.length === 1
-        ? `${cart[0].name} ${cart[0].volume}`
-        : `${cart[0].name} 외 ${cart.length - 1}건`;
-      if (window.location.protocol === 'file:') {
-        cardTestResult.textContent = '실결제는 GitHub Pages처럼 HTTPS 주소로 접속했을 때만 진행할 수 있습니다.';
-        return;
-      }
+      const payload = currentOrderPayload(paymentId);
+      const orderName = cart.length === 1 ? `${cart[0].name} ${cart[0].volume}` : `${cart[0].name} 외 ${cart.length - 1}건`;
       const redirectUrl = new URL(window.location.pathname, window.location.origin);
       redirectUrl.searchParams.set('card_payment', '1');
-      const customer = {};
-      customer.fullName = nameInput.value.trim();
-      customer.phoneNumber = phoneInput.value.trim();
-
-      cardTestButton.disabled = true;
-      cardTestResult.textContent = '주문 정보를 저장하고 실결제 창을 준비하고 있습니다...';
+      let paymentRequested = false;
+      cardTestResult.textContent = ''; verifyPaymentButton.hidden = true;
+      setCheckoutBusy(true, '주문 정보를 안전하게 준비하고 있어요');
+      performance.mark('checkout-start');
       try {
-        const readiness = await jsonp('ping');
-        if (!readiness || !readiness.ok) throw new Error('결제 확인 서버 설정이 완료되지 않았습니다.');
-        await fetch(CARD_LIVE_CONFIG.backendUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(currentOrderPayload(paymentId))
-        });
+        // No blocking ping: durable prepare + acknowledgement are the only prerequisites.
+        const controller = new AbortController();
+        const prepareTimeout = setTimeout(() => controller.abort(), 35000);
+        try {
+          await fetch(CARD_LIVE_CONFIG.backendUrl, { method: 'POST', mode: 'no-cors', signal: controller.signal, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+        } finally { clearTimeout(prepareTimeout); }
+        document.getElementById('checkoutStage').textContent = '결제창을 연결하고 있어요';
         const pending = await jsonp('status', paymentId);
-        if (!pending || !pending.ok || pending.status !== '결제대기') {
-          throw new Error('주문 준비 기록을 확인할 수 없어 결제를 시작하지 않았습니다.');
-        }
-        const response = await window.PortOne.requestPayment({
-          storeId: CARD_LIVE_CONFIG.storeId,
-          channelKey: CARD_LIVE_CONFIG.channelKey,
-          paymentId,
-          orderName,
-          totalAmount: cartTotal(),
-          currency: 'CURRENCY_KRW',
-          payMethod: 'CARD',
-          customer,
-          noticeUrls: [CARD_LIVE_CONFIG.backendUrl],
-          redirectUrl: redirectUrl.toString(),
-          forceRedirect: true
+        if (!pending?.ok || pending.status !== '결제대기') throw new Error(pending?.message || '주문 정보를 확인하지 못했습니다. 결제는 시작되지 않았습니다.');
+        performance.mark('checkout-order-ready');
+        try { sessionStorage.setItem('mandayoonCardAttempt', JSON.stringify({ payload, savedAt: Date.now(), phone: phoneInput.value, address: addressInput.value, addressDetail: addressDetailInput.value })); } catch (_) {}
+        checkingPaymentId = paymentId; paymentRequested = true;
+        performance.mark('checkout-sdk-request');
+        await window.PortOne.requestPayment({
+          storeId: CARD_LIVE_CONFIG.storeId, channelKey: CARD_LIVE_CONFIG.channelKey,
+          paymentId, orderName, totalAmount: payload.amount, currency: 'CURRENCY_KRW', payMethod: 'CARD',
+          customer: { fullName: payload.buyer.name, phoneNumber: payload.buyer.phone },
+          noticeUrls: [CARD_LIVE_CONFIG.backendUrl], redirectUrl: redirectUrl.toString(), forceRedirect: true
         });
-        if (response && response.code) {
-          cardTestResult.textContent = `결제가 취소되었거나 실패했습니다: ${response.message || response.code}`;
-        } else {
-          await confirmReturnedPayment(paymentId);
-        }
+        // Verify server-side even when the SDK returns an error; approval may be delayed.
+        setCheckoutBusy(false);
+        await confirmReturnedPayment(paymentId);
       } catch (error) {
-        cardTestResult.textContent = `결제 요청을 완료하지 못했습니다: ${error.message || '알 수 없는 오류'}`;
-      } finally {
-        cardTestButton.disabled = false;
-      }
-    });
+        paymentNeedsReview = paymentRequested;
+        verifyPaymentButton.hidden = !paymentRequested;
+        cardTestResult.textContent = paymentRequested ? `${error.message} 아래에서 결제 상태를 확인해주세요.` : `결제창을 열지 못했습니다: ${error.message} 입력 내용은 유지됩니다.`;
+      } finally { if (checkoutBusy) setCheckoutBusy(false); }
+    }
 
     orderForm.addEventListener('submit', async function (event) {
       event.preventDefault();
+      if (checkoutBusy || checkoutCompleted || paymentNeedsReview) return;
+      if (!cart.length) { cardTestResult.textContent = '주문할 옵션을 먼저 담아주세요.'; return; }
+      if (selectedPaymentMethod() === 'card') { await startCardCheckout(); return; }
+      if (selectedPaymentMethod() !== 'bank') return;
 
       if (!addressInput.value.trim()) {
         alert('우편번호 검색 버튼을 눌러 배송지 주소를 선택해주세요.');
@@ -2646,14 +2701,6 @@
       }
 
       const endpoint = orderForm.dataset.endpoint.trim();
-      const button = orderForm.querySelector('button[type="submit"]');
-      const originalText = button.textContent;
-
-      if (!cart.length) {
-        alert('주문할 옵션을 담아주세요. 제품·용량을 고르고 "＋ 옵션 담기"를 눌러주세요.');
-        return;
-      }
-
       const now = new Date();
       const orderNo = makeOrderNo(now);
       const optionSummary = cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(' / ');
@@ -2683,12 +2730,12 @@
         depositorName: depositorInput.value.trim(),
         cashReceipt: cashReceiptSelect.value,
         cashReceiptNo: cashReceiptNoInput.value.trim(),
+        paymentMethod: '계좌입금',
         paymentStatus: '미입금',
         shippingStatus: '배송전'
       };
 
-      button.disabled = true;
-      button.textContent = '주문 접수 중입니다...';
+      setCheckoutBusy(true, '계좌입금 주문을 접수하고 있어요');
 
       try {
         if (endpoint) {
@@ -2705,14 +2752,14 @@
         document.getElementById('cAccount').textContent = `${ORDER_CONFIG.bank} ${ORDER_CONFIG.account} (${ORDER_CONFIG.holder})`;
         document.getElementById('cDepositor').textContent = payload.depositorName || '주문자명+휴대폰 뒷자리';
 
+        checkoutCompleted = true;
         orderCard.style.display = 'none';
         orderComplete.classList.add('show');
         orderComplete.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (error) {
         alert('주문 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
       } finally {
-        button.disabled = false;
-        button.textContent = originalText;
+        setCheckoutBusy(false);
       }
     });
 
